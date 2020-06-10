@@ -2,7 +2,7 @@
 
 menu:
   主页: /
-  我的相册: /photo/index.html
+  我的相册: /photo
 
 # SubNav
 subnav:
