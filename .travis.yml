@@ -10,9 +10,16 @@ cache:
 install:
   - npm install # 下载依赖g
 
-script:
-  - hexo g # 我装了algolia的搜索工具。这一步正常可以是 hexo g
+# script:
+#   - hexo g # 我装了algolia的搜索工具。这一步正常可以是 hexo g
 
+script:
+- hexo clean
+- hexo generate
+# 执行的成功后执行 
+
+after_success:
+- hexo deploy
 
 after_script: # 推送到github的部分
   - cd ./public
