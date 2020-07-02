@@ -1,5 +1,6 @@
 ---
 title: Hello World
+date: 2020-06-03 16:08:21
 ---
 
 花了一点时间来整理搜集如何用github io 放置静态资源。
