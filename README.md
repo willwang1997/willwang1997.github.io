@@ -6,8 +6,8 @@
 * （提前检查是否有hexo是否可以执行hexo命令）
   >npm hexo -g 
 
-*  安装依赖
-  > cnpm i
+* 安装依赖
+  >cnpm i
 
 * 本地运行
   >hexo server 
