@@ -1,6 +1,7 @@
 ---
 title: Hello World
 date: 2020-06-01 16:08:21
+reward: true
 tags: 
     - others
 ---

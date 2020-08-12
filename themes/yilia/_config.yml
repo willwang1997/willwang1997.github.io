@@ -1,9 +1,9 @@
 # Header
 
 menu:
-  主页: /
-  说说: /talk
-  相册: /photo
+  ---->主页: /
+  ---->说说: /talk
+  ---->相册: /photo
 
 # SubNav
 subnav:
@@ -18,7 +18,7 @@ subnav:
   #segmentfault: "#"
   #bilibili: "#"
   #acfun: "#"
-  mail: "942345396@qq.com"
+  mail: "mailto:942345396@qq.com"
   #facebook: "#"
   #google: "#"
   #twitter: "#"
@@ -44,13 +44,13 @@ open_in_new: false
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
-reward_type: 2
+reward_type: 1
 # 打赏wording
 reward_wording: '谢谢你请我喝咖啡'
 # 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
 alipay: /asset/zhifubaoPayfor.jpg
 # 微信二维码图片地址
-weixin: /asset/wechatPayfor.jpg
+weixin: /asset/TIM图片20200812154947.jpg
 
 # 目录
 # 目录设定：0-不显示目录； 1-文章对应的md文件里有toc:true属性，才有目录； 2-所有文章均显示目录
@@ -66,7 +66,7 @@ top: true
 # Miscellaneous
 baidu_analytics: ''
 google_analytics: ''
-favicon: /favicon.png
+favicon: /asset/favicon.png
 
 #你的头像url
 avatar: /asset/avart.jpg
@@ -104,7 +104,7 @@ valine:
  appkey:  '05Qt9XWemgGLucqIPL8IPS4k'
  verify: true #验证码
  notify: true #评论回复提醒
- avatar: identicon #评论列表头像样式：''/mm/identicon/monsterid/wavatar/retro/hide
+ avatar: monsterid #评论列表头像样式：''/mm/identicon/monsterid/wavatar/retro/hide
  placeholder: 留下你的想法 #评论框占位符
 
 # 样式定制 - 一般不需要修改，除非有很强的定制欲望…
