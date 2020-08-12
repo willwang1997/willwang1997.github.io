@@ -99,7 +99,9 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/willwang1997/willwang1997.github.io # https://github.com/TJ-XiaJiaHao/TJ-XiaJiaHao.github.io
+  repo:
+      github: https://github.com/willwang1997/willwang1997.github.io # https://github.com/TJ-XiaJiaHao/TJ-XiaJiaHao.github.io 
+      coding: git@e.coding.net:wangwei1997/wangwei/wangwei.git
   branch: master
   
 jsonContent:
