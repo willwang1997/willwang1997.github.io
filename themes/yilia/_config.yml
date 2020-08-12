@@ -2,14 +2,15 @@
 
 menu:
   主页: /
-  我的相册: /photo
+  说说: /talk
+  相册: /photo
 
 # SubNav
 subnav:
   github: "https://github.com/willwang1997"
-  weibo: "#"
-  rss: "#"
-  # zhihu: "#"
+  weibo: "https://weibo.com/u/6204247658"
+  #rss: "#"
+  #zhihu: "#"
   #qq: "#"
   #weixin: "#"
   #jianshu: "#"
@@ -17,7 +18,7 @@ subnav:
   #segmentfault: "#"
   #bilibili: "#"
   #acfun: "#"
-  #mail: "mailto:litten225@qq.com"
+  mail: "942345396@qq.com"
   #facebook: "#"
   #google: "#"
   #twitter: "#"
