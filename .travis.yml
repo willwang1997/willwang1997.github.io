@@ -41,4 +41,4 @@ env: # 环境变量
  global:
    - GH_REF: github.com/willwang1997/willwang1997.github.io.git # 我的仓库地址
    # Coding Pages
-   - CO_REF: e.coding.net/wangwei1997/wangwei/wangwei.git
+   - CO_REF: https://e.coding.net/wangwei1997/wangwei/wangwei.git
