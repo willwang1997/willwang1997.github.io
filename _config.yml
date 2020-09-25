@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: 
+url: https://2cne3j.coding-pages.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -102,7 +102,6 @@ deploy:
   repo:
       github: https://github.com/willwang1997/willwang1997.github.io # https://github.com/TJ-XiaJiaHao/TJ-XiaJiaHao.github.io 
       coding: git@e.coding.net:wangwei1997/wangwei/wangwei.git
-      gitee: https://gitee.com/will942345396/willwang1997.github.io.git
   branch: master
   
 jsonContent:
