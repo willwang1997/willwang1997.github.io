@@ -12,7 +12,7 @@ menu:
 # SubNav
 subnav:
   github: "https://github.com/willwang1997"
-  # weibo: "https://weibo.com/u/6204247658"
+  # weibo: "#"
   #rss: "#"
   #zhihu: "#"
   #qq: "#"
@@ -20,7 +20,7 @@ subnav:
   #jianshu: "#"
   #douban: "#"
   #segmentfault: "#"
-  #bilibili: "#"
+  bilibili: "https://space.bilibili.com/238325651"
   #acfun: "#"
   mail: "mailto:942345396@qq.com"
   #facebook: "#"
@@ -116,7 +116,7 @@ style:
   # 头像上面的背景颜色
   header: '#4d4d4d'
   # 右滑板块背景
-  slider: 'linear-gradient(200deg,#a0cfe4,#e8c37e)'
+  slider: 'linear-gradient(200deg,#a0cfe4,#afb6ca)'
 
 # slider的设置
 slider:
