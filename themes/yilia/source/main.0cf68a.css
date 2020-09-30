@@ -960,7 +960,7 @@ html {
 }
 
 .left-col #header a {
-  color: #696969
+  color: #304455
 }
 
 .left-col #header a:hover {
@@ -980,8 +980,8 @@ html {
 }
 
 .left-col #header .header-menu {
-  font-weight: 300;
-  line-height: 31px;
+  font-weight: 500;
+  line-height: 35px;
   text-transform: uppercase;
   float: none;
   min-height: 150px;
