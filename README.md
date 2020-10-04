@@ -8,7 +8,7 @@
 国外：
  [我的博客](https://willwang1997.github.io/)
 
- >npm hexo -g 
+ >npm insatll hexo -g 
 * （提前检查是否有hexo是否可以执行hexo命令） 
 
 >cnpm i
