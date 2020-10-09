@@ -2181,10 +2181,6 @@ pre .id {
     transform: scale(1)
   }
 }
-/* 顶部留白 */
-.menu-l-head{
-  height: 85px;
-}
 /* 文章 */
 .article {
   margin: 30px 0px;
@@ -4358,4 +4354,9 @@ a.pswp__share--download:hover {
   background: #08c;
   -webkit-transition: width .3s ease;
   transition: width .3s ease
+}
+
+/* 顶部留白 */
+.menu-l-head{
+  height: 85px;
 }
