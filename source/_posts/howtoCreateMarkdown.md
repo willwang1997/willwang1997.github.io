@@ -2,8 +2,8 @@
 title: HowToUseMarkdown
 date: 2020-10-10 10:47:43
 tags:
-    -- hexo
-    -- markdown
+    - hexo
+    - markdown
 ---
 #### 什么是markdown?
 推荐阅读这篇文章,[入门markdown](https://sspai.com/post/36610)。
