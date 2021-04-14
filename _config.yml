@@ -95,6 +95,14 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: yilia
 
+#RSS订阅
+plugins: hexo-generater-feed
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20 # 最新的20篇文章
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
