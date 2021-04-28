@@ -2187,7 +2187,7 @@ pre .id {
   padding-bottom: 30px;
   position: relative;
   /* border-top: 1px solid #ddd; */
-  border-bottom: 10px solid #ddd;
+  /* border-bottom: 10px solid #ddd; */
   /* box-shadow: 0px 1px 5px #ddd; */
   background: #fff;
   transition: all .2s ease-in
@@ -2211,7 +2211,9 @@ pre .id {
 .article-header {
   /* border-left: 5px solid #4d4d4d; */
   /* padding: 30px 0 15px 25px; */
-  padding: 30px 0 15px 0px;
+  margin: 0px 0 15px 0px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
   /* padding-left: 7.6923% */
 }
 
@@ -2265,9 +2267,9 @@ pre .id {
 }
 
 .article-info-index.article-info {
-  padding-top: 20px;
+  padding-top: 5px;
   /* margin: 30px 7.6923% 0; */
-  margin: 30px 0 0;
+  /* margin: 30px 0 0; */
   min-height: 72px;
   border-top: 1px solid #ddd
 }
