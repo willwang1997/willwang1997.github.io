@@ -5,7 +5,7 @@ reward: true
 tags:
     - hexo
 ---
-### 2020-6-1：搭建与保存
+### 2020-6-1：搭建与保存源项目文件
 :rocket:偶然间在csdn，或者掘金上面看到别人的空间，链接到他到博客，瞬间鸡血上头，想自己弄个属于自己的个人网站，所以就开搞了。作为喜欢白嫖的人，网上找了一个免购买服务器到方法，就是hexo+ githubPage,的形式搭建静态资源，so。。。
 1. 安装环境，比如node，hexo，创建仓库，开启page功能。
     **接入评论系统的时候要注册配置[leanCloud](https://www.leancloud.cn/)**
@@ -27,9 +27,9 @@ tags:
 
 ### 2020-09-30：hexo博客文档的分类和归档入口
 :rocket:在yilia主题中添加分类和归档的入口。
-![分类](https://raw.githubusercontent.com/willwang1997/picMap/main/%E6%88%AA%E5%B1%8F2021-05-11%20%E4%B8%8A%E5%8D%8811.13.22.png)
+{% asset_img 截屏2021-05-11上午11.13.22.png 图片%} 
 ***
-![归档](https://raw.githubusercontent.com/willwang1997/picMap/main/%E6%88%AA%E5%B1%8F2021-05-11%20%E4%B8%8A%E5%8D%8811.17.20.png)
+{% asset_img 截屏2021-05-11上午11.17.20.png 图片%} 
 参考配置链接：[分类和归档](https://github.com/litten/hexo-theme-yilia/issues/835)。
 
 ### 利用码云pages搭建同步github的博客
@@ -39,10 +39,3 @@ tags:
 其中：码云 Pages 的访问地址不带二级目录，需要把仓库名称和路径改成你的码云账号，码云账号是需要在`个人设置`->`基本设置`->`个人资料`->`个人空间地址`，里面查看。
 官方文档：[不带二级目录](https://gitee.com/help/articles/4136#article-header0)
 友情链接: [白嫖码云Pages](https://juejin.cn/post/6868451280348676110)
-
-### 用PicGo来快速上传图片获得网络地址
-:rocket:了解到如果上传图片到hexo项目文件，那么会造成此仓库到文件大小非常大，假如clone 下来本地要下载很久，当然挂了梯子还好，下载速度还快，hexo到语法引入远程地址（网络地址）的图片相对速度比较快，所以综上所述，网上找到了一些解决办法，目前我用到是其中一种。利用github搭建图床，博客系统直接引用图床到图片地址即可。
-强烈推荐`PicGo`:
-![s](https://raw.githubusercontent.com/willwang1997/picMap/main/%E6%88%AA%E5%B1%8F2021-05-14%20%E4%B8%8A%E5%8D%8811.11.31.png)
-
-官方文档：[听说你也想用PicGo](https://picgo.github.io/PicGo-Doc/zh/guide/)
