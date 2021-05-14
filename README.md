@@ -1,8 +1,3 @@
-### 运用 travis -cl 域名添加https 进行持久化 构建。
-
-来源:  
-博客地址 [molunerfinn](https://molunerfinn.com/hexo-travisci-https/)
-
 国内：
  [我的博客](https://will942345396.gitee.io)
 国外：
