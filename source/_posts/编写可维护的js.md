@@ -3,6 +3,7 @@ title: 编写可维护的js
 date: 2021-03-27 15:29:00
 tags:
     - 书籍笔记
+toc: true
 ---
 {% asset_img WX20210427-164007@2x.png 图片%} 
 <!-- more -->
