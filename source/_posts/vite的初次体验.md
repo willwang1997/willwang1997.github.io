@@ -46,7 +46,37 @@ tags:
     ```
     yarn dev
     ```
-
+### vite2 跑 vue2 
+由于直接通过vite创建的项目是vue3.0，所以对于前vue2.0的项目想通过vite跑起来，需要进行迁移，好在vite2.0都提供了差价，接下来就是对某一个小的vue-cl3.0+vue2.0进行项目迁移的记录。
+1. 安装环境与插件支持
+    ```
+    npm i -D vite  
+    npm i -D vite-plugin-vue2
+    ```
+2. 在原来的项目文件目录下面，与vue.config.js同级的目录创建`vite.config.ts`（如果你是ts的话）或者`vite.config.js`文件。
+    ```javaScript
+    import { createVuePlugin } from "vite-plugin-vue2";//引入插件
+    import { defineConfig } from "vite";
+    //import vue from '@vitejs/plugin-vue' 注释vue3
+    import path from "path";//引入path路径
+    export default defineConfig({
+        resolve: {
+            alias: {
+                "@": path.resolve(__dirname, "src"),
+            },
+        },
+        base: "/",
+        plugins: [
+            // vue()
+            createVuePlugin()
+        ],
+        server: {
+            port: 8080 //跑起来的服务端口
+        }
+    });
+    ```
+3. 创建入口文index.html,引入 script 标签，使用浏览器原生的 ESM 来加载main.js。
+4. package.json创建单独的命令"dev": "vite"
 ### 相关链接：
 [vite官网](https://cn.vitejs.dev/)
 [vite2.0](https://juejin.cn/post/6930792459567890446)
