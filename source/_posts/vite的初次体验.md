@@ -75,9 +75,32 @@ tags:
         }
     });
     ```
-3. 创建入口文index.html,引入 script 标签，使用浏览器原生的 ESM 来加载main.js。
+3. 在项目根目录与*vue.config.js同级*创建入口文件index.html,引入 script 标签，使用浏览器原生的 ESM 来加载main.js。
+    ```html
+    <body>
+        <div id="app"></div>
+        <!-- 引入js的方式为type=module -->
+        <script type="module" src="/src/main.js"></script> 
+    </body>
+    ```
 4. package.json创建单独的命令"dev": "vite"
-### 相关链接：
+    ```JSON
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "test:unit": "vue-cli-service test:unit",
+        "lint": "vue-cli-service lint",
+        // 添加 运行命令
+        "dev": "vite",
+        // 自选添加vite的打包命令
+        "v-build": "vite build"
+    },
+    ```
+### 总结
+确实相比于使用webpack进行开发的项目，冷启动，热更新的话比vite慢，用起来的直观感受就是快。但是在vue2的项目中，还有很多需要注意的地方，比如src配置，以及寻找插件等问题。我目前没有把公司目前的项目进行vite跑，尝新是没问题，但还是求稳定吧。:penguin:
+后续会假如真的跑实际业务公司项目了，会继续记录一下。
+
+### 相关链接
 [vite官网](https://cn.vitejs.dev/)
 [vite2.0](https://juejin.cn/post/6930792459567890446)
 [vite2搞vue2.0](https://www.yuque.com/xinbao37/roadmap/vite2-vue2)
