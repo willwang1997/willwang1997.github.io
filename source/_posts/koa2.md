@@ -6,7 +6,7 @@ tags:
     - mongoDB
     - koa2
 ---
-### MongoDB 环境搭建
+### Windows MongoDB环境配置
 MongoDB的搭建，第一次在公司电脑下载MongoDB的时候出了一个问题解决了很久。下载安装的是 [社区版本4.0+ （点击下载）](https://www.mongodb.com/try/download/community)，然后安装过程中总是报：
 ![sad](https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20180930095421630.png)
 
@@ -14,9 +14,10 @@ MongoDB的搭建，第一次在公司电脑下载MongoDB的时候出了一个问
 。。。。failed to start Verify that you have sufficient privileges to start system services
 ```
 最后的找到的原因是，电脑（win10）的系统远程服务没有配置，what the fuck，我一直以为是安装环境没弄好，或者windows没有激活的原因。
+<!-- more -->
 1. 首先完全卸载MongoDB,可以根据以下两个方式去检查是否完全卸载干净
-    + 如果你安装过MongoDB，再次安装时出现这个错误（请先确保已经完全卸载了MongoDB），这可能是MongoDB服务的注册表没有删除干净。在“运行”里面输入“regedit”打开注册表编辑器，打开“HKEY_LOCAL_MACHINE\SYSTEM\”，找到CurrentControlSet，会有001，002的后缀多个，都打开找到Services打开，在里面找MongoDB，如果有就删除。重新安装就不会有这种错误。
-    + 如果报的错误是Service ‘MongoDB Server’(MongoDB) failed to install，就是MongoDB服务没有删除，打开计算机—管理，在服务里可以看到MongoDB Server在，就在控制台输入sc delete MongoDB关闭，然后删除掉就可以（需要管理员权限），然后再重启电脑。
+    1.1.如果你安装过MongoDB，再次安装时出现这个错误（请先确保已经完全卸载了MongoDB），这可能是MongoDB服务的注册表没有删除干净。在“运行”里面输入“regedit”打开注册表编辑器，打开“HKEY_LOCAL_MACHINE\SYSTEM\”，找到CurrentControlSet，会有001，002的后缀多个，都打开找到Services打开，在里面找MongoDB，如果有就删除。重新安装就不会有这种错误。
+    1.2.如果报的错误是Service ‘MongoDB Server’(MongoDB) failed to install，就是MongoDB服务没有删除，打开计算机—管理，在服务里可以看到MongoDB Server在，就在控制台输入sc delete MongoDB关闭，然后删除掉就可以（需要管理员权限），然后再重启电脑。
 2. 接下来就是需要重新添加电脑的远程服务设置，
     > 此电脑——管理——本地用户和组——组——双击Administrator——添加——高级——立即查找——添加NETWORK SERVICE——确认——应用
     参考链接：[错误1053的解决办法](https://jingyan.baidu.com/article/90bc8fc8207edeb753640ca3.html)。
@@ -25,7 +26,39 @@ MongoDB的搭建，第一次在公司电脑下载MongoDB的时候出了一个问
 参考链接：
 [WindowsMongoDB下载、安装、配置、使用](https://blog.csdn.net/muguli2008/article/details/80591256)。
 
-macos 环境安装问题总结。。。。
+### macOs MongoDB的环境配置
+1. 从官网下载的是一个压缩包，解压后放入/usr/local，打开Finder后按 shift + command +G 输入 /usr/local 后回车便能看到这个隐藏的目录了。
+2. 配置环境变量，打开终端，输入“open -e .bash_profile”，在打开的文件中加入
+    ```
+    export PATH=${PATH}:/usr/local/MongoDB/bin
+    ```
+3. Command+S保存配置，在终端输入"source .bash_profile"使配置生效。输入"mongod -version"，回车后如果看到下面的版本号则说明MongoDB已经成功安装到了Mac上。
+4. 在 “/usr/local/mongoDB“目录先创建log和data文件夹。
+5. 在终端中，先进入/usr/local/mongoDB ，输入"mongod --dbpath data --logpath log/mongod.log --logappend"，启动mongodb服务(当前终端不要关闭)；可以选择在mac根目录(即Macintosh HD)中创建/data/db，需要重启电脑时候配置。
+    >如果改变data目录位置，则需要在启动服务时 指定dbpath的位置。
+    >--dbpath 指定为刚才创建好的data目录
+    >--logpath 指定log存放位置
+    >--logappend mongo在后台运行
+6. 新的终端中输入"mongo" 连接数据库,如果终端出现了以下信息，则说明链接成功。（uuid我这个是设置了超级管理员，默认是所有权限）。
+```
+MongoDB shell version v4.4.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("********************************") }
+MongoDB server version: 4.4.6
+---
+    Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+    metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+    The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+    and anyone you share the URL with. MongoDB may use this information to make product
+    improvements and to suggest MongoDB products and deployment options to you.
+
+    To enable free monitoring, run the following command: db.enableFreeMonitoring()
+    To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+
+```
+
+参考友情链接：
 [macOs安装的步骤知乎](https://zhuanlan.zhihu.com/p/112263843)；
 [macOs安装的步骤简书](https://www.jianshu.com/p/a594e6482e5c)；
 
@@ -96,6 +129,8 @@ const cors = require('koa2-cors')
 // 其他代码
 app.use(cors( ))
 ```
+***
+
 ## 搭建连接好MongoDB的koa2项目
 在最开始已经知道怎么初始化一个项目的情况下，我们接下来进行的是，能在网页中显示找到你保存到数据库的数据。
 
