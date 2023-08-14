@@ -181,7 +181,6 @@ footer {
   .article-img {
     height: 240px;
     width: 100%;
-    // background: green;
   }
 
   a {
