@@ -14,11 +14,11 @@
         />
       </header>
       <Content itemprop="articleBody" />
-      <footer>
-        <!-- <Newsletter v-if="$service.email.enabled" /> -->
-        <hr />
+      <!-- <footer>
+        <Newsletter v-if="$service.email.enabled" />
         <Comment />
-      </footer>
+      </footer> -->
+        <hr />
     </article>
     <Toc />
   </div>

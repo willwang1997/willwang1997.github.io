@@ -12,9 +12,9 @@
     </div>
     <div v-if="date" class="post-meta-date">
       <time pubdate itemprop="datePublished" :datetime="date"  class="date-time">
-        {{ resolvedDate }}
+      创建于：{{ resolvedDate }}
       </time>
-      上次更新时间：<time pubdate itemprop="datePublished" :datetime="date">
+      更新于：<time pubdate itemprop="datePublished" :datetime="date">
         {{ resolveLastDate }}
       </time>
     </div>

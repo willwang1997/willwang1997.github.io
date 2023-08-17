@@ -7,7 +7,9 @@ tags:
   - 前端
 author: ULIVZ
 location: Shanghai
-img: /jiepin.png
+img: /messageBord.jpeg
+img2: https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20210518153514.png
+
 ---
 
 To write a theme, create a `.vuepress/theme` directory in your docs root, and then create a `Layout.vue` file:

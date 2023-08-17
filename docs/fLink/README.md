@@ -1,13 +1,14 @@
 ---
+title: 友情链接
 layout: Friendlink
 features:
-- title: asdfasd
-  link: https://www.baidu.com
-  details: 以 Markdown 
-- title: fasdafff
-  link: https://www.baidu.com
-  details: 享受 Vue + webpack 的开发体验。
-- title: gqwe
-  link: https://www.baidu.com
-  details: VuePress 为每个页面预渲染生成静态的 HTML
+- title: 武汉大佬博客
+  link: https://bougiel.github.io/
+  details: 我的博客就是按照她来做的 
+- title: Molunerfinn大牛
+  link: https://github.com/Molunerfinn
+  details: 部署hexo参考的大牛博客
+- title: 阮一峰
+  link: https://www.ruanyifeng.com/blog/
+  details: 阮一峰的网络日志
 ---

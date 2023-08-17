@@ -1,16 +1,12 @@
 ---
-title: frontmatter in vuepress 2
-date: 2018-11-7
+title: 编写可维护的js
+date: 2021-03-27
 tags: 
-  - 工作
-  - 生活
-author: ULIVZ
-location: Hangzhou
-img: /jiepin.png
-img2: https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20210518153514.png
+  - 书籍
+  - 前端
+img: /messageBord.jpeg
 ---
-
-{% asset_img WX20210427-164007@2x.png 图片%} 
+笔记记录
 <!-- more -->
 ### 行的长度
 单行代码不能超过80个字符。
@@ -102,3 +98,4 @@ Object.seal()函数来密封一个对象，Object.freeze()函数来冻结一个�
 比如检测document.getElementById()存在？不存在就判断doument.all()存在。
 ### 避免特性推断，避免浏览器推断。
 尽可能的使用特性检测，其次是用户代理检测，永远不要使用浏览器推断。
+

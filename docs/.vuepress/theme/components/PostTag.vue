@@ -62,7 +62,7 @@ export default {
 }
 
 .default {
-  background-color: rgb(43, 47, 59);
+  background-color: $accentColor;
 }
 
 .blue {

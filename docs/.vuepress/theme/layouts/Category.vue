@@ -4,13 +4,15 @@
     <ul class="tag-list">
       <li v-for="tag in tags" :key="tag.name">
         <router-link class="blog-tag" :to="tag.path">
-          <div class="tag-info">
+          <div class="tag-info" :class="userStyle(tag.name)">
             <h1>{{ tag.name }}</h1>
-            <div class="tag-count">
-              <!-- <h3>({{ tag.pages.length }})</h3> -->
-            </div>
+            <!-- <div class="tag-count">
+              <h3>({{ tag.pages.length }})</h3>
+            </div> -->
           </div>
-          <div class="discription">该类型在博客中共有：{{tag.pages.length}}篇</div>
+          <div class="discription">
+            该类型在博客中共有：{{ tag.pages.length }}篇
+          </div>
         </router-link>
       </li>
     </ul>
@@ -28,6 +30,23 @@ export default {
   created() {
     this.tags = this.$frontmatterKey.list;
     // console.log(this.$frontmatterKey);
+  },
+  // for循环里面实现动态样式230815
+  methods: {
+    userStyle(value) {
+      switch (value) {
+        case "前端":
+          return "green";
+        case "工作":
+          return "red";
+        case "生活":
+          return "blue";
+        case "书籍":
+          return "origin";
+        default:
+          return "default";
+      }
+    },
   },
 };
 </script>
@@ -69,13 +88,19 @@ export default {
       .tag-info {
         width: 120px;
         height: 120px;
-        background: $accentColor;
+        // background: $accentColor;
         color: white;
         border-radius: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
+        overflow: hidden;
+
+        h1 {
+          max-width: 100%;
+          text-align: center;
+        }
       }
 
       .discription {
@@ -84,6 +109,26 @@ export default {
         color: $textColor;
       }
     }
+  }
+
+  .default {
+    background-color: $accentColor;
+  }
+
+  .blue {
+    background-color: rgb(83, 144, 208);
+  }
+
+  .green {
+    background-color: rgb(152, 194, 60);
+  }
+
+  .red {
+    background-color: rgb(252, 72, 100);
+  }
+
+  .origin {
+    background-color: rgb(218, 109, 50);
   }
 }
 </style>>

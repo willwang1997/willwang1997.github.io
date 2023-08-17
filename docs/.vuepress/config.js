@@ -27,7 +27,7 @@ module.exports = {
                     },
                 ],
                 globalPagination: {
-                    lengthPerPage: 3,
+                    lengthPerPage: 5,
                     prevText: '上一页',
                     nextText: '下一页'
                 },

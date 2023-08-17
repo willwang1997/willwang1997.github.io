@@ -1,13 +1,11 @@
 ---
-title: Hello 444
-date: 2020-01-15
+title: JavaSript第3版本
+date: 2021-12-30
 author: 王维
 tags: 
-  - 工作
-  - 生活
   - 书籍
 location: hunan 
-img: /jiepin.png
+img: /messageBord.jpeg
 ---
 完整的过了这本小红书，我不知道为什么会费了这么久时间才看完，我在图什么呢？
 <!-- more -->

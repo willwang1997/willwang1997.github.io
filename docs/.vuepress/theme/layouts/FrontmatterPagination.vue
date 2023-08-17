@@ -95,13 +95,11 @@ export default {
     this.paginationComponent = this.getPaginationComponent();
   },
   mounted() {
-    console.log(this.$site);
-    console.log(this.$page);
-    console.log(this.$frontmatter);
-    console.log(this.$frontmatterKey);
-    // console.log(this.$frontmatterKey.list)
-    console.log(this.$pagination);
-    console.log(this.$pagination.pages);
+    // console.log(this.$site);
+    // console.log(this.$page);
+    // console.log(this.$frontmatter);
+    // console.log(this.$frontmatterKey);
+    // console.log(this.$pagination);
   },
   methods: {
     showFMImg,
@@ -179,7 +177,6 @@ footer {
   .article-img {
     height: 240px;
     width: 100%;
-    background: green;
   }
 
   a {
