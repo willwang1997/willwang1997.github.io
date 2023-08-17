@@ -10,9 +10,7 @@
               <h3>({{ tag.pages.length }})</h3>
             </div> -->
           </div>
-          <div class="discription">
-            该类型在博客中共有：{{ tag.pages.length }}篇
-          </div>
+          <div class="discription">博客中共有：{{ tag.pages.length }}篇</div>
         </router-link>
       </li>
     </ul>
@@ -66,12 +64,12 @@ export default {
   .tag-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 1em;
   }
 
   li {
-    width: calc(50% - 8px);
+    width: calc(32% - 0px);
     height: fit-content;
     list-style: none;
     margin-top: 16px;
@@ -105,8 +103,10 @@ export default {
 
       .discription {
         padding: 0 1em;
-        line-height: 120px;
+        // line-height: 120px;
         color: $textColor;
+        display: flex;
+        align-items: center;
       }
     }
   }
