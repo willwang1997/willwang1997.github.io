@@ -31,24 +31,27 @@ module.exports = {
                     prevText: '上一页',
                     nextText: '下一页'
                 },
+                feed: {
+                    canonical_base: 'https://willwang1997.github.io/',
+                },
             }],
-            [
-                'vuepress-plugin-comment',
-                {
-                    choosen: 'valine',
-                    // options选项中的所有参数，会传给Valine的配置
-                    options: {
-                        el: '#valine-vuepress-comment',
-                        appId: 'a7wKbSbc5RiKOd1zn4tvonXH-gzGzoHsz',
-                        appKey: 'tF2j46TCl3WBqg0HB963zchP',
-                        path: '<%- frontmatter.commentid || frontmatter.permalink %>',
-                        // 评论框占位内容
-                        placeholder: "评论支持Markdown语法",
-                        // 评论者头像
-                        avatar: "monsterid",
-                    }
-                }
-            ],
+            // [
+            //     'vuepress-plugin-comment',
+            //     {
+            //         choosen: 'valine',
+            //         // options选项中的所有参数，会传给Valine的配置
+            //         options: {
+            //             el: '#valine-vuepress-comment',
+            //             appId: 'a7wKbSbc5RiKOd1zn4tvonXH-gzGzoHsz',
+            //             appKey: 'tF2j46TCl3WBqg0HB963zchP',
+            //             path: '<%- frontmatter.commentid || frontmatter.permalink %>',
+            //             // 评论框占位内容
+            //             placeholder: "评论支持Markdown语法",
+            //             // 评论者头像
+            //             avatar: "monsterid",
+            //         }
+            //     }
+            // ],
             '@vuepress/back-to-top',
             '@vuepress/nprogress',
         ],
@@ -64,7 +67,7 @@ module.exports = {
         nav: [
             { text: 'Github', link: 'https://github.com/willwang1997' },
             { text: '掘金', link: 'https://juejin.cn/user/3456520288480792' },
-            { text: 'RSS', link: '' },
+            { text: 'RSS', link: 'https://willwang1997.github.io/rss.xml' },
             { text: '邮箱', link: 'mailto:942345396@qq.com' }
         ],
         sidebar: [

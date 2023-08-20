@@ -11,4 +11,7 @@ features:
 - title: 阮一峰
   link: https://www.ruanyifeng.com/blog/
   details: 阮一峰的网络日志
+- title: wiki
+  link: https://mulander-j.github.io/fillory/Wiki1001/
+  details: 博客评论问题发现的大佬
 ---
