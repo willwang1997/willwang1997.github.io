@@ -57,5 +57,9 @@ export default {
       margin-left: 15px;
     }
   }
+  // 每行的间距样式修改一下
+  /deep/li {
+    margin: 0.2em 0px;
+  }
 }
-</style>>
+</style>

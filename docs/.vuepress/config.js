@@ -61,8 +61,6 @@ module.exports = {
         displayAllHeaders: true,
         // 页面滚动效果
         smoothScroll: true,
-        nextLinks: false,
-        prevLinks: false,
         lastUpdated: '上次更新时间', // string | boolean
         nav: [
             { text: 'Github', link: 'https://github.com/willwang1997' },

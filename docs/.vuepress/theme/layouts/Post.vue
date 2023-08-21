@@ -18,7 +18,8 @@
         <Newsletter v-if="$service.email.enabled" />
         <Comment />
       </footer> -->
-        <hr />
+      <hr />
+      <Comment :isShowReadCount="false"></Comment>
     </article>
     <Toc />
   </div>
@@ -27,7 +28,8 @@
 <script>
 import Toc from "@theme/components/Toc.vue";
 import PostMeta from "@theme/components/PostMeta.vue";
-import { Comment } from "@vuepress/plugin-blog/lib/client/components";
+// import { Comment } from "@vuepress/plugin-blog/lib/client/components";
+import Comment from "@theme/components/Comment.vue";
 
 export default {
   components: {
@@ -35,6 +37,12 @@ export default {
     PostMeta,
     Comment,
     // Newsletter: () => import('@theme/components/Newsletter.vue'),
+  },
+  created() {
+    console.log(this.$site);
+    console.log(this.$page);
+    console.log(this.$frontmatter);
+    console.log(this.$pagination);
   },
 };
 </script>

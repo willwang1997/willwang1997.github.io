@@ -90,4 +90,4 @@ export default {
 /deep/ p {
   margin: 1em 0;
 }
-</style>>
+</style>

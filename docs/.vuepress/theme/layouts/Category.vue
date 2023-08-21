@@ -131,4 +131,4 @@ export default {
     background-color: rgb(218, 109, 50);
   }
 }
-</style>>
+</style>
