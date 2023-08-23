@@ -133,7 +133,7 @@ export default {
   },
 };
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 #base-list-layout {
   width: $contentWidth;
   // 父元素塌陷
@@ -188,6 +188,7 @@ footer {
 .ui-post-title {
   // font-family: PT Serif, Serif;
   font-size: 18px;
+  font-weight: 500;
   border-bottom: 0;
   cursor: pointer;
 

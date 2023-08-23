@@ -192,6 +192,7 @@ footer {
 .ui-post-title {
   // font-family: PT Serif, Serif;
   font-size: 18px;
+  font-weight: 500;
   border-bottom: 0;
   cursor: pointer;
 

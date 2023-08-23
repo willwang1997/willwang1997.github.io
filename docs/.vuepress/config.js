@@ -34,6 +34,9 @@ module.exports = {
                 feed: {
                     canonical_base: 'https://willwang1997.github.io/',
                 },
+                sitemap: {
+                    hostname: 'https://willwang1997.github.io/',
+                },
             }],
             // [
             //     'vuepress-plugin-comment',
