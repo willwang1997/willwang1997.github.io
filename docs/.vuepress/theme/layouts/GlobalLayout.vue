@@ -37,6 +37,7 @@ import Sidebar from "@theme/components/Sidebar.vue";
 import Footer from '@theme/components/Footer.vue'
 import { resolveSidebarItems } from "@theme/util";
 export default {
+  name:'GlobalLayout',
   components: {
     // AgainGlobalLayout: GlobalLayout,
     Home,

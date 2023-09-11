@@ -32,6 +32,7 @@ import PostMeta from "@theme/components/PostMeta.vue";
 import Comment from "@theme/components/Comment.vue";
 
 export default {
+  name:'Post',
   components: {
     Toc,
     PostMeta,

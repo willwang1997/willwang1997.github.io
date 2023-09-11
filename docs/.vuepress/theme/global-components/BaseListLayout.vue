@@ -78,6 +78,7 @@ import { showFMImg } from "../util/index";
 dayjs.extend(dayjsPluginUTC);
 
 export default {
+  name:'BaseListLayout',
   components: {
     NavLink,
     PostTag,

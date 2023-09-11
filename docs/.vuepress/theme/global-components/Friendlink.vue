@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "friendlink",
+  name: "Friendlink",
   //计算属性来获取md中的数据
   computed: {
     data() {
