@@ -10,6 +10,6 @@ date: 2020-08-12
 本站配图来自 [unsplash](https://unsplash.com/)。
 
 # todo
-* 图片压缩
-* 博客加载优化
+* 图片图床地址
+* 博客post和分类注册失败bug，评论不刷新
 * 赞赏
