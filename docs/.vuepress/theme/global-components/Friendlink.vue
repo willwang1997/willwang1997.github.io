@@ -14,12 +14,19 @@
         </a>
       </li>
     </ul>
+          <Comment :isShowReadCount="false"></Comment>
+
   </div>
 </template>
 
 <script>
+import Comment from "@theme/components/Comment.vue";
+
 export default {
   name: "Friendlink",
+  components:{
+    Comment
+  },
   //计算属性来获取md中的数据
   computed: {
     data() {
