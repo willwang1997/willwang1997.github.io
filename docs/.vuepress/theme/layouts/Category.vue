@@ -10,7 +10,7 @@
               <h3>({{ tag.pages.length }})</h3>
             </div> -->
           </div>
-          <div class="discription">博客中共有：{{ tag.pages.length }}篇</div>
+          <div class="discription">博客中有:{{ tag.pages.length }}篇</div>
         </router-link>
       </li>
     </ul>
@@ -64,7 +64,7 @@ export default {
   .tag-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    // justify-content: space-between;
     margin-bottom: 1em;
   }
 
@@ -72,12 +72,13 @@ export default {
     width: calc(32% - 0px);
     height: fit-content;
     list-style: none;
-    margin-top: 16px;
+    margin: 16px 10px 0 0;
     border-radius: 15px;
     box-shadow: 0 1px 4px rgba(26, 26, 26, 0.15);
 
     @media (max-width: $MQMobile) {
       width: 100%;
+      margin: 16px 0 0 0;
     }
 
     .blog-tag {
