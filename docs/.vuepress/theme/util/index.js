@@ -272,5 +272,23 @@ export function showFMImg(path) {
     return base + path.slice(1);
   } else {
     return path;
-  } 
+  }
+}
+// 文章首页组建动态执行、消除动画效果css--231012
+export function addAnimation() {
+  let keyframes =
+    "@keyframes shining {from {text-shadow: 0 0 10px lightblue, 0 0 20px lightblue, 0 0 30px lightblue, 0 0 40px skyblue, 0 0 50px skyblue, 0 0 60px skyblue;}​to {text-shadow: 0 0 5px lightblue, 0 0 10px lightblue, 0 0 15px lightblue, 0 0 20px skyblue, 0 0 25px skyblue, 0 0 30px skyblue;}}";
+  let style = document.createElement("style");
+  style.type = "text/css";
+  style.innerHTML = keyframes;
+  style.id = "keyframes";
+  document.getElementsByTagName("head")[0].appendChild(style);
+}
+export function removeAnimation() {
+  let styleArr = [];
+  styleArr = document.getElementsByTagName("style");
+  document
+    .getElementsByTagName("head")[0]
+    .removeChild(styleArr.namedItem("keyframes"));
+
 }

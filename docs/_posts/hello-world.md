@@ -5,7 +5,7 @@ tags:
   - 生活
 author: 王维
 location: hunan
-img: /messageBord.jpeg
+img: 
 ---
 
 花了一点时间来整理搜集如何用github io 放置静态资源以及布置hexo博客。

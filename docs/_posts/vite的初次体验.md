@@ -5,7 +5,7 @@ tags:
   - 前端
 author: 王维
 location: hunan
-img: /messageBord.jpeg
+img: 
 ---
 ## vite是什么？
 微博上面关注了尤大大的微博，在2020年年末吧，建了开发的Web开发构建工具---vite。在2021年2月的时候发部了2.0版本:zap:，

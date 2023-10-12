@@ -6,7 +6,7 @@ tags:
     - koa2
 author: 王维
 location: hunan
-img: /messageBord.jpeg
+img: 
 ---
 ## Windows MongoDB环境配置
 MongoDB的搭建，第一次在公司电脑下载MongoDB的时候出了一个问题解决了很久。

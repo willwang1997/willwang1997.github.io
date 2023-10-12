@@ -6,7 +6,7 @@ tags:
   - markdown
 author: 王维
 location: hunan
-img: /messageBord.jpeg
+img: 
 ---
 ## 什么是markdown?
 推荐阅读这篇文章,[入门markdown](https://sspai.com/post/36610)。

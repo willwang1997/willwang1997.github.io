@@ -5,10 +5,16 @@
       <article v-for="page in pages" :key="page.key" class="ui-post">
         <router-link :to="page.path" class="post-link">
           <img
+            v-if="page.frontmatter.img != null"
             :src="showFMImg(page.frontmatter.img)"
             alt=""
             class="article-img"
           />
+          <div class="article-banner" v-else>
+            <div class="banner-txt">
+              <i>{{ page.title }}</i>
+            </div>
+          </div>
           <div class="text-warp">
             <div class="ui-post-title" itemprop="name headline">
               {{ page.title }}
@@ -73,12 +79,12 @@ import {
   Pagination,
   SimplePagination,
 } from "@vuepress/plugin-blog/lib/client/components";
-import { showFMImg } from "../util/index";
+import { showFMImg, addAnimation, removeAnimation } from "../util/index";
 
 dayjs.extend(dayjsPluginUTC);
 
 export default {
-  name:'BaseListLayout',
+  name: "BaseListLayout",
   components: {
     NavLink,
     PostTag,
@@ -100,7 +106,12 @@ export default {
     this.paginationComponent = this.getPaginationComponent();
     // console.log(this.$pagination);
   },
-
+  mounted() {
+    addAnimation();
+  },
+  destroyed() {
+    removeAnimation();
+  },
   methods: {
     showFMImg,
     getPaginationComponent() {
@@ -134,7 +145,7 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 #base-list-layout {
   width: $contentWidth;
   // 父元素塌陷
@@ -253,6 +264,30 @@ footer {
     &:hover {
       // color: $accentColor;
     }
+  }
+}
+
+// 动画效果--封面文字
+.article-banner {
+  height: 240px;
+  width: 100%;
+  background: $accentColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-txt {
+  max-width: 100%;
+  // height: 100%;
+  // overflow: hidden;
+  color: #fff;
+  font-size: 3rem;
+  -webkit-animation: shining 1s alternate infinite;
+  animation: shining 1.5s alternate infinite;
+
+  @media (max-width: $MQMobile) {
+    font-size: 1.5rem;
   }
 }
 </style>
