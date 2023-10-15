@@ -31,7 +31,7 @@ img:
 **缓慢的更新：**
 当基于打包器启动时，编辑文件后将重新构建文件本身。显然我们不应该重新构建整个包，因为这样更新速度会随着应用体积增长而直线下降
 
-![d](https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20210518172055.png)
+![d](https://fastly.jsdelivr.net/gh/willwang1997/picMap@main/20210518172055.png)
 ***
 ## 创建vite for vue 的项目
 前提：Node.js 的版本 必须大于等于12.0.0；
@@ -40,9 +40,9 @@ img:
     yarn create @vitejs/app [项目名称]
     ```
 2. 选择，我这里选择的是vue 和JavaScript,vue 默认版本是 3.0。:ambulance:
-    ![](https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20210518175528.png)
+    ![](https://fastly.jsdelivr.net/gh/willwang1997/picMap@main/20210518175528.png)
     ***
-    ![](https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20210518175652.png)
+    ![](https://fastly.jsdelivr.net/gh/willwang1997/picMap@main/20210518175652.png)
 3. 安装依赖，开启服务。
     ```
     yarn dev

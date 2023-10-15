@@ -46,7 +46,7 @@ img:
 :rocket:了解到如果上传图片到hexo项目文件，那么会造成此仓库到文件大小非常大，假如clone 下来本地要下载很久，当然挂了梯子还好，下载速度还快，hexo到语法引入远程地址（网络地址）的图片相对速度比较快。
 所以综上所述，网上找到了一些解决办法，目前我用到是其中一种。利用github搭建图床，博客系统直接引用图床到图片地址即可。
 强烈推荐`PicGo`:[听说你也想用PicGo](https://picgo.github.io/PicGo-Doc/zh/guide/)
-![s](https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20210518153514.png)
+![s](https://fastly.jsdelivr.net/gh/willwang1997/picMap@main/20210518153514.png)
 ***
 **遇到的问题**
 按照配置信息，github的图片上传后是不能访问（当然可以找其他的图床，或者购买服务器）,Windows本地的picgo图片也挂了，mac目前本地看picgo的图片好像没出事，但是上传后的图片网络地址域名是被墙的，所以解决方法是：

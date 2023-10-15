@@ -12,7 +12,8 @@ img:
 MongoDB的搭建，第一次在公司电脑下载MongoDB的时候出了一个问题解决了很久。
 <!-- more -->
 下载安装的是 [社区版本4.0+ （点击下载）](https://www.mongodb.com/try/download/community)，然后安装过程中总是报：
-![sad](https://cdn.jsdelivr.net/gh/willwang1997/picMap@main/20180930095421630.png)
+
+![sad](https://fastly.jsdelivr.net/gh/willwang1997/picMap@main/20180930095421630.png)
 
 ```
 。。。。failed to start Verify that you have sufficient privileges to start system services

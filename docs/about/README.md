@@ -10,7 +10,10 @@ date: 2020-08-12
 # 其他
 本站配图来自 [unsplash](https://unsplash.com/)。
 
-# todo
-* 图片图床地址
-* 博客post和分类注册失败bug
+# Todo
+* 博客post和分类组件注册name提示报错
 * 赞赏
+* 深色功能
+* 图床不显示--[方法](https://www.xpn.cc/5368/fy.html)
+* 控制台报中文路由警告
+* 文章内部标题多次点击跳转报错问题

@@ -275,6 +275,7 @@ export function showFMImg(path) {
   }
 }
 // 文章首页组建动态执行、消除动画效果css--231012
+// 参考掘金https://juejin.cn/post/7033049505326956581
 export function addAnimation() {
   let keyframes =
     "@keyframes shining {from {text-shadow: 0 0 10px lightblue, 0 0 20px lightblue, 0 0 30px lightblue, 0 0 40px skyblue, 0 0 50px skyblue, 0 0 60px skyblue;}​to {text-shadow: 0 0 5px lightblue, 0 0 10px lightblue, 0 0 15px lightblue, 0 0 20px skyblue, 0 0 25px skyblue, 0 0 30px skyblue;}}";
