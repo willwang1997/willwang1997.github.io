@@ -70,6 +70,11 @@ export default {
   p, h1, h2, h3 {
     margin: 1em 0;
   }
+  
+  img{
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @media (max-width: $MQMobile) {
