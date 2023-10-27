@@ -8,6 +8,7 @@ img: /messageBord.jpeg
 ---
 笔记记录
 <!-- more -->
+![Image from alias](../.vuepress/public/bianxiekeweihujs/png1.png)
 ### 行的长度
 单行代码不能超过80个字符。
 ### 命名
