@@ -107,10 +107,10 @@ export default {
     // console.log(this.$pagination);
   },
   mounted() {
-    addAnimation();
+    // addAnimation();
   },
   destroyed() {
-    removeAnimation();
+    // removeAnimation();
   },
   methods: {
     showFMImg,

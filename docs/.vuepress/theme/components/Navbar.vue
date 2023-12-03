@@ -32,6 +32,9 @@
       />
       <SearchBox v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false" />
       <NavLinks class="can-hide" />
+      <div class="black-them">
+        <a href="" class="nav-link external">深色模式</a>
+      </div>
     </div>
   </header>
 </template>
@@ -137,4 +140,11 @@ $navbar-horizontal-padding = 1.5rem
       overflow hidden
       white-space nowrap
       text-overflow ellipsis
+
+.black-them{
+  margin-left: 1rem;
+  a{
+    color: inherit
+  }
+}
 </style>

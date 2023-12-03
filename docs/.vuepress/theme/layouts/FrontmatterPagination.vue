@@ -270,7 +270,7 @@ footer {
   max-width: 100%;
   // height: 100%;
   // overflow: hidden;
-  color: #fff;
+  color: $tagsTextColor;
   font-size: 3rem;
   -webkit-animation: shining 1s alternate infinite;
   animation: shining 1.5s alternate infinite;

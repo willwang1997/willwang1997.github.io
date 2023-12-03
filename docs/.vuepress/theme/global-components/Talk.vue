@@ -50,7 +50,7 @@ export default {
     display: flex;
     align-content: center;
     font-size: 12px;
-    color: #808695;
+    color: $footerTextColor;
     margin: 1em 0px;
 
     .update-time {

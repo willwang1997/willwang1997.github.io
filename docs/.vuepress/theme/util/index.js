@@ -288,8 +288,7 @@ export function addAnimation() {
 export function removeAnimation() {
   let styleArr = [];
   styleArr = document.getElementsByTagName("style");
-  document
-    .getElementsByTagName("head")[0]
-    .removeChild(styleArr.namedItem("keyframes"));
-
+  if(styleArr.namedItem('keyframes')){
+    document.getElementsByTagName("head")[0].removeChild(styleArr.namedItem("keyframes"));
+  }
 }
