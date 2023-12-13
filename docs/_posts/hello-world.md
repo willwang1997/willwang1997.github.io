@@ -3,7 +3,7 @@ title: Hello World
 date: 2020-06-01
 tags: 
   - 生活
-author: 王维
+author: willwang
 location: hunan
 img: 
 ---

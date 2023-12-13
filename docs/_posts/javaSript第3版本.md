@@ -1,7 +1,7 @@
 ---
 title: JavaSript第3版本
 date: 2021-12-30
-author: 王维
+author: willwang
 tags: 
   - 书籍
 location: hunan 
