@@ -74,7 +74,7 @@ export default {
     list-style: none;
     margin-top: 16px;
     border-radius: 15px;
-    box-shadow: 0 1px 4px rgba(26, 26, 26, 0.15);
+    box-shadow: var(--box-shadow);
     // display: flex;
     max-height: 120px;
 
@@ -100,7 +100,7 @@ export default {
 
     .discription {
       padding: 15px;
-      color: $textColor;
+      color: var(--regular-text);
       overflow: auto;
     }
   }

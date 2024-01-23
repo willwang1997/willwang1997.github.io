@@ -181,9 +181,9 @@ footer {
   // padding-bottom: 25px;
   // border-bottom: 1px solid $borderColor;
   margin-top: 15px;
-  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.15);
+  box-shadow: var(--box-shadow);
   border-radius: 5px;
-  border: 1px solid rgba(26, 26, 26, 0.15);
+  border: var(--border-color)
 
   &:last-child {
     // border-bottom: 0px;
@@ -196,7 +196,7 @@ footer {
   }
 
   a {
-    color: $darkTextColor;
+    color: var(--primary-text);
     font-weight: normal;
   }
 }

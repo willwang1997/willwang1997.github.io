@@ -61,4 +61,11 @@ export default {
         top calc(1rem - 2px)
     & > .sidebar-links
       padding 1rem 0
+.sidebar {
+  background-color: var(--bg-color) !important;
+}
+// 激活菜单 背景色。
+a.sidebar-link.active {
+    background-color: var(--card-color);
+}
 </style>

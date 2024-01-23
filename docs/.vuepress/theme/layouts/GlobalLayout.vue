@@ -144,6 +144,8 @@ export default {
 <style lang="stylus">
 #vuepress-theme-blog__global-layout {
   word-wrap: break-word;
+  background-color: var(--bg-color);
+  color: var(--regular-text)
 }
 //头部固定但高度假装填充
 .theme-container{
@@ -151,7 +153,7 @@ export default {
 }
 .content-wrapper {
   // padding 90px 15px 80px 15rem
-  min-height: calc(100vh - 80px - 60px - 160px);
+  min-height: calc(100vh);
   // max-width $contentWidth
   // margin 0 auto
   margin-left: 240px;

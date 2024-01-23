@@ -56,7 +56,7 @@ export default {
   font-size: 14px;
   letter-spacing: 0px;
   // font-family: PT Serif, Serif;
-  color: $textColor;
+  color: var(--regular-text);
   position: relative;
 
   @media (min-width: $MQNarrow) {

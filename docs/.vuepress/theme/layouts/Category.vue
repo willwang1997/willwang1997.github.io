@@ -74,7 +74,7 @@ export default {
     list-style: none;
     margin: 16px 10px 0 0;
     border-radius: 15px;
-    box-shadow: 0 1px 4px rgba(26, 26, 26, 0.15);
+    box-shadow: var(--box-shadow);
 
     @media (max-width: $MQMobile) {
       width: 100%;
@@ -105,7 +105,7 @@ export default {
       .discription {
         padding: 0 1em;
         // line-height: 120px;
-        color: $textColor;
+        color: var(--regular-text);
         display: flex;
         align-items: center;
       }

@@ -33,7 +33,7 @@ export default {
   watch: {
     // 路由变化时从新初始化Valine组件
     $route(a, b) {
-      console.log("routechange", a, b);
+      // console.log("routechange", a, b);
       if (a.path == b.path) {
         this.renderValine();
       }
