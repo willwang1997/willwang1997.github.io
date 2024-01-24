@@ -104,13 +104,13 @@ export default {
     })
     switch (this.currentMode) {
       case 'auto':
-        this.nowModeTitle ='🌓自动';
-        break;
-      case 'dark':
         this.nowModeTitle ='🌙深色';
         break;
-      case 'light':
+      case 'dark':
         this.nowModeTitle ='🌕浅色';
+        break;
+      case 'light':
+        this.nowModeTitle ='🌓自动';
         break;
     }
     console.log(this.currentMode,'2');
