@@ -38,23 +38,6 @@ module.exports = {
                     hostname: 'https://willwang1997.github.io/',
                 },
             }],
-            // [
-            //     'vuepress-plugin-comment',
-            //     {
-            //         choosen: 'valine',
-            //         // options选项中的所有参数，会传给Valine的配置
-            //         options: {
-            //             el: '#valine-vuepress-comment',
-            //             appId: 'a7wKbSbc5RiKOd1zn4tvonXH-gzGzoHsz',
-            //             appKey: 'tF2j46TCl3WBqg0HB963zchP',
-            //             path: '<%- frontmatter.commentid || frontmatter.permalink %>',
-            //             // 评论框占位内容
-            //             placeholder: "评论支持Markdown语法",
-            //             // 评论者头像
-            //             avatar: "monsterid",
-            //         }
-            //     }
-            // ],
             '@vuepress/back-to-top',
             '@vuepress/nprogress',
         ],
