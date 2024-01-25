@@ -2,7 +2,7 @@
 title: koa2 +MongoDB从0到1，实现与数据库交互。
 date: 2020-12-15
 tags:
-    - mongoDB
+    - DataBase
     - koa2
 author: willwang
 location: hunan
