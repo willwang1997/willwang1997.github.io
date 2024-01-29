@@ -40,6 +40,15 @@ module.exports = {
             }],
             '@vuepress/back-to-top',
             '@vuepress/nprogress',
+            ['@vuepress/medium-zoom',
+                {
+                    selector: '.content__default :not(a) > img',
+                    options: {
+                        margin: 24,
+                        background: 'rgba(0, 0, 0, 0.875)',
+                    }
+                }
+            ]
         ],
     themeConfig: {
         logo: '/avart.jpeg',

@@ -11,10 +11,10 @@ date: 2020-08-12
 本站配图来自 [unsplash](https://unsplash.com/)。
 
 # Todo
-* 文章中的图片，无法点击展开或者小图显示过大
 * 控制台报中文路由警告信息
 * 文章内部标题重复点击跳转报错问题
 
 # Done
 * 深色功能-- [参照方法来自掘金Xerrors](https://juejin.cn/post/6844904165257248775)
 * 图床不显示--[方法](https://www.xpn.cc/5368/fy.html)
+* 文章中的图片，无法点击展开或者小图显示过大--[官网插件](https://vuepress.vuejs.org/zh/plugin/official/plugin-medium-zoom.html)

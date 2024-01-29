@@ -40,8 +40,9 @@ img:
     yarn create @vitejs/app [项目名称]
     ```
 2. 选择，我这里选择的是vue 和JavaScript,vue 默认版本是 3.0。:ambulance:
+
     ![](https://fastly.jsdelivr.net/gh/willwang1997/picMap@main/20210518175528.png)
-    ***
+
     ![](https://fastly.jsdelivr.net/gh/willwang1997/picMap@main/20210518175652.png)
 3. 安装依赖，开启服务。
     ```
