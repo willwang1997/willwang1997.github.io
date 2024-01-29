@@ -272,6 +272,7 @@ footer {
   // overflow: hidden;
   color: $tagsTextColor;
   font-size: 3rem;
+  text-align: center;
   -webkit-animation: shining 1s alternate infinite;
   animation: shining 1.5s alternate infinite;
 
