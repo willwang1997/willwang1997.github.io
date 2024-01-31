@@ -1429,80 +1429,90 @@ toDataURL()方法，接受一个参数 MIME 类型，例如"imge/png”，可以
 if (drawing.getContext){ ｝；
 ```
 ## 15.2 2D 上下文
-2D 上下文的坐标开始于左上角（0，0）；x，y 值表示向左和向下延伸。
-* 填充和描边
-2D 上下文的两种基本绘图操作是填充和描边，两个属性：fillStyle 和 strokeStyle。
-值可以是字符串、渐变对象或模式对象，而且它们的默认值都是"#000000"，表示颜色的字符串值。
+2D 上下文的坐标开始于左上角（0，0）；x，y 值表示向左和向下延伸。 
+
+* 填充和描边：  
+2D 上下文的两种基本绘图操作是填充和描边，两个属性：fillStyle 和 strokeStyle。  
+值可以是字符串、渐变对象或模式对象，而且它们的默认值都是"#000000"，表示颜色的字符串值。  
 ```javascript
 var context = drawing.getContext("2d"); 
 context.strokeStyle = "red"; 
 context.fillStyle = "#0000ff"; 
 ```
-* 绘制矩形
-fillRect()制定颜色、strokeRect()颜色描边，和 clearRect()清除话补某个区域。都接收 4 个参数：矩形的 x 坐标、矩形的 y 坐标、矩形宽度和矩形高度。这些参数的单位都是像素。
-* 绘制矩形
-首先必须调用 beginPath()方法，再是以下方法：arc（），arcTo（），bezierCurveTo（），lineTo（），**moveTo（）**，quadraticCurveTo（），rect（）。接下来必须走的一步是：如果绘制一条连接到路径起点的线条用 closePath()结束，如果填充它，可以调用 fill()方法结束，或者调用 stroke()方法对路径描边结束，或者 clip（）创建一个剪切区域。
-isPointInPath(x，y)的方法确定画布上的某一点是否位于路径上。
-* 绘制文本
-fillText()和 strokeText()，四个参数：绘制的字符串，x，y，可选的最大像素宽度。方法有三个属性：font，textAlign 文本对齐方式，textBaseline。
-2D 上下文提供了辅助确定文本大小的方法 measureText()，接受一个参数，即绘制的文本，返回一个只带有 width 属性的对象。
-* 变换
+* 绘制矩形：  
+fillRect()制定颜色、strokeRect()颜色描边，和 clearRect()清除话补某个区域。都接收 4 个参数：矩形的 x 坐标、矩形的 y 坐标、矩形宽度和矩形高度。这些参数的单位都是像素。  
+* 绘制矩形：  
+首先必须调用 beginPath()方法，再是以下方法：arc（），arcTo（），bezierCurveTo（），lineTo（），**moveTo（）**，quadraticCurveTo（），rect（）。接下来必须走的一步是：如果绘制一条连接到路径起点的线条用 closePath()结束，如果填充它，可以调用 fill()方法结束，或者调用 stroke()方法对路径描边结束，或者 clip（）创建一个剪切区域。  
+isPointInPath(x，y)的方法确定画布上的某一点是否位于路径上。  
+
+* 绘制文本：  
+fillText()和 strokeText()，四个参数：绘制的字符串，x，y，可选的最大像素宽度。方法有三个属性：font，textAlign 文本对齐方式，textBaseline。  
+2D 上下文提供了辅助确定文本大小的方法 measureText()，接受一个参数，即绘制的文本，返回一个只带有 width 属性的对象。  
+
+* 变换：  
 rotate(angle)：scale(scaleX, scaleY)：translate(x, y)：transform(m1_1, m1_2, m2_1, m2_2, dx, dy)：
-* 绘制图像
+
+* 绘制图像：  
 传入一个 HTML`<img>`元素，绘制该图像的起点的 x 和 y 坐标。
 ```javascript
 context.drawImage(image, 10, 10); 
 //可以传 9 参数 要绘制的图像、源图像的 x 坐标、源图像的 y 坐标、源图像的宽度、源图像的高度、目标图像的 x 坐标、目标图像的 y 坐标、目标图像的宽度、目标图像的高度。
 ```
-把另一个画布内容绘制到当前画布上,第一个参数应为`<canvas>`。
-图像不能来自其他域。
-* 阴影
+把另一个画布内容绘制到当前画布上,第一个参数应为`<canvas>`。  
+图像不能来自其他域。  
+
+* 阴影：  
 ```javascript
 context.shadowOffsetX = 5; //x 轴偏移量
 context.shadowOffsetY = 5; 
 context.shadowBlur = 4; // 模糊的像素值
 context.shadowColor = "rgba(0, 0, 0, 0.5)"; 
 ```
-* 渐变
-由 CanvasGradient 实例表示，调用 createLinearGradient()方法。收 4 个参数：起点的 x 坐标、起点的 y 坐标、终点的 x 坐标、终点的 y 坐标。返回一个 CanvasGradient 对象的实例。
-下一步就是使用 addColorStop(色标位置，CSS 颜色值）方法来指定色标。
+* 渐变：  
+由 CanvasGradient 实例表示，调用 createLinearGradient()方法。收 4 个参数：起点的 x 坐标、起点的 y 坐标、终点的 x 坐标、终点的 y 坐标。返回一个 CanvasGradient 对象的实例。  
+下一步就是使用 addColorStop(色标位置，CSS 颜色值）方法来指定色标。  
 ```javascript
 var gradient = context.createLinearGradient(30, 30, 70, 70); 
 gradient.addColorStop(0, "white"); 
 gradient.addColorStop(1, "black"); 
 ```
-创建径向渐变（或放射渐变），用 createRadialGradient()方法，参数为 6 个，两个圆的圆心和半径。
-* 模式
-就是重复的图像，可以用来填充或描边图形。createPattern()方法并传入两个参数：一个 HTML `<img>`元素和一个表示如何重复图像的字符串（"repeat"、"repeat-x"、"repeat-y"和"no-repeat"）。
-第一个参数也可以是一个`<video>`元素，或者另一个`<canvas>`元素。
-* 使用图像数据
-可以通过 getImageData()取得原始图像数据。四个参数：要取得其数据的画面区域的 x 和 y 坐标以及该区域的像素宽度，和高度。
-返回一个 ImageData 的实例对象，对象有三个属性，width，height，和 data。data 是个数组，每一个像素用 4 个元素保存，分别代表红 data[0]，绿 data[1]，蓝 data[2]，透明度 data[3]。
-画布“干净”的情况下（即图像并非来自其他域），才可以取得图像数据。
-* 合成
-两个属性：globalAlpha 指定所有绘制的透明度。默认值为 0。
-globalCompositionOperation 表示后绘制的图形怎样与先绘制的图形结合。有很多值，“source-in”等。
+创建径向渐变（或放射渐变），用 createRadialGradient()方法，参数为 6 个，两个圆的圆心和半径。  
+
+* 模式：  
+就是重复的图像，可以用来填充或描边图形。createPattern()方法并传入两个参数：一个 HTML `<img>`元素和一个表示如何重复图像的字符串（"repeat"、"repeat-x"、"repeat-y"和"no-repeat"）。  
+第一个参数也可以是一个`<video>`元素，或者另一个`<canvas>`元素。  
+
+* 使用图像数据：  
+可以通过 getImageData()取得原始图像数据。四个参数：要取得其数据的画面区域的 x 和 y 坐标以及该区域的像素宽度，和高度。  
+返回一个 ImageData 的实例对象，对象有三个属性，width，height，和 data。data 是个数组，每一个像素用 4 个元素保存，分别代表红 data[0]，绿 data[1]，蓝 data[2]，透明度 data[3]。  
+画布“干净”的情况下（即图像并非来自其他域），才可以取得图像数据。  
+
+* 合成：  
+两个属性：globalAlpha 指定所有绘制的透明度。默认值为 0。  
+globalCompositionOperation 表示后绘制的图形怎样与先绘制的图形结合。有很多值，“source-in”等。  
 ## 15.3 WebGL
 WebGL 是针对 Canvas 的 3D 上下文。
-* 类型化数组
-WebGL 引入了一个概念，叫类型化数组，其元素被设置为特定类型的值，核心就是一个名为 ArrayBuffer 的类型。
-WebGL 是从 OpenGL ES 2.0 移植到浏览器中的，而 OpenGL ES 2.0 是游戏开发人员在创建计算机图形图像时经常使用的一种语言。WebGL 支持比 2D 上下文更丰富和更强大的图形图像处理能力，比如：
-用 GLSL（OpenGL Shading Language，OpenGL 着色语言）编写的顶点和片段着色器
-支持类型化数组，即能够将数组中的数据限定为某种特定的数值类型
-创建和操作纹理。
-但对于 WebGL 而言，目前还只有 Firefox 4+和 Chrome 支持它。
+
+* 类型化数组：  
+WebGL 引入了一个概念，叫类型化数组，其元素被设置为特定类型的值，核心就是一个名为 ArrayBuffer 的类型。  
+WebGL 是从 OpenGL ES 2.0 移植到浏览器中的，而 OpenGL ES 2.0 是游戏开发人员在创建计算机图形图像时经常使用的一种语言。WebGL 支持比 2D 上下文更丰富和更强大的图形图像处理能力，比如：  
+用 GLSL（OpenGL Shading Language，OpenGL 着色语言）编写的顶点和片段着色器  
+支持类型化数组，即能够将数组中的数据限定为某种特定的数值类型  
+创建和操作纹理。  
+但对于 WebGL 而言，目前还只有 Firefox 4+和 Chrome 支持它。  
 # HTML5 脚本编程
 ## 16.1 跨文档消息传递
-简称为 XDM，自不同域的页面间传递消息。
-核心是 postMessage()方法，传递给`<iframe>`元素，或者由当前页面弹出的窗口，两个参数：一条消息（最好是字符串参数）和一个表示消息接收方来自哪个域的字符串。
-接收时触发 window 对象的 message 事件，event 包含下列属性：data，origin，source 发送消息的文档的 window 对象的代理。
-event.source 大多数情况下只是 window 对象的代理，并非实际的 window 对象。
+简称为 XDM，自不同域的页面间传递消息。  
+核心是 postMessage()方法，传递给`<iframe>`元素，或者由当前页面弹出的窗口，两个参数：一条消息（最好是字符串参数）和一个表示消息接收方来自哪个域的字符串。  
+接收时触发 window 对象的 message 事件，event 包含下列属性：data，origin，source 发送消息的文档的 window 对象的代理。  
+event.source 大多数情况下只是 window 对象的代理，并非实际的 window 对象。  
 ## 16.2 原生拖放
-* 拖放事件
-拖动某元素时，将依次触发 dragstart，drag，dragend。
-当某个元素被拖动到一个有效的放置目标上时，dragenter，dragover，dragleave 或 drop。只要有元素被拖动到放置目标上，就会触发 dragenter 事件，被放到了放置目标中，则会触发 drop 事件而不是 dragleave 事件。目标都是作为放置目标的元素。
-* 自定义放置目标
-你可以把任何元素变成有效的放置目标，方法是重写 dragenter 和 dragover 事件的**默认行为。**
+* 拖放事件：  
+拖动某元素时，将依次触发 dragstart，drag，dragend。  
+当某个元素被拖动到一个有效的放置目标上时，dragenter，dragover，dragleave 或 drop。只要有元素被拖动到放置目标上，就会触发 dragenter 事件，被放到了放置目标中，则会触发 drop 事件而不是 dragleave 事件。目标都是作为放置目标的元素。  
+
+* 自定义放置目标：  
+你可以把任何元素变成有效的放置目标，方法是重写 dragenter 和 dragover 事件的**默认行为。**  
 ```javascript
 EventUtil.addHandler(droptarget, "dragover", function(event){ 
  EventUtil.preventDefault(event); 
@@ -1510,60 +1520,66 @@ EventUtil.addHandler(droptarget, "dragover", function(event){ 
 ```
 Firefox 支持正常的拖放，还要取消 drop 事件的默认行为，阻止它打开 URL：
 * **dataTransfer 对象**
-在拖放操作时实现数据交换，事件对象的一个属性，用于从被拖动元素向放置目标传递字符串格式的数据。
-getData()和 setData(一个参数，字符串，表示保存的数据类型，取值为"text"或"URL")。
-保存在 dataTransfer 对象中的数据只能在 drop 事件处理程序中读取。
+在拖放操作时实现数据交换，事件对象的一个属性，用于从被拖动元素向放置目标传递字符串格式的数据。  
+getData()和 setData(一个参数，字符串，表示保存的数据类型，取值为"text"或"URL")。  
+保存在 dataTransfer 对象中的数据只能在 drop 事件处理程序中读取。  
 * **dropEffect 与 effectAllowed**
-dataTransfer 对象的两个属性，dropEffect 属性可以知道被拖动的元素能够执行哪种放置行为。
-要使用 dropEffect 属性，必须在 ondragenter 事件处理程序中针对放置目标来设置它。
-dropEffect 只有搭配 effectAllowed 属性才有用，用来表示允许拖动元素的哪种 dropEffect。
-必须在**ondragstart** 事件处理程序中设置 effectAllowed 属性。
-* 可拖动
-文本只有在被选中的情况下才能拖动，而图像和链接在任何时候都可以拖动。
-元素规定了一个 draggable 属性可拖动。
-Firefox 支持可拖动属性，还必须添加一个 ondragstart 事件处理程序，并在 dataTransfer 对象中保存一些信息。
-* 其他成员
-dataTransfer 对象还包含以下方法和属性：addElement（），clearData（），setDragImage（），types。
+dataTransfer 对象的两个属性，dropEffect 属性可以知道被拖动的元素能够执行哪种放置行为。  
+要使用 dropEffect 属性，必须在 ondragenter 事件处理程序中针对放置目标来设置它。  
+dropEffect 只有搭配 effectAllowed 属性才有用，用来表示允许拖动元素的哪种 dropEffect。  
+必须在**ondragstart** 事件处理程序中设置 effectAllowed 属性。  
+
+* 可拖动：  
+文本只有在被选中的情况下才能拖动，而图像和链接在任何时候都可以拖动。  
+元素规定了一个 draggable 属性可拖动。  
+Firefox 支持可拖动属性，还必须添加一个 ondragstart 事件处理程序，并在 dataTransfer 对象中保存一些信息。  
+
+* 其他成员：  
+dataTransfer 对象还包含以下方法和属性：addElement（），clearData（），setDragImage（），types。  
 ## 16.3 媒体元素
-`<audio>`和`<video>`。至少要在标签中包含 src 属性，poster 属性指定图像的 URI 可以在加载视频内容期间显示一幅图像。
-* 属性
-* 事件
-* 自定义媒体播放器
-* 检测编解码器的支持情况
-两个媒体元素都有一个 canPlayType()方法，该方法接收一种格式/编解码器字符串，返回"probably"、"maybe"或""（ 空字符串）。
-真正决定文件能否播放的还是编码的格式。
-* Audio 类型
-`<audio>`元素还有一个原生的 JavaScript 构造函数 Audio，可以在任何时候播放音频，调用 play()就可以播放音频。
+`<audio>`和`<video>`。至少要在标签中包含 src 属性，poster 属性指定图像的 URI 可以在加载视频内容期间显示一幅图像。  
+* 属性  
+* 事件  
+* 自定义媒体播放器  
+* 检测编解码器的支持情况  
+
+两个媒体元素都有一个 canPlayType()方法，该方法接收一种格式/编解码器字符串，返回"probably"、"maybe"或""（ 空字符串）。  
+真正决定文件能否播放的还是编码的格式。  
+
+* Audio 类型：  
+`<audio>`元素还有一个原生的 JavaScript 构造函数 Audio，可以在任何时候播放音频，调用 play()就可以播放音频。  
 ```javascript
 var audio = new Audio("sound.mp3");
 audio.play(); 
 ```
 ## 16.4 历史状态管理
-前提：用户的每次操作不一定会打开一个全新的页面，因此“后退”和“前进”按钮也就失去了作用，导致用户很难在不同状态间切换。
-使用 hashchange 事件，Html5 通过更新 history 对象为管理历史状态提供了方便。
-创建新的历史状态则用 history.pushState()方法，该方法可以接收三个参数：状态对象、新状态的标题和可选的相对 URL。第二个参数目前还没有浏览器实现，因此完全可以只传入一个**空字符串**，或者一个**短标题**也可以。而第一个参数则应该尽可能**提供初始化页面状态所需的各种信息。**
-重写当前状态或者更新状态，则调用 replaceState()，传入的参数与 pushState()的前两个参数相同。
-历史状态管理让我们不必卸载当前页面即可修改浏览器的历史状态栈。有了这种机制，用户就
-可以通过“后退”和“前进”按钮在页面状态间切换，而这些状态完全由 JavaScript 进行控制。
+前提：用户的每次操作不一定会打开一个全新的页面，因此“后退”和“前进”按钮也就失去了作用，导致用户很难在不同状态间切换。  
+使用 hashchange 事件，Html5 通过更新 history 对象为管理历史状态提供了方便。  
+创建新的历史状态则用 history.pushState()方法，该方法可以接收三个参数：状态对象、新状态的标题和可选的相对 URL。第二个参数目前还没有浏览器实现，因此完全可以只传入一个**空字符串**，或者一个**短标题**也可以。而第一个参数则应该尽可能**提供初始化页面状态所需的各种信息。**  
+重写当前状态或者更新状态，则调用 replaceState()，传入的参数与 pushState()的前两个参数相同。  
+历史状态管理让我们不必卸载当前页面即可修改浏览器的历史状态栈。有了这种机制，用户就可以通过“后退”和“前进”按钮在页面状态间切换，而这些状态完全由 JavaScript 进行控制。  
 
 # 错误处理与调试
 ## 17.1 浏览器报告的错误
-别忘了启用浏览器的 JavaScript 报告功能。
-* IE
-浏览器左下角会出现一个黄色的图标，打开“Tools”选中“Display a notification about every script error”（显示每个脚本错误的通知）。
-* Firefox 
-插件 Firebug，已经成为开发人员必备的 JavaScript 纠错工具。
-* Safari
-选中“Show develop menu in menubar”单击“Show Error Console”（显示错误控制台）选项。
+别忘了启用浏览器的 JavaScript 报告功能。  
+
+* IE：  
+浏览器左下角会出现一个黄色的图标，打开“Tools”选中“Display a notification about every script error”（显示每个脚本错误的通知）。  
+
+* Firefox：  
+插件 Firebug，已经成为开发人员必备的 JavaScript 纠错工具。  
+
+* Safari：  
+选中“Show develop menu in menubar”单击“Show Error Console”（显示错误控制台）选项。  
 ## 17.2 错误处理
-* try-catch 语句
-把所有可能会抛出错误的代码都放在 try 语句块中，发生错误接下来会执行 catch 块，此块包含错误信息的对象，即便不想使用也要给他（错误对象）一个名字，共同的是有一个保存着错误消息的 message 属性。
-在跨浏览器编程时，最好还是只使用 message 属性。
-finally 子句一经使用，其代码无论如何都会执行。
-try 或 catch 语句块中包含甚至 return 语句，都不会阻止 finally 子句的执行。
-IE7 及更早版本中有一个 bug：必须有 catch 子句，否则 finally 不执行。
-7 种错误类型：**Error**是基类型，其他错误类型都继承自该类型。**EvalError** 类型的错误会在使用 eval()函数而发生异常时被抛出。**RangeError**类型超出相应范围时触发。找不到对象的情况下，会发生 **ReferenceError**（object expected"浏览器错误）。**SyntaxError**语法错误的 JavaScript 字符串传入 eval()函数。
-要知道属于哪种错误的类型，catch 语句中使用 instanceof 操作符。
+* try-catch 语句：  
+把所有可能会抛出错误的代码都放在 try 语句块中，发生错误接下来会执行 catch 块，此块包含错误信息的对象，即便不想使用也要给他（错误对象）一个名字，共同的是有一个保存着错误消息的 message 属性。  
+在跨浏览器编程时，最好还是只使用 message 属性。  
+finally 子句一经使用，其代码无论如何都会执行。  
+try 或 catch 语句块中包含甚至 return 语句，都不会阻止 finally 子句的执行。  
+IE7 及更早版本中有一个 bug：必须有 catch 子句，否则 finally 不执行。  
+7 种错误类型：**Error**是基类型，其他错误类型都继承自该类型。**EvalError** 类型的错误会在使用 eval()函数而发生异常时被抛出。**RangeError**类型超出相应范围时触发。找不到对象的情况下，会发生 **ReferenceError**（object expected"浏览器错误）。**SyntaxError**语法错误的 JavaScript 字符串传入 eval()函数。  
+要知道属于哪种错误的类型，catch 语句中使用 instanceof 操作符。  
 ```javascript
 catch（error）{
   if (error instanceof TypeError){ 
@@ -1571,14 +1587,16 @@ catch（error）{
  }
 }
 ```
-try-catch 最适合处理那些我们无法控制的错误。
-* 抛出错误
-throw 操作符，抛出自定义错误，给 throw 操作符指定一个值，什么类型无要求。
-代码会立即停止执行。仅当有 try-catch 语句捕获到被抛出的值时，代码才会继续执行。
-利用**原型链**还可以通过继承 Error 来创建自定义错误类型。
-* 错误（error）事件
-要指定 onerror 事件处理程序，必须使用如下所示的 DOM0 级技术，它没有遵循“DOM2 级事件”的标准格式。
-阻止浏览器报告错误的默认行为。
+try-catch 最适合处理那些我们无法控制的错误。  
+
+* 抛出错误：  
+throw 操作符，抛出自定义错误，给 throw 操作符指定一个值，什么类型无要求。  
+代码会立即停止执行。仅当有 try-catch 语句捕获到被抛出的值时，代码才会继续执行。  
+利用**原型链**还可以通过继承 Error 来创建自定义错误类型。  
+
+* 错误（error）事件：  
+要指定 onerror 事件处理程序，必须使用如下所示的 DOM0 级技术，它没有遵循“DOM2 级事件”的标准格式。  
+阻止浏览器报告错误的默认行为。  
 ```javascript
 window.onerror = function(message, url, line){ 
  alert(message); 
@@ -1586,14 +1604,18 @@ window.onerror = function(message, url, line){ 
 }; 
 // 返回 false，这个函数实际上就充当了整个文档中的 try-catch 语句，只要可能就不应该使用它。适当地使用 try-catch 语句即可。
 ```
-图像的 src 特性中的 URL 不能返回可以被识别的图像格式，就会触发 error 事件，此时的 error 事件遵循 DOM 格式。
-* 处理错误的策略
+图像的 src 特性中的 URL 不能返回可以被识别的图像格式，就会触发 error 事件，此时的 error 事件遵循 DOM 格式。  
+
+* 处理错误的策略：  
 必须要知道代码何时可能出错，会出什么错，同时还要有一个跟踪此类问题的系统。
-* 常见的错误类型
-建议使用全等（===）和不全等（!==）操作符，以避免类型转换错误。
-数据类型错误：基本类型的值应该使用 typeof 来检测，而对象的值则应该使用 instanceof 来检测。
-通信错误：格式不正确的 URL 或发送的数据有关，没有使用 encodeURIComponent()对数据进行编码。
+
+* 常见的错误类型：  
+建议使用全等（===）和不全等（!==）操作符，以避免类型转换错误。  
+数据类型错误：基本类型的值应该使用 typeof 来检测，而对象的值则应该使用 instanceof 来检测。  
+通信错误：格式不正确的 URL 或发送的数据有关，没有使用 encodeURIComponent()对数据进行编码。  
+
 * 区分致命错误和非致命错误
+
 * 把错误记录到服务器
 ```javascript
 function logError(sev, msg){ 
@@ -1604,12 +1626,14 @@ function logError(sev, msg){ 
 //logError()函数接收两个参数：表示严重程度的数值或字符串，及错误消息。Image 对象来发送请求好处有：所有浏览器都支持 Image 对象，可以避免跨域限制。
 ```
 ## 17.3 调试技术
-* 将消息记录到控制台
-Firefox 要使用 Firebug 的控制台。
-Opera 10.5 之前的版本中，JavaScript 控制台可以通过 **opera.postError()** 方法来访问。
-还有一种方案是使用 LiveConnect，也就是在 JavaScript 中运行 Java 代码。
-* 将消息记录到页面
-创建一个 div 元素。
+* 将消息记录到控制台：  
+Firefox 要使用 Firebug 的控制台。  
+Opera 10.5 之前的版本中，JavaScript 控制台可以通过 **opera.postError()** 方法来访问。  
+还有一种方案是使用 LiveConnect，也就是在 JavaScript 中运行 Java 代码。  
+
+* 将消息记录到页面：  
+创建一个 div 元素。  
+
 * 抛出错误
 ```javascript
 // 自定义的错误通常都使用 assert()函数抛出，参数：求值结果应该为 true 的条件，另一个是条件为 false 时要抛出的错误。
@@ -1621,30 +1645,35 @@ function assert(condition, message){ 
 ```
 ## 17.4 常见的 IE 错误
 * 操作终止
-* 无效字符
-垃圾收集例程配合错误所直接导致的，对象被销毁之后，又给该对象赋值，导致未找到成员错误。闭包中使用了 event 对象，将来调用它并给 event 的属性赋值时会导致。
-innerHTML 或 outerHTML 以下列方式指定 HTML 时：一是把块元素插入到行内元素时，二是访问表格任意部分的任意属性时。
-IE 对 URL 路径还有一个不能超过 2048 个字符的限制。
+
+* 无效字符：  
+垃圾收集例程配合错误所直接导致的，对象被销毁之后，又给该对象赋值，导致未找到成员错误。闭包中使用了 event 对象，将来调用它并给 event 的属性赋值时会导致。  
+innerHTML 或 outerHTML 以下列方式指定 HTML 时：一是把块元素插入到行内元素时，二是访问表格任意部分的任意属性时。  
+IE 对 URL 路径还有一个不能超过 2048 个字符的限制。  
 # JavaScript 与 XML
-XML 一度成为存储和通过因特网传输结构化数据的标准。
+XML 一度成为存储和通过因特网传输结构化数据的标准。  
 ## 18.1 浏览器对 XML DOM 的支持
-DOM2 级是第一个提到动态创建 XML DOM 概念的规范。DOM3 新增了解析和序列化等特性。
-* DOM2 级核心
-实际开发中很少需要从头开始创建一个 XML，DOM2 级 XML 文档。
+DOM2 级是第一个提到动态创建 XML DOM 概念的规范。DOM3 新增了解析和序列化等特性。  
+
+* DOM2 级核心：  
+实际开发中很少需要从头开始创建一个 XML，DOM2 级 XML 文档。  
 ```javascript
 // 创建一个新的、文档元素为<root>的 XML 文档。第一个是命名空间参数，最后一个是文档类型参数，一般很少用到。
 var xmldom = document.implementation.createDocument("", "root", null);
 ```
-* DOMParser 类型
-将 XML 解析为 DOM 文档，引入了 DOMParser 类型；首先必须创建一个 DOMParser 的实例，再调用 **parseFromString**(要解析的 XML 字符串，“text/xml”)方法。返回一个 document 的实例。
-发生解析错误时，返回 Document 对象，里面的文档元素是`<parsererror>`。
-* XMLSerializer 类型
-将 DOM 文档序列化为 XML 字符串。首先必须创建 XMLSerializer 的实例，将文档传入其 **serializeToString (xmldom)** 方法。可以序列化任何有效的 DOM 对象，不仅包括个别的节点，也包括 HTML 文档。
-* IE8 及之前版本中的 XML
-创建一个 XML 文档的实例，需要使用 ActiveXObject 构造函数并为其传入一个表示 XML 文档版本的字符串。有 6 种。
-要解析 XML 字符串，首先必须创建一个 DOM 文档，然后调用 loadXML()方法。
-IE 将序列化 XML 的能力内置在了 DOM 文档中。每个 DOM 节点都有一个 xml 属性，其中保存着表示该节点的 XML 字符串。
-加载 xml 文件，公认的还是使用 **XMLHttpRequest**对象比较好。
+* DOMParser 类型：  
+将 XML 解析为 DOM 文档，引入了 DOMParser 类型；首先必须创建一个 DOMParser 的实例，再调用 **parseFromString**(要解析的 XML 字符串，“text/xml”)方法。返回一个 document 的实例。  
+发生解析错误时，返回 Document 对象，里面的文档元素是`<parsererror>`。  
+
+* XMLSerializer 类型：  
+将 DOM 文档序列化为 XML 字符串。首先必须创建 XMLSerializer 的实例，将文档传入其 **serializeToString (xmldom)** 方法。可以序列化任何有效的 DOM 对象，不仅包括个别的节点，也包括 HTML 文档。  
+
+* IE8 及之前版本中的 XML：  
+创建一个 XML 文档的实例，需要使用 ActiveXObject 构造函数并为其传入一个表示 XML 文档版本的字符串。有 6 种。  
+要解析 XML 字符串，首先必须创建一个 DOM 文档，然后调用 loadXML()方法。  
+IE 将序列化 XML 的能力内置在了 DOM 文档中。每个 DOM 节点都有一个 xml 属性，其中保存着表示该节点的 XML 字符串。  
+加载 xml 文件，公认的还是使用 **XMLHttpRequest**对象比较好。  
+
 ```javascript
 var xmldom = createDocument(); 
 xmldom.async = true;// 通常都使用异步方式。
@@ -1653,246 +1682,282 @@ xmldom.onreadystatechange = function(){ // 必须放在调用 load()方法的
 }
 xmldom.load("example.xml"); //调用 load()可以启动下载过程。
 ```
-* 跨浏览器处理 XML 
-编写解析 xml 文件的封装函数，和序列化 XML 功能函数。
-由于序列化过程的差异，相同的 DOM 对象在不同的浏览器下，有可能会得到不同的 XML 字符串。
+* 跨浏览器处理 XML:  
+编写解析 xml 文件的封装函数，和序列化 XML 功能函数。  
+由于序列化过程的差异，相同的 DOM 对象在不同的浏览器下，有可能会得到不同的 XML 字符串。  
 ## 18.2 浏览器对 XPath 的支持
-XPath 是设计用来在 DOM 文档中查找节点的一种手段，对 XML 处理也很重要。
-IE 则以自己的方式实现了 XPath。
-* DOM3 级 XPath 
-两个类型是 XPathEvaluator 和 XPathResult。
-* IE 中的 XPath 
-内置在基于 ActiveX 的 XML DOM 文档对象中的，没有使用 DOMParser 返回的 Dom 对象。
-每个节点上额外定义了两个的方法：**selectSingleNode()** 和 **selectNodes()**。
-* 跨浏览器使用 XPath 
-IE 对 XPath 功能的支持有限，因此跨浏览器 XPath 只能保证达到 IE 支持的功能。
+XPath 是设计用来在 DOM 文档中查找节点的一种手段，对 XML 处理也很重要。  
+IE 则以自己的方式实现了 XPath。  
+
+* DOM3 级 XPath：  
+两个类型是 XPathEvaluator 和 XPathResult。  
+
+* IE 中的 XPath ：  
+内置在基于 ActiveX 的 XML DOM 文档对象中的，没有使用 DOMParser 返回的 Dom 对象。  
+每个节点上额外定义了两个的方法：**selectSingleNode()** 和 **selectNodes()**。  
+
+* 跨浏览器使用 XPath ：  
+IE 对 XPath 功能的支持有限，因此跨浏览器 XPath 只能保证达到 IE 支持的功能。  
 ## 18.3 浏览器对 XSLT 的支持
-利用 XPath 将文档从一种表现形式转换成另一种表现形式。
-IE 是第一个支持通过 JavaScript 处理 XSLT 的浏览器。
-* IE 中的 XSLT 
-通过 ActiveX 对象实现，使用 **transformNode()** 方法。
+利用 XPath 将文档从一种表现形式转换成另一种表现形式。  
+IE 是第一个支持通过 JavaScript 处理 XSLT 的浏览器。  
+
+* IE 中的 XSLT ：  
+通过 ActiveX 对象实现，使用 **transformNode()** 方法。  
 ```javascript
 //转换
 var result = xmldom.transformNode(xsltdom); 
 ```
-* XSLTProcessor 类型
-可以通过 XSLTProcessor 类型使用 XSLT 转换 XML 文档，
+* XSLTProcessor 类型：  
+可以通过 XSLTProcessor 类型使用 XSLT 转换 XML 文档，  
 ```javascript
 var processor = new XSLTProcessor() 
 processor.importStylesheet(xsltdom); //使用 importStylesheet()方法为其指定一个 XSLT。
 /* 想返回一个完整的 DOM 文档调用 transformToDocument()。
 调用 transformToFragment()则可以得到一个文档片段对象。两个参数：要转换的 XMLDOM 和应该拥有结果片段的文档，想将返回的片段插入到页面中，只要将 document 作为第二个参数即可。 */
 ```
-XSLTProcessor 的实例都可以重用，调用 reset()方法可以重置。
+XSLTProcessor 的实例都可以重用，调用 reset()方法可以重置。  
 # E4X
-只是 ECMAScript 语言的可选扩展。
+只是 ECMAScript 语言的可选扩展。  
 ## 19.1 E4X 的类型
-E4X 定义了如下几个新的全局类型，可以表现 XML 文档中的所有部分，其内部机制是将每一种类型都映射为多个 DOM 类型。
-* XML 类型
-可以表现元素、特性、注释、处理指令或文本节点。使用 XML 字面量将 XML 数据直接指定给一个变量。以下两个方法满足所有序列化 XML 的需求。
-**toXMLString**()方法会返回 XML 对象及其子节点的 XML 字符串表示。
-**toString**()方法基于内容返回不同的字符串。
-* XMLList 类型
+E4X 定义了如下几个新的全局类型，可以表现 XML 文档中的所有部分，其内部机制是将每一种类型都映射为多个 DOM 类型。  
+
+* XML 类型：  
+可以表现元素、特性、注释、处理指令或文本节点。使用 XML 字面量将 XML 数据直接指定给一个变量。以下两个方法满足所有序列化 XML 的需求。  
+**toXMLString**()方法会返回 XML 对象及其子节点的 XML 字符串表示。  
+**toString**()方法基于内容返回不同的字符串。  
+
+* XMLList 类型：  
 ```javascript
 var list = new XMLList(); // or new XMLList("<item/><item/>"); 
 ```
-XMLList 对象都有 length()方法，用于返回对象中包含的元素数量。
-一个 XML 对象与一个只包含一个 XML 对象的 XMLList 之间，并没有显而易见的区别。
-* Namespace 类型
-传入 URI 或前缀加 URI，就可以初始化 Namespace 对象。
-使用 prefix 和 uri 属性来取得 Namespace 对象中的信息。
-* QName 类型
-两个属性：uri 和 localName：返回创建对象时指定的命名空间的 URI（如果未指定命名空间，则返回空字符串），返回限定名中的内部名称。
+XMLList 对象都有 length()方法，用于返回对象中包含的元素数量。  
+一个 XML 对象与一个只包含一个 XML 对象的 XMLList 之间，并没有显而易见的区别。  
+
+* Namespace 类型：  
+传入 URI 或前缀加 URI，就可以初始化 Namespace 对象。  
+使用 prefix 和 uri 属性来取得 Namespace 对象中的信息。  
+
+* QName 类型：  
+两个属性：uri 和 localName：返回创建对象时指定的命名空间的 URI（如果未指定命名空间，则返回空字符串），返回限定名中的内部名称。  
 ## 19.2 一般用法
-可以使用点号加特性或标签名的方式来访问其中不同的层次和结构。
-想访问所有子元素，不管其名称是什么，也可以像下面这样使用星号（*）。
-* 访问特性
-为了区分特性名与子元素的标签名，必须在名称前面加上一个@字符，**attribute()** 方法并传入特性名，可以只访问 XML 对象的特性，不需要传入带@字符的特性名。
-* 其他节点类型
+可以使用点号加特性或标签名的方式来访问其中不同的层次和结构。  
+想访问所有子元素，不管其名称是什么，也可以像下面这样使用星号（*）。  
+
+* 访问特性：  
+为了区分特性名与子元素的标签名，必须在名称前面加上一个@字符，**attribute()** 方法并传入特性名，可以只访问 XML 对象的特性，不需要传入带@字符的特性名。  
+
+* 其他节点类型：  
 ```javascript
 XML.ignoreComments = false; 
 XML.ignoreProcessingInstructions = false; 
 // 在设置了这两个属性之后，E4X 就会将注释和处理指令解析到 XML 结构中。
 ```
-**nodeKind()** 方法可以得到 XML 对象表示的类型。
-**hasSimpleContent()** 和**hasComplexContent()** 方法，可以确定 XML 对象中是只包含文本，还是包含更复杂的内容。
+**nodeKind()** 方法可以得到 XML 对象表示的类型。  
+**hasSimpleContent()** 和**hasComplexContent()** 方法，可以确定 XML 对象中是只包含文本，还是包含更复杂的内容。  
 ```javascript
 employees.employee[0].hasComplexContent()
 ```
-* 查询
-使用两个点，则可以进一步扩展查询的深度，查询到所有后代节点。
-descendants()方法不给这个方法传递参数的情况下，它会返回所有后代节点（与使用..*相同）。
-parent()方法能够在 XML 结构中上溯，
+* 查询：  
+使用两个点，则可以进一步扩展查询的深度，查询到所有后代节点。  
+descendants()方法不给这个方法传递参数的情况下，它会返回所有后代节点（与使用..*相同）。  
+parent()方法能够在 XML 结构中上溯，  
 ```javascript
 var allDescendants = employees..*; 
 var allDescendants = employees.descendants(); 
 ```
-* 构建和操作 XML
+* 构建和操作 XML：  
 XML 字面量可以嵌入 JavaScript 变量，语法是使用花括号（{}）。
-* 解析和序列化
-五个设置都保存在 settings 对象中，通过 XML 构造函数的 settings()方法可以取得这个对象。
-setSettings()方法中传入包含全部 5 项设置的对象，可以一次性指定所有设置。
-defaultSettings()方法则可以取得一个包含默认设置的对象，
+
+* 解析和序列化：  
+五个设置都保存在 settings 对象中，通过 XML 构造函数的 settings()方法可以取得这个对象。  
+setSettings()方法中传入包含全部 5 项设置的对象，可以一次性指定所有设置。  
+defaultSettings()方法则可以取得一个包含默认设置的对象，  
 ```javascript
 XML.setSettings(XML.defaultSettings()); // 重置设置：
 ```
-* 命名空间
-使用 **setNamespace()** 并传入 Namespace 对象，也可以为给定元素设置命名空间。
+* 命名空间：  
+使用 **setNamespace()** 并传入 Namespace 对象，也可以为给定元素设置命名空间。  
 ## 19.3 19.4 全面启用 E4X
-想完整地启用 E4X，需要将`<script>`标签的 type 特性设置为"text/javascript;e4x=1"。
+想完整地启用 E4X，需要将`<script>`标签的 type 特性设置为"text/javascript;e4x=1"。  
 # JSON
-（JavaScript Object Notation，JavaScript 对象表示法）是 JavaScript 的一个严格的子集，是一种数据格式，不是一种编程语言。
+（JavaScript Object Notation，JavaScript 对象表示法）是 JavaScript 的一个严格的子集，是一种数据格式，不是一种编程语言。  
 ## 20.1 语法
-语法可以表示三种类型的值。**简单值**：但不支持 js 中的特殊值 undefined。**对象**：**数组**：。
-JSON 不支持变量、函数或对象实例。
-* 简单值
-JSON 字符串必须使用双引号
-* 对象
+语法可以表示三种类型的值。**简单值**：但不支持 js 中的特殊值 undefined。**对象**：**数组**：。  
+JSON 不支持变量、函数或对象实例。  
+
+* 简单值：  
+JSON 字符串必须使用双引号  
+
+* 对象：  
 没有声明变量（JSON 中没有变量的概念）。其次，没有末尾的分号。
-* 数组
+
+* 数组：  
 对象和数组通常是 JSON 数据结构的最外层形式。
 ## 20.2 解析与序列化
-JSON 数据结构解析为有用的 JavaScript 对象。
-* json 对象
-早期的 JSON 解析器基本上就是 eval()函数。
-JSON 对象有两个方法：stringify()和 parse()，代表 JavaScript 对象序列化为 JSON 字符串和把 JSON 字符串解析为原生 JavaScript 值。
-在序列化 JavaScript 对象时，所有**函数及原型成员**都会被有意忽略，值为 undefined 的任何属性也都会被跳过。
-深拷贝：拷贝后是两个独立的、没有任何关系的对象。
-* 序列化选项
-JSON.stringify()还可以接收另外两个参数，第一个参数是个**过滤器**（可以是数组或者函数），第二个参数是**选项**，表示是否在 json 字符串中保留缩进，数值表示的是每个级别缩进的空格数，最大缩进空格数为 10。
-如果是函数，那么传入的函数接收两个参数，属性（键）名和属性值，属性名只能是字符串，而在值并非键值对儿结构的值时，键名可以是空字符串。
-函数返回的值就是相应键的值，函数返回了 undefined，那么此对应的属性会被忽略。
-**第一次调用**这个函数过滤器，传入参数中的键是一个空字符串，而值就是 book 对象。
-可以为任何对象添加 toJSON()方法，函数可以返回某个值，序列化后就返回该值，方法返回 undefined 时：如果包含它的对象嵌入在另一个对象中，会导致它的值变成 null，而如果它是顶级对象，结果就是 undefined。。
-序列化某对象顺序：
+JSON 数据结构解析为有用的 JavaScript 对象。  
+
+* json 对象：  
+早期的 JSON 解析器基本上就是 eval()函数。  
+JSON 对象有两个方法：stringify()和 parse()，代表 JavaScript 对象序列化为 JSON 字符串和把 JSON 字符串解析为原生 JavaScript 值。  
+在序列化 JavaScript 对象时，所有**函数及原型成员**都会被有意忽略，值为 undefined 的任何属性也都会被跳过。  
+深拷贝：拷贝后是两个独立的、没有任何关系的对象。  
+
+* 序列化选项：  
+JSON.stringify()还可以接收另外两个参数，第一个参数是个**过滤器**（可以是数组或者函数），第二个参数是**选项**，表示是否在 json 字符串中保留缩进，数值表示的是每个级别缩进的空格数，最大缩进空格数为 10。  
+如果是函数，那么传入的函数接收两个参数，属性（键）名和属性值，属性名只能是字符串，而在值并非键值对儿结构的值时，键名可以是空字符串。  
+函数返回的值就是相应键的值，函数返回了 undefined，那么此对应的属性会被忽略。  
+**第一次调用**这个函数过滤器，传入参数中的键是一个空字符串，而值就是 book 对象。  
+可以为任何对象添加 toJSON()方法，函数可以返回某个值，序列化后就返回该值，方法返回 undefined 时：如果包含它的对象嵌入在另一个对象中，会导致它的值变成 null，而如果它是顶级对象，结果就是 undefined。。  
+
+序列化某对象顺序：  
 ```plain
 (1) 如果存在 toJSON()方法而且能通过它取得有效的值，则调用该方法。否则，返回对象本身。
 (2) 如果提供了第二个参数，应用这个函数过滤器。传入函数过滤器的值是第(1)步返回的值。
 (3) 对第(2)步返回的每个值进行相应的序列化。
 (4) 如果提供了第三个参数，执行相应的格式化。
 ```
-* 解析选项
-JSON.parse()方法可加另一个参数，是一个函数，称为**还原函数。**
-还原函数返回 undefined，则表示要从结果中删除相应的键；返回其他值，则将该值插入到结果中。
+* 解析选项：  
+JSON.parse()方法可加另一个参数，是一个函数，称为**还原函数。**  
+还原函数返回 undefined，则表示要从结果中删除相应的键；返回其他值，则将该值插入到结果中。  
 # Ajax 与 Comet
 2005 年 Garrett 提出，Ajax 技术的核心是 XMLHttpRequest 对象（简称 XHR），之前这种技术叫做远程脚本。
 ## 21.1 XMLHttpRequest 对象
-IE7 之前 ActiveX 对象实现的，new ActiveXObject。
-其他版本浏览器 new XMLHttpRequest(); 
-* XHR 的用法
-调用的第一个方法是 open(要发送的请求的类型，请求的 URL，是否异步发送请求的布尔值。)，URL 是相对于执行代码的当前页面，也可以使用绝对路径，open（）方法只是启动一个请求以备发送。
-send()方法接收一个参数，即要作为请求主体发送的数据。
-XHR 对象的属性：responseText，responseXML，status，statusText。
-readyState 属性表示请求/响应过程的当前活动阶段，0，1，2，3，4。
-必须在调用 open()之前指定**onreadystatechange**事件处理程序才能确保跨浏览器兼容性。
-没有向 onreadystatechange 事件中传递 event 对象；必须通过 XHR 对象本身来确定下一步该怎么做。作用域问题：如果使用 this 对象，会导致函数执行失败，或者导致错误发生。
-* HTTP 头部信息
-XHR 对象也提供了操作这两种（请求和响应）头部信息的方法。
-setRequestHeader()方法可以设置自定义的请求头部信息。调用 open()方法之后且调用 send()方法之前调用 setRequestHeader()。不要使用浏览器正常发送的字段名称。
-getResponseHeader()方法并传入头部字段名称，取得相应的响应头部信息。
-getAllResponseHeaders()方法取得一个包含所有头部信息的长字符串。
-* GET 请求
-查询字符串中每个参数的名称和值都必须使用 encodeURIComponent()进行编码。
-* POST 请求
-请求的主体提交，如果是表单需要将页面中表单的数据进行序列化。
+IE7 之前 ActiveX 对象实现的，new ActiveXObject。  
+其他版本浏览器 new XMLHttpRequest();   
+
+* XHR 的用法：  
+调用的第一个方法是 open(要发送的请求的类型，请求的 URL，是否异步发送请求的布尔值。)，URL 是相对于执行代码的当前页面，也可以使用绝对路径，open（）方法只是启动一个请求以备发送。  
+send()方法接收一个参数，即要作为请求主体发送的数据。  
+XHR 对象的属性：responseText，responseXML，status，statusText。  
+readyState 属性表示请求/响应过程的当前活动阶段，0，1，2，3，4。  
+必须在调用 open()之前指定**onreadystatechange**事件处理程序才能确保跨浏览器兼容性。  
+没有向 onreadystatechange 事件中传递 event 对象；必须通过 XHR 对象本身来确定下一步该怎么做。作用域问题：如果使用 this 对象，会导致函数执行失败，或者导致错误发生。  
+
+* HTTP 头部信息：  
+XHR 对象也提供了操作这两种（请求和响应）头部信息的方法。  
+setRequestHeader()方法可以设置自定义的请求头部信息。调用 open()方法之后且调用 send()方法之前调用 setRequestHeader()。不要使用浏览器正常发送的字段名称。  
+getResponseHeader()方法并传入头部字段名称，取得相应的响应头部信息。  
+getAllResponseHeaders()方法取得一个包含所有头部信息的长字符串。  
+
+* GET 请求：  
+查询字符串中每个参数的名称和值都必须使用 encodeURIComponent()进行编码。  
+
+* POST 请求：  
+请求的主体提交，如果是表单需要将页面中表单的数据进行序列化。  
 ## 21.2 XMLHttpRequest 2 级
-* FormData
-为序列化表单，首先创建了一个 FormData 对象，该对象 append()方法接收两个参数：键和值。
-也可向构造函数中传入表单元素，也可以用表单元素的数据预先向其中填入键值对儿。
-* 超时设定
-XHR 对象添加了一个 timeout 属性，等待响应多少毫秒之后就终止。
-如果在超时终止请求之后再访问 status 属性，就会导致错误。
-* overrideMimeType()方法
-用于重写 XHR 响应的 MIME 类型。
-根据 MIME 类型，即使数据是 XML，responseXML 属性中仍然是 null。
-将响应当作 XML 而非纯文本来处理。调用 overrideMimeType()必须在 send()方法之前。
+* FormData：  
+为序列化表单，首先创建了一个 FormData 对象，该对象 append()方法接收两个参数：键和值。  
+也可向构造函数中传入表单元素，也可以用表单元素的数据预先向其中填入键值对儿。  
+
+* 超时设定：  
+XHR 对象添加了一个 timeout 属性，等待响应多少毫秒之后就终止。  
+如果在超时终止请求之后再访问 status 属性，就会导致错误。  
+
+* overrideMimeType()方法：  
+用于重写 XHR 响应的 MIME 类型。  
+根据 MIME 类型，即使数据是 XML，responseXML 属性中仍然是 null。  
+将响应当作 XML 而非纯文本来处理。调用 overrideMimeType()必须在 send()方法之前。  
+
 ## 21.3 进度事件
-每个请求都从触发 loadstart 事件开始，接下来是一或多个 progress 事件，然后触发 error、
-abort 或 load 事件中的一个，最后以触发 loadend 事件结束。
-* load 事件
-只要浏览器接收到服务器的响应，不管其状态如何，都会触发 load 事件。你必须要检查 status 属性，才能确保数据可用。
-* progress 事件
-onprogress 事件处理程序 event 对象，含着三个额外的属性：lengthComputable 进度信息是否可用的布尔值、position 已经接收的字节数和 totalSize（Content-Length 响应头部确定的预期字节数）。
+每个请求都从触发 loadstart 事件开始，接下来是一或多个 progress 事件，然后触发 error、  
+abort 或 load 事件中的一个，最后以触发 loadend 事件结束。  
+
+* load 事件：  
+只要浏览器接收到服务器的响应，不管其状态如何，都会触发 load 事件。你必须要检查 status 属性，才能确保数据可用。  
+
+* progress 事件：  
+onprogress 事件处理程序 event 对象，含着三个额外的属性：lengthComputable 进度信息是否可用的布尔值、position 已经接收的字节数和 totalSize（Content-Length 响应头部确定的预期字节数）。  
 ## 21.4 跨源资源共享
-CORS（Cross-Origin Resource Sharing，跨源资源共享）。
-额外的 Origin 头部，其中包含请求页面的源信息，如果服务器认为这个请求可以接受，就在 Access-Control-Allow-Origin 头部中回发相同的源信息。
+CORS（Cross-Origin Resource Sharing，跨源资源共享）。  
+额外的 Origin 头部，其中包含请求页面的源信息，如果服务器认为这个请求可以接受，就在 Access-Control-Allow-Origin 头部中回发相同的源信息。  
 ```javascript
 Origin: http://www.nczonline.net 
 Access-Control-Allow-Origin: http://www.nczonline.net 
 ```
-* IE 对 CORS 的实现
-IE8 中引入了 XDR，他与 xhr 不同之处，使 CSRF（Cross-Site Request Forgery，跨站点请求伪造）和 XSS（Cross-Site Scripting，跨站点脚本）的问题得到了缓解。
-第一步是创建 XDomainRequest 实例代码，然后 open，再 send。
-XDR 对象的 open()方法只接收两个参数：请求的类型和 URL。
-所有 XDR 请求都是异步执行的。
-只能访问响应的原始文本；没有办法确定响应的状态代码。
-支持 POST 请求，XDR 对象提供了 contentType 属性，用来表示发送数据的格式。
-* 其他浏览器对 CORS 的实现
-都通过 XMLHttpRequest 对象实现了对 CORS 的原生支持。
-跨域 XHR 对象为了安全这些限制是必需的。
+* IE 对 CORS 的实现：  
+IE8 中引入了 XDR，他与 xhr 不同之处，使 CSRF（Cross-Site Request Forgery，跨站点请求伪造）和 XSS（Cross-Site Scripting，跨站点脚本）的问题得到了缓解。  
+第一步是创建 XDomainRequest 实例代码，然后 open，再 send。  
+XDR 对象的 open()方法只接收两个参数：请求的类型和 URL。  
+所有 XDR 请求都是异步执行的。  
+只能访问响应的原始文本；没有办法确定响应的状态代码。  
+支持 POST 请求，XDR 对象提供了 contentType 属性，用来表示发送数据的格式。  
+
+* 其他浏览器对 CORS 的实现：  
+都通过 XMLHttpRequest 对象实现了对 CORS 的原生支持。  
+跨域 XHR 对象为了安全这些限制是必需的。  
 ```plain
 不能使用 setRequestHeader()设置自定义头部。
 不能发送和接收 cookie。
 调用 getAllResponseHeaders()方法总会返回空字符串。
 ```
-* Preflighted Reqeusts 
-透明服务器验证机制，这种请求使用 OPTIONS 方法。IE 10 及更早版本都不支持。
-* 带凭据的请求
-默认情况下，跨源请求不提供凭据，将 withCredentials 属性设置为 true，可以指定某个请求应该发送凭据。
-如果服务器接受凭证则 HTTP 头部来回应：Access-Control-Allow-Credentials: true。
-IE 10 及更早版本都不支持。
-* 跨浏览器的 CORS 
-兼顾函数规则：是否存在 withCredentials 属性。再结合检测 XDomainRequest 对象是否存在。
+* Preflighted Reqeusts ：  
+透明服务器验证机制，这种请求使用 OPTIONS 方法。IE 10 及更早版本都不支持。  
+
+* 带凭据的请求：  
+默认情况下，跨源请求不提供凭据，将 withCredentials 属性设置为 true，可以指定某个请求应该发送凭据。  
+如果服务器接受凭证则 HTTP 头部来回应：Access-Control-Allow-Credentials: true。  
+IE 10 及更早版本都不支持。  
+
+* 跨浏览器的 CORS ：  
+兼顾函数规则：是否存在 withCredentials 属性。再结合检测 XDomainRequest 对象是否存在。  
 ## 21.5 其他跨域技术
-* 图像 Ping 
-动态创建图像经常用于图像 Ping。只能发送 GET 请求，无法访问服务器的响应文本。
-* JSONP 
-JSON with padding（填充式 JSON 或参数式 JSON），被包含在函数调用中的 JSON。
-JSONP 由两部分组成：**回调函数**：是当响应到来时应该在页面中调用的函数。和**数据**：传入回调函数中的 JSON 数据。
+* 图像 Ping ：  
+动态创建图像经常用于图像 Ping。只能发送 GET 请求，无法访问服务器的响应文本。  
+
+* JSONP ：  
+JSON with padding（填充式 JSON 或参数式 JSON），被包含在函数调用中的 JSON。  
+JSONP 由两部分组成：**回调函数**：是当响应到来时应该在页面中调用的函数。和**数据**：传入回调函数中的 JSON 数据。  
 ```javascript
 script.src = "http://freegeoip.net/json/?callback=handleResponse";
 ```
-能够直接访问响应文本，支持在浏览器与服务器之间双向通信。但是不安全，确定 JSONP 请求是否失败并不容易。
-* Comet 
-服务器推送，服务器向页面推送数据的技术。有两种实现 Comet 的方式：**长轮询** 和**流**。
-第一种**长轮询，** 服务器一直保持连接打开，直到有数据可发送。
-第二种流行的 Comet 实现是 **HTTP 流** 。浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据。
-通过侦听 readystatechange 事件及检测 readyState 的值是否为 3，就可以利用 XHR 对象实现 HTTP 流。
-* 服务器发送事件
-SSE（Server-Sent Events，服务器发送事件），服务器通过这个连接可以发送任意数量的数据。
-* Web Sockets 
-一个单独的持久连接上提供全双工、双向通信。
-只有支持这种协议的专门服务器才能正常工作。
+能够直接访问响应文本，支持在浏览器与服务器之间双向通信。但是不安全，确定 JSONP 请求是否失败并不容易。  
+
+* Comet:  
+服务器推送，服务器向页面推送数据的技术。有两种实现 Comet 的方式：**长轮询** 和**流**。  
+第一种**长轮询，** 服务器一直保持连接打开，直到有数据可发送。  
+第二种流行的 Comet 实现是 **HTTP 流** 。浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据。  
+通过侦听 readystatechange 事件及检测 readyState 的值是否为 3，就可以利用 XHR 对象实现 HTTP 流。  
+
+* 服务器发送事件:  
+SSE（Server-Sent Events，服务器发送事件），服务器通过这个连接可以发送任意数量的数据。  
+
+* Web Sockets :  
+一个单独的持久连接上提供全双工、双向通信。  
+只有支持这种协议的专门服务器才能正常工作。  
+
 **wss://。**
-要创建一个 WS，首先实例一个 WebSocket 对象并传入要连接的 URL：
+要创建一个 WS，首先实例一个 WebSocket 对象并传入要连接的 URL：  
 ```javascript
 var socket = new WebSocket("ws://www.example.com/server.php"); 
 ```
-send()方法发送数据，需要序列化。
-服务器向客户端发来消息时，WebSocket 对象就会触发 message 事件。
-只有 close 事件的 event 对象有额外的信息。有三个额外的属性，wasClean、code 和 reason。
-* SSE 与 Web Sockets
-只需读取服务器数据，那么 SSE 比较容易实现。
-必须双向通信那么 Web Sockets 显然更好，组合 XHR 和 SSE 也是能实现双向通信的。
+send()方法发送数据，需要序列化。  
+服务器向客户端发来消息时，WebSocket 对象就会触发 message 事件。  
+只有 close 事件的 event 对象有额外的信息。有三个额外的属性，wasClean、code 和 reason。  
+
+* SSE 与 Web Sockets：  
+只需读取服务器数据，那么 SSE 比较容易实现。  
+必须双向通信那么 Web Sockets 显然更好，组合 XHR 和 SSE 也是能实现双向通信的。  
 ## 21.6 安全
 # 高级技巧
 ## 22.1 高级函数
-* 安全的类型检测
-在任何值上调用 Object 原生的 toString()方法，都会返回一个[object NativeConstructorName]格式的字符串。每个类在内部都有一个[[Class]]属性，这个属性中就指定了上述字符串中的构造函数名。不能检测非原生构造函数的构造函数名。
+* 安全的类型检测：  
+在任何值上调用 Object 原生的 toString()方法，都会返回一个[object NativeConstructorName]格式的字符串。每个类在内部都有一个[[Class]]属性，这个属性中就指定了上述字符串中的构造函数名。不能检测非原生构造函数的构造函数名。  
 ```javascript
 Object.prototype.toString.call(value)；//"[object Array]" 
 ```
-IE 中以 COM 对象形式实现的任何函数，isFunction()内部实现以上代码的都将返回 false。
-* 作用域安全的构造函数
-思路：确认 this 对象是正确类型的实例。如果不是，那么会创建新的实例并返回。
+IE 中以 COM 对象形式实现的任何函数，isFunction()内部实现以上代码的都将返回 false。  
+
+* 作用域安全的构造函数：  
+思路：确认 this 对象是正确类型的实例。如果不是，那么会创建新的实例并返回。  
 ```javascript
 if (this instanceof Person){ 
 } else { 
  return new Person(name, age, job); 
  }
 ```
-* 惰性载入函数
-表示函数执行的分支仅会发生一次。第一种就是在函数被调用时再处理函数，该函数会被覆盖为另外一个按合适方式执行的函数，对原函数的调用都不用再经过执行的分支了。
+* 惰性载入函数：  
+表示函数执行的分支仅会发生一次。第一种就是在函数被调用时再处理函数，该函数会被覆盖为另外一个按合适方式执行的函数，对原函数的调用都不用再经过执行的分支了。  
 ```javascript
 function createXHR(){ 
  if(....){
@@ -1911,9 +1976,9 @@ var createXHR = (function () {
   }
 })();
 ```
-* 函数绑定
-要创建一个函数，可以在特定的 this 环境中以指定参数调用另一个函数。
-js 库实现了一个可以将函数绑定到指定环境的函数。这个函数一般都叫 bind()，它**接受一个函数**和**一个环境**，并返回一个在给定环境中调用给定函数的函数，并且将所有参数原封不动传递过去。
+* 函数绑定：  
+要创建一个函数，可以在特定的 this 环境中以指定参数调用另一个函数。  
+js 库实现了一个可以将函数绑定到指定环境的函数。这个函数一般都叫 bind()，它**接受一个函数**和**一个环境**，并返回一个在给定环境中调用给定函数的函数，并且将所有参数原封不动传递过去。  
 ```javascript
 function bind(fn, context){ 
  return function(){ 
@@ -1921,30 +1986,35 @@ function bind(fn, context){ 
  }; 
 } 
 ```
-ECMAScript 5 为所有函数定义了一个原生的 bind()方法，都是要传入作为 this 值的对象。
-主要用于事件处理程序以及 setTimeOut 和 setInterval。
-* 函数柯里化
-创建已经设置好了一个或多个参数的函数。
-基本方法：使用一个闭包返回一个函数。
-柯里化函数通常由以下步骤动态创建：调用另一个函数并为它传入要柯里化的函数和必要参数。
-ECMAScript 5 的 bind()方法也实现函数柯里化，只要在 this 的值之后再传入另一个参数即可。
+ECMAScript 5 为所有函数定义了一个原生的 bind()方法，都是要传入作为 this 值的对象。  
+主要用于事件处理程序以及 setTimeOut 和 setInterval。  
+
+* 函数柯里化：  
+创建已经设置好了一个或多个参数的函数。  
+基本方法：使用一个闭包返回一个函数。  
+柯里化函数通常由以下步骤动态创建：调用另一个函数并为它传入要柯里化的函数和必要参数。  
+ECMAScript 5 的 bind()方法也实现函数柯里化，只要在 this 的值之后再传入另一个参数即可。  
 ## 22.2 防篡改对象
-一旦把对象定义为防篡改，就无法撤销了。
-* 不可扩展对象
-Object.preventExtensions(某对象)。
-Object.istExtensible()方法还可以确定对象是否可以扩展。
-* 密封的对象
-Object.seal()方法。
-Object.isSealed()方法可以确定对象是否被密封了。
-* 冻结的对象
-Object.freeze()方法可以用来冻结对象。
-Object.isFrozen()方法用于检测冻结对象。
+一旦把对象定义为防篡改，就无法撤销了。  
+
+* 不可扩展对象：  
+Object.preventExtensions(某对象)。  
+Object.istExtensible()方法还可以确定对象是否可以扩展。  
+
+* 密封的对象：  
+Object.seal()方法。  
+Object.isSealed()方法可以确定对象是否被密封了。  
+
+* 冻结的对象：  
+Object.freeze()方法可以用来冻结对象。  
+Object.isFrozen()方法用于检测冻结对象。  
 ## 22.3 高级定时器
-在 JavaScript 中没有任何代码是立刻执行的，但一旦进程空闲则尽快执行。
-定时器要记住的最重要的事情是，指定的时间间隔表示何时将定时器的代码添加到队列，而不是何时实际执行代码。
-* 重复的定时器
-两个问题：(1) 某些间隔会被跳过；(2) 多个定时器的代码执行之间的间隔可能会比预期的小。
-可以用如下模式使用链式 setTimeout()。
+在 JavaScript 中没有任何代码是立刻执行的，但一旦进程空闲则尽快执行。  
+定时器要记住的最重要的事情是，指定的时间间隔表示何时将定时器的代码添加到队列，而不是何时实际执行代码。  
+
+* 重复的定时器  
+两个问题：(1) 某些间隔会被跳过；(2) 多个定时器的代码执行之间的间隔可能会比预期的小。  
+可以用如下模式使用链式 setTimeout()。  
 ```javascript
 setTimeout(function(){ 
  //处理中
@@ -1952,10 +2022,11 @@ setTimeout(function(){ 
 }, interval); 
 ```
 * Yielding Processes 
-* 函数节流
-使用定时器对该函数进行节流。
-某些代码不可以在没有间断的情况连续重复执行。
-目的是只有在执行函数的请求停止了一段时间之后才执行。
+
+* 函数节流：  
+使用定时器对该函数进行节流。  
+某些代码不可以在没有间断的情况连续重复执行。  
+目的是只有在执行函数的请求停止了一段时间之后才执行。  
 ```javascript
 function throttle(method, context) { 
  clearTimeout(method.tId); 
@@ -1965,103 +2036,116 @@ function throttle(method, context) { 
 } 
 ```
 ## 22.4 自定义事件
-事件是一种叫做观察者的设计模式，这是一种创建松散耦合代码的技术。
-DOM 元素便是**主体**，你的事件处理代码便是**观察者**。
-使用自定义事件有助于解耦相关对象，保持功能的隔绝。
-触发事件的代码和监听事件的代码是完全分离的。
+事件是一种叫做观察者的设计模式，这是一种创建松散耦合代码的技术。  
+DOM 元素便是**主体**，你的事件处理代码便是**观察者**。  
+使用自定义事件有助于解耦相关对象，保持功能的隔绝。  
+触发事件的代码和监听事件的代码是完全分离的。  
 *封装了一个大型 EventTarget 函数 616 页*
+
 ## 22.5 拖放
-拖放的基本概念很简单：创建一个绝对定位的元素，使其可以用鼠标移动。
-*封装了一个大型*DragDrop *函数 622 页*
+拖放的基本概念很简单：创建一个绝对定位的元素，使其可以用鼠标移动。  
+*封装了一个大型*DragDrop *函数 622 页*  
 # 离线应用与客户端存储
 ## 23.1 离线检测
-navigator.onLine 单独使用该属性不能确定网络是否连通。
-online 和 offline。两个事件在 window 对象上触发。
+navigator.onLine 单独使用该属性不能确定网络是否连通。  
+online 和 offline。两个事件在 window 对象上触发。  
 ## 23.2 应用缓存
-使用一个描述文件（manifest file），列出要下载和缓存的资源。
-要将描述文件与页面关联起来，可以在`<html>`中的 manifest 属性中指定这个文件的路径。
+使用一个描述文件（manifest file），列出要下载和缓存的资源。  
+要将描述文件与页面关联起来，可以在`<html>`中的 manifest 属性中指定这个文件的路径。  
 ```javascript
 <html manifest="/offline.manifest"> 
 ```
-API 的核心是 applicationCache 对象，这个对象有一个 status 属性，表示应用缓存的如下当前状态。
-swapCache()来启用新应用缓存。
+API 的核心是 applicationCache 对象，这个对象有一个 status 属性，表示应用缓存的如下当前状态。  
+swapCache()来启用新应用缓存。  
 ## 23.3 数据存储
-* Cookie
-在客户端用于存储会话信息的。
-最佳的浏览器兼容性，最好将整个 cookie 长度限制在 4095B（含 4095）以内。
-cookie 由浏览器保存的以下几块信息构成：名称，值，域，路径，失效时间，安全标志。
-document.cookie 属性可以设置为一个新的 cookie 字符串，最好每次设置 cookie 时都像下面这个例子中一样使用 encodeURIComponent()。
+* Cookie：  
+在客户端用于存储会话信息的。  
+最佳的浏览器兼容性，最好将整个 cookie 长度限制在 4095B（含 4095）以内。  
+cookie 由浏览器保存的以下几块信息构成：名称，值，域，路径，失效时间，安全标志。  
+document.cookie 属性可以设置为一个新的 cookie 字符串，最好每次设置 cookie 时都像下面这个例子中一样使用 encodeURIComponent()。  
 ```javascript
 document.cookie = encodeURIComponent("name") + "=" +encodeURIComponent("Nicholas"); 
 ```
-**有一个封装 CookieUtil 对象函数，和子 cookie 函数。*
-HTTP 专有 cookie 可以从浏览器或者服务器设置，只能从服务器端读取。
-存储大量信息会影响到特定域的请求性能。cookie 信息越大，完成对服务器请求的时间也就越长。不要在 cookie 中存储重要和敏感的数据。
-* IE 用户数据 
-在 IE5.0 中，微软通过一个自定义行为引入了持久化用户数据的概念，每个文档最多 128KB 数据，每个域名最多 1MB 数据。
-css 指定 userData 行为：
-* Web 存储机制 
-**Web Storage**最终成为了 HTML5 的一部。
-Storage 类型提供最大的存储空间（因浏览器而异）来存储名值对儿，有以下方法：clear()，getItem(name)，key(index)，removeItem(name)，setItem(name, value)。
-Storage 类型只能存储字符串。
-**sessionStorage**对象存储特定于某个会话的数据，该数据只保持到浏览器关闭，数据只能由最初给对象存储数据的页面访问到。IE8 中可以强制把数据写入磁盘。
-Firefox 2 中实现了 **globalStorage** 对象，指定哪些域可以访问，通过方括号标记使用属性来实现，globalStorage 对象不是 Storage 的实例，而具体的 globalStorage["wrox.com"]才是。
-同源政策下面才可以访问同一个 **localstorage**对象。
-对 Storage 对象进行任何修改，都会在文档上触发 storage 事件。
-一般限制了 **2.5M**大小。
-* IndexedDB 
-在浏览器中保存结构化数据的一种数据库，异步进行的。因此，大多数操作会以请求方式进行。
-在 Chrome 中叫 webkitIndexedDB。
-每一次的 IndexDb 操作，都可以添加 error 和 success 事件处理程序。
+**有一个封装 CookieUtil 对象函数，和子 cookie 函数。*  
+HTTP 专有 cookie 可以从浏览器或者服务器设置，只能从服务器端读取。  
+存储大量信息会影响到特定域的请求性能。cookie 信息越大，完成对服务器请求的时间也就越长。不要在 cookie 中存储重要和敏感的数据。  
+
+* IE 用户数据 ：  
+在 IE5.0 中，微软通过一个自定义行为引入了持久化用户数据的概念，每个文档最多 128KB 数据，每个域名最多 1MB 数据。  
+css 指定 userData 行为：  
+
+* Web 存储机制：  
+**Web Storage**最终成为了 HTML5 的一部。  
+Storage 类型提供最大的存储空间（因浏览器而异）来存储名值对儿，有以下方法：clear()，getItem(name)，key(index)，removeItem(name)，setItem(name, value)。  
+Storage 类型只能存储字符串。  
+**sessionStorage**对象存储特定于某个会话的数据，该数据只保持到浏览器关闭，数据只能由最初给对象存储数据的页面访问到。IE8 中可以强制把数据写入磁盘。  
+Firefox 2 中实现了 **globalStorage** 对象，指定哪些域可以访问，通过方括号标记使用属性来实现，globalStorage 对象不是 Storage 的实例，而具体的 globalStorage["wrox.com"]才是。  
+同源政策下面才可以访问同一个 **localstorage**对象。  
+对 Storage 对象进行任何修改，都会在文档上触发 storage 事件。  
+一般限制了 **2.5M**大小。  
+
+* IndexedDB：  
+在浏览器中保存结构化数据的一种数据库，异步进行的。因此，大多数操作会以请求方式进行。  
+在 Chrome 中叫 webkitIndexedDB。  
+每一次的 IndexDb 操作，都可以添加 error 和 success 事件处理程序。  
 ```javascript
 var indexedDB = window.indexedDB || window.msIndexedDB || window.mozIndexedDB || 
 window.webkitIndexedDB; 
 ```
-是使用对象保存数据，而不是使用表来保存数据。
-indexDB.open()会返回一个 IDBRequest 对象，创建并打开一个数据库。
-建立了与数据库的连接之后，下一步就是使用**对象存储空间**。
+是使用对象保存数据，而不是使用表来保存数据。  
+indexDB.open()会返回一个 IDBRequest 对象，创建并打开一个数据库。  
+建立了与数据库的连接之后，下一步就是使用**对象存储空间**。  
 ```javascript
 var store = db.createObjectStore("users", { keyPath: "username" }); 
 ```
-add()想象成插入新值，把 put()想象成更新原有的值。
-**接下来**的所有操作都是通过事务来完成的，创建事务，只能通过事务来读取数据库中保存的对象。
- IDBTransaction 接口定义的常量表示，进行读写存储空间。
+add()想象成插入新值，把 put()想象成更新原有的值。  
+**接下来**的所有操作都是通过事务来完成的，创建事务，只能通过事务来读取数据库中保存的对象。  
+ IDBTransaction 接口定义的常量表示，进行读写存储空间。  
 ```javascript
 var transaction = db.transaction(); 
 // db.transaction("users", IDBTransaction.READ_WRITE); 这个事务能够读写 users 存储空间。
 ```
-取得了事务的索引后，使用 objectStore()方法并传入存储空间的名称，就可以访问特定的存储空间。然后使用 get 或者 put 方法修改数据。
-需要检索多个对象的情况下，则需要在事务内部创建**游标，** 在对象存储空间上调用 openCursor()方法可以创建游标，event.target.result 取得存储空间中的下一个对象。
-默认情况下，每个游标只发起一次请求。要想发起另一次请求，必须调用下面的一个方法 continue(key)：，或者 advance(count)。
-同时指定上、下界，使用 bound()方法，四个参数：：表示下界的键、表示上界的键、可选的表示是否跳过下界的布尔值和可选的表示是否跳过上界的布尔值。
-在定义键范围之后，把它传给 openCursor()方法，就能得到一个符合相应约束条件的游标。
-IndexedDB 的并发问题：每次成功打开数据库，都应该指定 onversionchange 事件处理程序。
-同源，磁盘空间也有限制，火狐 50MB，chrome5Mb。火狐不允许本地文件访问 IndexedDB。
+取得了事务的索引后，使用 objectStore()方法并传入存储空间的名称，就可以访问特定的存储空间。然后使用 get 或者 put 方法修改数据。  
+需要检索多个对象的情况下，则需要在事务内部创建**游标，** 在对象存储空间上调用 openCursor()方法可以创建游标，event.target.result 取得存储空间中的下一个对象。  
+默认情况下，每个游标只发起一次请求。要想发起另一次请求，必须调用下面的一个方法 continue(key)：，或者 advance(count)。  
+同时指定上、下界，使用 bound()方法，四个参数：：表示下界的键、表示上界的键、可选的表示是否跳过下界的布尔值和可选的表示是否跳过上界的布尔值。  
+在定义键范围之后，把它传给 openCursor()方法，就能得到一个符合相应约束条件的游标。  
+IndexedDB 的并发问题：每次成功打开数据库，都应该指定 onversionchange 事件处理程序。  
+同源，磁盘空间也有限制，火狐 50MB，chrome5Mb。火狐不允许本地文件访问 IndexedDB。  
 # 最佳实践
 ## 24.1 可维护性
-* 什么是可维护的代码 
+* 什么是可维护的代码  
+
 可理解性，直观性，可适应性，可扩展性，可调试性。
+
 * 代码约定
-匈牙利标记法来指定变量类型。
-使用类型注释。
+
+匈牙利标记法来指定变量类型。  
+使用类型注释。  
+
 * 松散耦合 
-* 编程实践 
-尊重对象所有权；避免全局量；避免与 null 进行比较 ；使用常亮。
+
+* 编程实践  
+尊重对象所有权；避免全局量；避免与 null 进行比较 ；使用常亮。  
+
 ## 24.2 性能 
-* 注意作用域
-避免全局查找，避免 with 语句 ，
-* 选择正确方法
-避免不必要的属性查找 ：一旦多次用到对象属性，应该将其存储在局部变量中（提取公共变量，减少 O（n）访问次数）。
-优化循环：减值迭代；简化终止条件；简化循环体；使用后测试循环。
-展开循环：
-避免双重解释：要提高代码性能，尽可能避免出现需要按照 JavaScript 解释的字符串。
-原生方法较快；Switch 语句较快；取模，逻辑与和逻辑或都可以考虑用位运算来替换。 
-* 最小化语句数
-变量声明用逗号，迭代语句可以尝试将迭代值插入到最后使用它的语句中去。 
-* 优化 DOM 交互
-页面更新时候，最小化现场更新（使用文档片段）； 使用 innerHTML。
-使用事件代理；注意 HTMLCollection（for 循环使用变量保存）。
-发生以下情况时会返回 HTMLCollection 对象： 
+* 注意作用域：  
+避免全局查找，避免 with 语句 ，  
+
+* 选择正确方法：
+避免不必要的属性查找 ：一旦多次用到对象属性，应该将其存储在局部变量中（提取公共变量，减少 O（n）访问次数）。  
+优化循环：减值迭代；简化终止条件；简化循环体；使用后测试循环。  
+展开循环：  
+避免双重解释：要提高代码性能，尽可能避免出现需要按照 JavaScript 解释的字符串。  
+原生方法较快；Switch 语句较快；取模，逻辑与和逻辑或都可以考虑用位运算来替换。   
+
+* 最小化语句数：  
+变量声明用逗号，迭代语句可以尝试将迭代值插入到最后使用它的语句中去。   
+
+* 优化 DOM 交互：  
+页面更新时候，最小化现场更新（使用文档片段）； 使用 innerHTML。  
+使用事件代理；注意 HTMLCollection（for 循环使用变量保存）。  
+发生以下情况时会返回 HTMLCollection 对象：   
 ```plain
 进行了对 getElementsByTagName() 的调用； 
 获取了元素的 childNodes 属性； 
@@ -2069,40 +2153,47 @@ IndexedDB 的并发问题：每次成功打开数据库，都应该指定 onvers
 访问了特殊的集合，如 document.forms、document.images 等。 
 ```
 ## 24.3 部署 
-* 构建过程
+* 构建过程  
 构建过程始于在源控制中定义用于存储文件的逻辑结构。
-* 验证 
-JSLint。
-* 压缩
-**代码长度**指的是浏览器所需解析的字节数，**配重**指的是实际从服务器传送到浏览器的字节数。
-**HTTP 压缩**一起使用可以让 JavaScript 文件尽可能小，因此对整体页面性能的影响也会最小。
+
+* 验证   
+JSLint。  
+
+* 压缩  
+**代码长度**指的是浏览器所需解析的字节数，**配重**指的是实际从服务器传送到浏览器的字节数。  
+**HTTP 压缩**一起使用可以让 JavaScript 文件尽可能小，因此对整体页面性能的影响也会最小。  
 # 新兴的 API
 ## 25.1 requestAnimationFrame()
+
 ## 25.2 Page Visibility API
-由以下三部分组成:document.hidden：document.visibilityState：visibilitychange 事件。表示页面是否由可见变得不可见。
-IE 中 document.msHidden，而在 Chrome 的实现中则是 document.webkitHidden。
+由以下三部分组成:document.hidden：document.visibilityState：visibilitychange 事件。表示页面是否由可见变得不可见。  
+IE 中 document.msHidden，而在 Chrome 的实现中则是 document.webkitHidden。  
 ## 25.3 Geolocation API 
-地理定位（geolocation）在浏览器中的实现是 navigator.geolocation 对象，第一个方法是 getCurrentPosition()，接收个参数：成功回调函数、可选的失败回调函数和可选的选项对象。
-如果你希望跟踪用户的位置，那么可以使用另一个方法 watchPosition()。
+地理定位（geolocation）在浏览器中的实现是 navigator.geolocation 对象，第一个方法是 getCurrentPosition()，接收个参数：成功回调函数、可选的失败回调函数和可选的选项对象。  
+如果你希望跟踪用户的位置，那么可以使用另一个方法 watchPosition()。  
 ## 25.4 File API
-HTML5 在 DOM 中为文件输入元素添加了一个 files 集合，集合中包含一组 File 对象，每个 File 对象对应着一个文件。
-* FileReader 类型
-实现的是一种异步文件读取机制，它读取的是文件系统，提供以下几种方法：readAsText，readAsDataURL(file)，readAsBinaryString(file)，readAsArrayBuffer(file)。
-progress、error 和 load 事件分别表示是否又读取了新数据、是否发生了错误以及是否已经读完了整个文件。
-错误码是 1 表示未找到文件，是 2 表示安全性错误，是 3 表示读取中断，是 4 表示文件不可读，是 5 表示编码错误。
+HTML5 在 DOM 中为文件输入元素添加了一个 files 集合，集合中包含一组 File 对象，每个 File 对象对应着一个文件。  
+
+* FileReader 类型：  
+实现的是一种异步文件读取机制，它读取的是文件系统，提供以下几种方法：readAsText，readAsDataURL(file)，readAsBinaryString(file)，readAsArrayBuffer(file)。  
+progress、error 和 load 事件分别表示是否又读取了新数据、是否发生了错误以及是否已经读完了整个文件。  
+错误码是 1 表示未找到文件，是 2 表示安全性错误，是 3 表示读取中断，是 4 表示文件不可读，是 5 表示编码错误。  
 ```javascript
 reader = new FileReader(); 
 ```
-* 读取部分内容
-File 对象还支持一个 slice()方法，起始字节及要读取的字节数，返回一个 Blob 的实例，Blob 是 File 类型的父类型。
-* 对象 URL 
-也被称为 blob URL，好处是可以不必把文件内容读取到 JavaScript 中而直接使用文件内容。
-创建对象 URL，可以使用 window.URL.createObjectURL()方法，并传入 File 或 Blob 对象。
-**Chrome 中的实现叫 window.webkitURL.createObjectURL()。*
-返回值是一个字符串，指向一块内存的地址。
-* 读取拖放的文件
-* 使用 XHR 上传文件
-是以表单提交的方式来上传文件，使用 FormData 类型，调用 append()方法并传入相应的 File 对象作为参数。
+* 读取部分内容：  
+File 对象还支持一个 slice()方法，起始字节及要读取的字节数，返回一个 Blob 的实例，Blob 是 File 类型的父类型。  
+
+* 对象 URL：  
+也被称为 blob URL，好处是可以不必把文件内容读取到 JavaScript 中而直接使用文件内容。  
+创建对象 URL，可以使用 window.URL.createObjectURL()方法，并传入 File 或 Blob 对象。  
+**Chrome 中的实现叫 window.webkitURL.createObjectURL()。*  
+返回值是一个字符串，指向一块内存的地址。  
+
+* 读取拖放的文件  
+
+* 使用 XHR 上传文件  
+是以表单提交的方式来上传文件，使用 FormData 类型，调用 append()方法并传入相应的 File 对象作为参数。  
 ```javascript
 data = new FormData(); 
 data.append("file" + i, files[i]); 
@@ -2111,35 +2202,36 @@ xhr.send(data);
 ## 25.5 Web 计时
 Web 计时机制的核心是 window.performance 对象。对页面的所有度量信息，包括那些规范中已经定义的和将来才能确定的，都包含在这个对象里面。
 ## 25.6 Web Workers
-解决浏览器冻结用户界面，此规范通过让 js 在后台运行解决这个问题。
-* 使用 Worker 
-要给 Worker 传递消息，可以使用 postMessage()方法，消息内容可以是任何能够被序列化的值，调用 terminate()方法就可以停止 Worker 的工作。
+解决浏览器冻结用户界面，此规范通过让 js 在后台运行解决这个问题。  
+
+* 使用 Worker：  
+要给 Worker 传递消息，可以使用 postMessage()方法，消息内容可以是任何能够被序列化的值，调用 terminate()方法就可以停止 Worker 的工作。  
 ```javascript
 var worker = new Worker("stufftodo.js"); 
 worker.postMessage(“start! "); 
 ```
-可以运行异步 JavaScript 代码，避免阻塞用户界面。在执行复杂计算和数据处理的时候，这个 API 非常有用；要不然，这些任务轻则会占用很长时间，重则会导致用户无法与页面交互。
+可以运行异步 JavaScript 代码，避免阻塞用户界面。在执行复杂计算和数据处理的时候，这个 API 非常有用；要不然，这些任务轻则会占用很长时间，重则会导致用户无法与页面交互。  
 # 附录 A
-剩余参数的语法形式是三 个点后跟一个标识符，收集到一个数组中。
+剩余参数的语法形式是三 个点后跟一个标识符，收集到一个数组中。  
 ```plain
 function sum(num1, num2, ...nums){}   
 ```
-分布参数：就是在值的前面加三个点。
-参数默认值：就是在形参赋值。
-生成器：就是一个对象，每次能生成一系列值中的一个。需要通过 yield 操作符。
-迭代器：一个对象，迭代一系列值并每次返回其中一个值，用 Iterator 构造函数。
-数组领悟：用一组符合某个条件的值来初始化数组。
+分布参数：就是在值的前面加三个点。  
+参数默认值：就是在形参赋值。  
+生成器：就是一个对象，每次能生成一系列值中的一个。需要通过 yield 操作符。  
+迭代器：一个对象，迭代一系列值并每次返回其中一个值，用 Iterator 构造函数。  
+数组领悟：用一组符合某个条件的值来初始化数组。  
 ```javascript
 array = [ value for each (variable in values) condition ]; 
 // value 是实际包含在 array 中的最终值，condition 是条件，variable 是保存循环遍历在 values 中的每一项。
 ```
-解构赋值：等号左边使用对应类型的字面量，
+解构赋值：等号左边使用对应类型的字面量，  
 ```javascript
 var [value1，value2] = ["red"，"color"]；
 var [, value] = ["color", "red"]; //只取局部数据
 var [value2, value1] = [value1, value2]; //交换变量的值
 var { name: personName, age: personAge } = person; 
 ```
-代理对象：一个表示接口的对象，使用 Proxy.creare()方法，传入一个处理程序对象和一个可选的 prototype 对象来创建代理对象。
-代理函数：Proxy.createFunction(处理程序对象 hander，一个调用捕捉器函数，一个可选的构造函数捕捉器函数）。
+代理对象：一个表示接口的对象，使用 Proxy.creare()方法，传入一个处理程序对象和一个可选的 prototype 对象来创建代理对象。  
+代理函数：Proxy.createFunction(处理程序对象 hander，一个调用捕捉器函数，一个可选的构造函数捕捉器函数）。  
 映射与集合：Map 类型也称简单映射，目的是保存一组键值对，get（），set（），delete（）方法。Set 类型，集合就是一组不重复的元素，集合中只有键。
