@@ -524,6 +524,7 @@ SubType.prototype = { 
 包含引用类型值的原型属性会被所有实例共享，原先的实例属性也就变成了现在的原型属性。  
 在创建子类型的实例时，不能向超类型的构造函数中传递参数。  
 * 借用构造函数（伪造对象或经典继承）：  
+
 基本思想在子类型构造函数的内部调用超类型构造函数，同时可以传递参数给超类。  
 通过使用 apply()和 call()方法也可以在（将来）新创建的对象上执行构造函数。
 ```javascript
@@ -538,9 +539,11 @@ function SubType(){ 
 } 
 ```
 * 组合继承（伪经典继承）：  
+
 最常用的继承模式，使用**原型链**实现对原型属性和方法的继承，而通过**借用构造函数**来实现对实例属性的继承。  
 instanceof 和 isPrototypeOf()也能够用于识别基于组合继承创建的对象。  
 * 原型式继承：  
+
 是借助原型可以基于已有的对象创建新对象，同时还不必因此创建自定义类型。  
 将传入的对象作为这个构造函数的原型，返回了这个临时类型的一个新实例，对传入的对象执行了一次浅复制。  
 **Object.create()** 方法两个参数：用作新对象原型的对象，为新对象定义额外属性的对象。  
@@ -568,7 +571,8 @@ function createAnother(original){ 
 } 
 ```
 object()函数不是必需的，任何能够返回新对象的函数都适用于此模式。  
-* 寄生组合式继承  
+
+* 寄生组合式继承：  
 组合继承都会调用两次超类型构造函数：一次是在创建子类型原型的时候，另一次是在子类型构造函数内部。
 ```javascript
 SuperType.call(this, name); //第二次调用 SuperType() 
@@ -576,6 +580,7 @@ SuperType.call(this, name); //第二次调用 SuperType() 
 SubType.prototype = new SuperType(); //第一次调用 SuperType() 
 ```
 父类假如定义属性 name 和 colors，此时有两组 name 和 colors 属性：一组在实例上，一组在子类原型中。  
+
 * 寄生组合式继承：  
 通过借用**构造函数**来继承属性，通过**原型链的混成形式**来继承方法，本质上，就是使用**寄生式继承**来继承超类型的原型，然后再将结果指定给子类型的原型。  
 基本模式如下：
@@ -648,7 +653,7 @@ function createFunctions() {
   return result; 
 }
 ```
-* 在闭包中 this 对象问题  
+* 在闭包中 this 对象问题：  
 this 对象是在运行时基于函数的执行环境绑定的，匿名函数的执行环境具有全局性，因此其 this 通常指向 window。  
 每个函数在被调用时都会自动取得 this，和 arguments 变量，只搜索到其活动对象为止，不可能直接访问外部函数中的这两个变量，可以把外部作用域中的 this 对象**保存到一个闭包能够访问的变量里**就行。  
 ```javascript
@@ -691,6 +696,7 @@ function output(count) {
 我们把有权访问私有变量和私有函数的公有方法称为特权方法，第一种是在构造函数中定义特权方法。  
 特权方法作为闭包有权访问在构造函数中定义的所有变量和函数。  
 使用构造函数定义特权方法缺点是每个实例都会创建同样一组新方法。  
+
 * 静态的私有变量：  
 通过在私有作用域中定义私有变量或函数，同样也可以创建特权方法。
 ```javascript
@@ -743,9 +749,11 @@ IE8 及更早的版本删除 window 属性语句时都会报错。
 <frame src="anotherframe.htm" name="leftFrame"> 
 ```
 使用框架的情况下浏览器中会存在多个 Global 对象。  
+
 * 窗口位置：  
 screenLeft 和 screenTop 属性（Firefox 则在 screenX 和 screenY），分别用于表示窗口相对于屏幕左边和上边的位置。  
 使用 moveTo()接收的是新位置的 x 和 y 坐标值，和 moveBy()水平和垂直方向上移动的像素数方法，两个参数，将窗口移动。  
+
 * 窗口大小：  
 outerWidth 和 outerHeight 返回浏览器窗口本身的尺寸。  
 innerWidth 和 innerHeight 则表示该容器中页面视图区的大小（减去边框宽度）。  
@@ -753,20 +761,24 @@ innerWidth 和 innerHeight 则表示该容器中页面视图区的大小（减�
 移动设备中，innerWidth 和 innerHeight 保存**可见视口**，IE 则是**标准模式。**  
 其他移动浏览器，document.documentElement 度量的是**布局视口，** 渲染后页面的实际大小（与可见视口不同，可见视口只是整个页面中的一小部分）。  
 **resizeTo()** 和 **resizeBy()** 方法可以调整浏览器窗口的大小。  
+
 * 导航和打开窗口：  
 window.open()4 个参数：要加载的 URL、窗口目标、一个特性字符串，表示新页面是否取代浏览器历史记录中当前加载页面的布尔值。  
 window 对象 opener 属性保存着打开它的原始窗口对象，只在弹出窗口中的最外层 window 对象（top）中有定义。  
 将 opener 属性设置为 null 就是告诉浏览器新创建的标签页不需要与打开它的标签页通信。  
 如果是浏览器内置的屏蔽程序阻止的弹出窗口，那么 window.open()很可能会返回 null。  
+
 * 间歇调用和超时调用：  
 超时调用 window 对象的 setTimeout()方法，参数：要执行的代码和以毫秒表示的时间，第二个参数表示过多长时间把当前任务添加到任务队列中，方法会返回一个数值 ID，表示超时调用，唯一标识符，严格模式下函数中 this 为 undefined，否则为 window 对象。  
 取消超时调用 clearTimeout()方法参数是相应的超时调用 ID。  
 间歇调用的方法是 setInterval()，按照指定的时间间隔重复执行代码，直至间歇调用被取消或者页面被卸载。  
 取消超时调用 clearInterval()方法参数是相应的间歇调用 ID。  
 很少使用间接调用，存在间接还没走完又有间接调用。  
+
 * 系统对话框：  
 alert()、confirm()和 prompt()方法，后两者方法会返回值。  
 prompt()方法接受两个参数：要显示给用户的文本提示和文本输入域的默认值。  
+
 ## 8.2 location 对象
 location 对象也是 document 对象的属性，它保存着当前文档的信息，属性：hash，host，hostname，href，pathname，port，protocol，search。  
 查询字符串参数可以使用对象的 search 属性，例如 b 站的搜索出来的结果是：
@@ -795,94 +807,102 @@ go()方法可以在用户的历史记录中任意跳转，负数表示向后跳�
 history 对象还有一个 length 属性保存历史记录的数量，检测该值可以判断当前页面是不是用户历史记录中的第一个页面时。  
 # 客户端检测
 ## 9.1 能力检测
-人们广泛接受的客户端检测形式是能力检测,（又称特性检测），第一个概念是先检测达成目的的最常用的特性，第二个是必须测试实际要用到的特性。
-在可能的情况下，要尽量使用 typeof 进行能力检测，但 IE8 之前会出现问题。
-能力检测作为确定下一步解决方案的依据，而不是用它来判断用户使用的是什么浏览器。
+人们广泛接受的客户端检测形式是能力检测,（又称特性检测），第一个概念是先检测达成目的的最常用的特性，第二个是必须测试实际要用到的特性。  
+在可能的情况下，要尽量使用 typeof 进行能力检测，但 IE8 之前会出现问题。  
+能力检测作为确定下一步解决方案的依据，而不是用它来判断用户使用的是什么浏览器。  
 ## 9.2 怪癖检测
 怪癖检测的目标是识别浏览器的特殊行为，想要知道浏览器存在什么缺陷。
 ## 9.3 用户代理检测
-通过检测用户代理字符串来确定实际使用的浏览器。
-用户代理字符串是作为响应首部发送的，通过 navigator.userAgent 属性访问。
-在确定平台时，检测 navigator.platform 要比检测用户代理字符串更简单。
+通过检测用户代理字符串来确定实际使用的浏览器。  
+用户代理字符串是作为响应首部发送的，通过 navigator.userAgent 属性访问。  
+在确定平台时，检测 navigator.platform 要比检测用户代理字符串更简单。  
 ps：9.3.3 小节有完整代码的用户代理检测
 # DOM
 ## 10.1 节点层次
-DOM 可以将任何 HTML 或 XML 文档描绘成一个由**多层节点构成**的结构。
-`<html>`元素称之为**文档元素，** 是最外层元素，每个文档唯一，在 XML 中，任何元素都可能成为文档元素。
-* Node 类型
-DOM1 级定义了一个 Node 接口，所有节点类型都继承自 Node 类型。
-每个节点都有一个 nodeType 属性，最好还是将 nodeType 属性与数字值进行比较，以及还有 nodeName 保存的始终都是元素的标签名，nodeValue 属性值则始终为 null。
-每个节点都有一个 childNodes 属性，其中保存着一个 NodeList 类数组对象，是基于 DOM 动态的查询结果。
-每个节点的 parentNode 属性，该属性指向文档树中的父节点。
-每个节点的 previousSibling 和 nextSibling 属性指向上一个或者下一个节点。
-父节点的 firstChild 和 lastChild 属性指向其 childNodes 列表中的第一个和最后一个节点。
-最后一个属性是 ownerDocument，该属性指向表示整个文档的文档节点。
-以下必须是在某个父节点下的 childNodes 下使用方法，不然会报错。而且同时要注意有 text 节点占用了一个数组项：
-**appendChild()** ，向 childNodes 列表的末尾添加一个节点，如果传入到 appendChild()中的节点已经是文档的一部分，该节点从原来的位置转移到新位置（位移）。
-**insertBefore()，** 两个参数：要插入的节点和作为参照的节点，同时被方法返回，第二个参数是 null 则为添加含义。
-**replaceChild()** 两个参数是：要插入的节点和要替换的节点，文档所有，但是没有位置。
-**removeChild()** 方法，受一个参数，即要移除的节点，文档所有，但是没有位置。
-所有类型的节点都有的**cloneNode()** ，接受一个布尔值参数，参数为 true 执行深复制，复制节点及其整个子节点树，false 执行浅复制，即只复制节点本身，IE 存在一个 bug，即它会复制事件处理程序。
-所有类型的节点都有的 **normalize()** 处理文档树中的文本节点。
-* Document 类型
-Document 类型表示文档，document 对象是 HTMLDocument（继承自 Document 类型）的一个实例，表示整个 HTML 页面，document 对象是 window 对象的一个属性。
-document.documentElement 属性指向 HTML 页面中的`<html>`元素，body 属性，直接指向`<body>`元素。
-document.doctype 取得对<!DOCTYPE>的引用，属性 title 取得当前页面的标题，URL 属性
-中包含页面完整的 URL，domain 属性中只包含页面的域名，referrer 属性表示链接到当前页面的那个页面的 URL。
-只有 domain 是可以设置的，设置为新的域名后之后，就不能再将其设置回。
-取得元素的操作 getElementById()和 getElementsByTagName()。
-**getElementById()** 一个参数 id，返回的是**元素的引用**，IE8 及较低版本不区分 ID 的大小写，IE7 及较低版本“怪癖”：返回个表单元素的 name 特性等于指定的 ID。
-**getElementsByTagName()** 一个参数，标签名字，返回的是元素的 NodeList，会返回一个 **HTMLCollection 对象**，此对象有一个 nameItem（）方法通过 name 特性取得集合中的项，或者按名称访问，对命名的项也可以使用方括号语法来访问。
-**getElementsByName()** 常用于取得单选按钮。
-document 特殊的集合（anchors，applets 等），都是 HTMLCollection 对象,通过属性访问。
-hasFeature()方法，两个参数：要检测的 DOM 功能的名称及版本号。浏览器支持给定名称和版本的功能，则该方法返回 true。
+DOM 可以将任何 HTML 或 XML 文档描绘成一个由**多层节点构成**的结构。  
+`<html>`元素称之为**文档元素，** 是最外层元素，每个文档唯一，在 XML 中，任何元素都可能成为文档元素。  
+
+* Node 类型：  
+DOM1 级定义了一个 Node 接口，所有节点类型都继承自 Node 类型。  
+每个节点都有一个 nodeType 属性，最好还是将 nodeType 属性与数字值进行比较，以及还有 nodeName 保存的始终都是元素的标签名，nodeValue 属性值则始终为 null。  
+每个节点都有一个 childNodes 属性，其中保存着一个 NodeList 类数组对象，是基于 DOM 动态的查询结果。  
+每个节点的 parentNode 属性，该属性指向文档树中的父节点。  
+每个节点的 previousSibling 和 nextSibling 属性指向上一个或者下一个节点。  
+父节点的 firstChild 和 lastChild 属性指向其 childNodes 列表中的第一个和最后一个节点。  
+最后一个属性是 ownerDocument，该属性指向表示整个文档的文档节点。  
+以下必须是在某个父节点下的 childNodes 下使用方法，不然会报错。而且同时要注意有 text 节点占用了一个数组项：  
+**appendChild()** ，向 childNodes 列表的末尾添加一个节点，如果传入到 appendChild()中的节点已经是文档的一部分，该节点从原来的位置转移到新位置（位移）。  
+**insertBefore()，** 两个参数：要插入的节点和作为参照的节点，同时被方法返回，第二个参数是 null 则为添加含义。  
+**replaceChild()** 两个参数是：要插入的节点和要替换的节点，文档所有，但是没有位置。  
+**removeChild()** 方法，受一个参数，即要移除的节点，文档所有，但是没有位置。  
+所有类型的节点都有的**cloneNode()** ，接受一个布尔值参数，参数为 true 执行深复制，复制节点及其整个子节点树，false 执行浅复制，即只复制节点本身，IE 存在一个 bug，即它会复制事件处理程序。  
+所有类型的节点都有的 **normalize()** 处理文档树中的文本节点。  
+
+* Document 类型：  
+Document 类型表示文档，document 对象是 HTMLDocument（继承自 Document 类型）的一个实例，表示整个 HTML 页面，document 对象是 window 对象的一个属性。  
+document.documentElement 属性指向 HTML 页面中的`<html>`元素，body 属性，直接指向`<body>`元素。  
+document.doctype 取得对<!DOCTYPE>的引用，属性 title 取得当前页面的标题，URL 属性  
+中包含页面完整的 URL，domain 属性中只包含页面的域名，referrer 属性表示链接到当前页面的那个页面的 URL。  
+只有 domain 是可以设置的，设置为新的域名后之后，就不能再将其设置回。  
+取得元素的操作 getElementById()和 getElementsByTagName()。  
+**getElementById()** 一个参数 id，返回的是**元素的引用**，IE8 及较低版本不区分 ID 的大小写，IE7 及较低版本“怪癖”：返回个表单元素的 name 特性等于指定的 ID。  
+**getElementsByTagName()** 一个参数，标签名字，返回的是元素的 NodeList，会返回一个 **HTMLCollection 对象**，此对象有一个 nameItem（）方法通过 name 特性取得集合中的项，或者按名称访问，对命名的项也可以使用方括号语法来访问。  
+**getElementsByName()** 常用于取得单选按钮。  
+document 特殊的集合（anchors，applets 等），都是 HTMLCollection 对象,通过属性访问。  
+hasFeature()方法，两个参数：要检测的 DOM 功能的名称及版本号。浏览器支持给定名称和版本的功能，则该方法返回 true。  
 ```javascript
 document.implementation.hasFeature("XML", "1.0");
 ```
-**write()** 和 **writeln()** 方法都接受一个字符串参数，即要写入到输出流中的文本，页面加载的过程中可以动态的通过这两个方法加入内容。
-* Element 类型
-用于表现 XML 或 HTML 元素，了对元素标签名、子节点及特性的访问。
-所有 HTML 元素都由 HTMLElement 类型表示，直接通过这个类型，或者它的子类型来表示，添加的属性分别对应于每个元素存在的标准特性：id，title，lang，dir，className。
-每个元素都有一或多个特性，getAttribute()、setAttribute()和 removeAttribute()，三个方法可以针对任何特性使用。
-getAttribute()方法也可以取得自定义特性，优先在这样的情况下用。
-两类特殊的特性，属性的值与通过 getAttribute()返回的值并不相同。style 返回的 style 特性值中包含的是 CSS 文本，属性访问返回一个对象。onclick 这样的事件处理程序，通过 getAttribute()访问，则会返回相应代码的字符串，属性时，则会返回一个 JavaScript 函数。
-setAttribute()两个参数：设置的特性名和值，推荐通过属性来设置特性（点字符），添加一个自定义的属性，该属性不会自动成为元素的特性。
-IE6 及以前版本不支持 removeAttribute()。
-Element 类型是使用 attributes 属性的唯一一个 DOM 节点类型，属性中包含一个 NamedNodeMap，也是一个“动态”的集合。有下列的四种方法：
+**write()** 和 **writeln()** 方法都接受一个字符串参数，即要写入到输出流中的文本，页面加载的过程中可以动态的通过这两个方法加入内容。  
+
+* Element 类型：  
+用于表现 XML 或 HTML 元素，了对元素标签名、子节点及特性的访问。  
+所有 HTML 元素都由 HTMLElement 类型表示，直接通过这个类型，或者它的子类型来表示，添加的属性分别对应于每个元素存在的标准特性：id，title，lang，dir，className。  
+每个元素都有一或多个特性，getAttribute()、setAttribute()和 removeAttribute()，三个方法可以针对任何特性使用。  
+getAttribute()方法也可以取得自定义特性，优先在这样的情况下用。  
+两类特殊的特性，属性的值与通过 getAttribute()返回的值并不相同。style 返回的 style 特性值中包含的是 CSS 文本，属性访问返回一个对象。onclick 这样的事件处理程序，通过 getAttribute()访问，则会返回相应代码的字符串，属性时，则会返回一个 JavaScript 函数。  
+setAttribute()两个参数：设置的特性名和值，推荐通过属性来设置特性（点字符），添加一个自定义的属性，该属性不会自动成为元素的特性。  
+IE6 及以前版本不支持 removeAttribute()。  
+Element 类型是使用 attributes 属性的唯一一个 DOM 节点类型，属性中包含一个 NamedNodeMap，也是一个“动态”的集合。有下列的四种方法：  
 ```plain
 getNamedItem(name)：
 removeNamedItem(name)：
 setNamedItem(node)：
 item(pos)。
 ```
-如果想要遍历元素的特性，attributes 属性倒是可以派上用场。
-用 document.createElement()方法可以创建新元素，一个标签名参数，也为新元素设置了 ownerDocuemnt 属性，但是新元素尚未被添加到文档树中，一旦将元素添加到文档树中，浏览器就会立即呈现该元素，作的任何修改都会实时反映在浏览器中。
-有事可以通过在 createElement()中指定完整的 HTML 标签来解决一些表单问题。
-* Text 类型
-通过 nodeValue 属性或 data 属性访问 Text 节点中包含的文本。
-length 属性，保存着节点中字符的数目。
-使用 document.createTextNode()创建新文本节点，一个参数，要插入节点中的文本。
-两个文本节点是相邻的同胞节点，那么这两个节点中的文本就会连起来显示，中间不会有空格。
-splitText()方法，将一个文本节点分成两个文本节点，按照指定的位置分割 nodeValue 值。方法会返回一个新文本节点。
-* Comment 类型
-注释在 DOM 中是通过 Comment 类型来表示的。
-* CDATASection 类型
-只针对基于 XML 的文档，表示的是 CDATA 区域。
-* DocumentType 类型
-包含着与文档的 doctype 有关的所有信息，DocumentType 对象不能动态创建，只能通过解析文档代码的方式来创建。
-只有 name 属性是有用，保存的是文档类型的名称，document.doctype.name。
-* DocumentFragment 类型
-文档片段是一种“轻量级”的文档，可以包含和控制节点，作为一个“仓库”来使用，可以在里面保存将来可能会添加到文档中的节点。
+如果想要遍历元素的特性，attributes 属性倒是可以派上用场。  
+用 document.createElement()方法可以创建新元素，一个标签名参数，也为新元素设置了 ownerDocuemnt 属性，但是新元素尚未被添加到文档树中，一旦将元素添加到文档树中，浏览器就会立即呈现该元素，作的任何修改都会实时反映在浏览器中。  
+有事可以通过在 createElement()中指定完整的 HTML 标签来解决一些表单问题。  
+
+* Text 类型：  
+通过 nodeValue 属性或 data 属性访问 Text 节点中包含的文本。  
+length 属性，保存着节点中字符的数目。  
+使用 document.createTextNode()创建新文本节点，一个参数，要插入节点中的文本。  
+两个文本节点是相邻的同胞节点，那么这两个节点中的文本就会连起来显示，中间不会有空格。  
+splitText()方法，将一个文本节点分成两个文本节点，按照指定的位置分割 nodeValue 值。方法会返回一个新文本节点。  
+
+* Comment 类型：  
+注释在 DOM 中是通过 Comment 类型来表示的。  
+
+* CDATASection 类型：  
+只针对基于 XML 的文档，表示的是 CDATA 区域。  
+
+* DocumentType 类型：  
+包含着与文档的 doctype 有关的所有信息，DocumentType 对象不能动态创建，只能通过解析文档代码的方式来创建。  
+只有 name 属性是有用，保存的是文档类型的名称，document.doctype.name。  
+
+* DocumentFragment 类型：  
+文档片段是一种“轻量级”的文档，可以包含和控制节点，作为一个“仓库”来使用，可以在里面保存将来可能会添加到文档中的节点。  
 ```javascript
 //可以通过 appendChild()或 insertBefore()将文档片段中内容添加到文档中，文档片段本身永远不会成为文档树的一部分。解决：浏览器反复渲染问题。
 document.createDocumentFragment()；
 ```
-* Attr 类型
-元素的特性在 DOM 中以 Attr 类型来表示，特性就是存在于元素的 attributes 属性中的节点。
-ps：很少直接引用特性节点。
-Attr 对象有 3 个属性：name、value 和 specified，specified 是一个布尔值，用以区别特性是在代码中指定的，还是默认的。
+* Attr 类型：  
+元素的特性在 DOM 中以 Attr 类型来表示，特性就是存在于元素的 attributes 属性中的节点。  
+（ps：很少直接引用特性节点）  
+Attr 对象有 3 个属性：name、value 和 specified，specified 是一个布尔值，用以区别特性是在代码中指定的，还是默认的。  
 ## 10.2 DOM 操作技术
-创建动态脚本也有两种方式：插入外部文件和直接插入 JavaScript 代码。
+创建动态脚本也有两种方式：插入外部文件和直接插入 JavaScript 代码。  
 DOM 代码反映：
 ```javascript
 var script = document.createElement('script');
@@ -890,150 +910,151 @@ script.type = 'text/javascript';
 document.body.appendChild(script);
 ```
 
-在 IE 中以使用`<script>`元素的 text 属性来指定 JavaScript 代码不会报错。
-动态样式是指在页面刚加载时不存在的样式；是在页面加载完成后动态添加到页面中的。
-**try-catch**语句来捕获 IE 抛出的动态加载样式的错误。
-HTML DOM 还为`<table>`、`<tbody>`和`<tr>`元素添加了一些属性和方法（需要网搜）。
-NodeList 及其“近亲”NamedNodeMap 和 HTMLCollection，三个集合都是“动态的”，每当文档结构发生变化时，它们都会得到更新，始终都会保存着最新、最准确的信息。
-访问 NodeList 会导致无限循环的问题（循环遍历插入 div，解决办法是保存循环开始的快照）
-每次访问 NodeList 对象，都会运行一次查询，最好的办法就是尽量减少 DOM 操作。
+在 IE 中以使用`<script>`元素的 text 属性来指定 JavaScript 代码不会报错。  
+动态样式是指在页面刚加载时不存在的样式；是在页面加载完成后动态添加到页面中的。  
+**try-catch**语句来捕获 IE 抛出的动态加载样式的错误。  
+HTML DOM 还为`<table>`、`<tbody>`和`<tr>`元素添加了一些属性和方法（需要网搜）。  
+NodeList 及其“近亲”NamedNodeMap 和 HTMLCollection，三个集合都是“动态的”，每当文档结构发生变化时，它们都会得到更新，始终都会保存着最新、最准确的信息。  
+访问 NodeList 会导致无限循环的问题（循环遍历插入 div，解决办法是保存循环开始的快照）  
+每次访问 NodeList 对象，都会运行一次查询，最好的办法就是尽量减少 DOM 操作。  
 # DOM 扩展
 ## 11.1 选择符 API
-对 DOM 的两个主要的扩展是 Selectors API（选择符 API）和 HTML5。
-* 选择符 API
-W3C 发起制定的一个标准，致力于让浏览器原生支持 CSS 查询。
-**querySelector()方法** 接收一个 CSS 选择符，返回与该模式匹配的第一个元素，通过 Element 类型调用 querySelector()方法时，只会在该元素后代元素的范围内查找匹配的元素。
-**querySelectorAll()方法** 参数一个 CSS 选择符，返回的是所有匹配，实际上是带有所有属性和方法的 NodeList，类似于一组元素的快照。
-**matchesSelector()方法** 一个 CSS 选择符，调用元素与该选择符匹配，返回 true；否则，返回 false。
+对 DOM 的两个主要的扩展是 Selectors API（选择符 API）和 HTML5。  
+
+* 选择符 API：  
+W3C 发起制定的一个标准，致力于让浏览器原生支持 CSS 查询。  
+**querySelector()方法** 接收一个 CSS 选择符，返回与该模式匹配的第一个元素，通过 Element 类型调用 querySelector()方法时，只会在该元素后代元素的范围内查找匹配的元素。  
+**querySelectorAll()方法** 参数一个 CSS 选择符，返回的是所有匹配，实际上是带有所有属性和方法的 NodeList，类似于一组元素的快照。  
+**matchesSelector()方法** 一个 CSS 选择符，调用元素与该选择符匹配，返回 true；否则，返回 false。  
 ## 11.2 元素遍历
-元素间的空格，在大部分浏览器都会返回文本节点。
-Element Traversal API 为 DOM 元素添加了以下 5 个属性。
-childElementCount：返回子元素（不包括文本节点和注释）的个数。
-firstElementChild：指向第一个子元素；firstChild 的元素版。
-lastElementChild：指向最后一个子元素；lastChild 的元素版。
-previousElementSibling：指向前一个同辈元素；previousSibling 的元素版。
-nextElementSibling：指向后一个同辈元素；nextSibling 的元素版。
+元素间的空格，在大部分浏览器都会返回文本节点。  
+Element Traversal API 为 DOM 元素添加了以下 5 个属性。  
+childElementCount：返回子元素（不包括文本节点和注释）的个数。  
+firstElementChild：指向第一个子元素；firstChild 的元素版。  
+lastElementChild：指向最后一个子元素；lastChild 的元素版。  
+previousElementSibling：指向前一个同辈元素；previousSibling 的元素版。  
+nextElementSibling：指向后一个同辈元素；nextSibling 的元素版。  
 ## 11.2 HTML5
-**getElementsByClassName()** 方法接收一个参数，返回带有指定类的所有元素的 NodeList。
-HTML5 新增了一种操作类名的方式，元素都添加 classList 属性，是新集合类型 DOMTokenList 的实例，该属性的其中一个方法：
-**toggle(value)** ：如果列表中已经存在给定的值，删除它；如果列表中没有给定的值，添加它。
+**getElementsByClassName()** 方法接收一个参数，返回带有指定类的所有元素的 NodeList。  
+HTML5 新增了一种操作类名的方式，元素都添加 classList 属性，是新集合类型 DOMTokenList 的实例，该属性的其中一个方法：  
+**toggle(value)** ：如果列表中已经存在给定的值，删除它；如果列表中没有给定的值，添加它。  
 ```javascript
 div.classList.toggle("user"); 
 ```
-焦点的功能，首先就是 document.activeElement 属性始终会引用 DOM 中当前获得了焦点的元素。
-元素获得焦点的方式有页面加载、用户输入和在代码中调用 focus()方法。
-默认情况下，文档刚刚加载完成时，document.activeElement 中保存的是 document.body 元素的引用。文档加载期间，值为 null。
-新增了 document.**hasFocus()** 方法，这个方法用于确定文档是否获得了焦点，可以知道用户是不是正在与页面交互。
-document 对象引入了 **readyState**属性，有两个值，loading，正在加载文档；complete，已经加载完文档。
-document 添加了一个名为**compatMode**的属性，表示哪种渲染模式。
-document.**head** 属性，引用文档的`<head>`元素。
-document 的 charset 属性表示文档中实际使用的字符集。
-document 的 defaultCharset 属性，表示根据默认浏览器及操作系统的设置，当前文档默认的字符集应该是什么。
-HTML5 规定可以为元素添加非标准的属性，但要添加前缀 data-。通过元素的 **dataset** 属性来访问自定义属性的值。
-在读模式下，**innerHTML** 属性返回与调用元素的所有子节点对应的 HTML 标记。在写模式下，根据指定的值创建新的 DOM 树，完全替换调用元素原先的所有子节点。
-通过 innerHTML 插入`<script>`元素并不会执行其中的脚本。`<script>`元素被认为是“无作用域的元素”，也就是在页面中看不到的元素，与`<style>`元素或注释类似。插入的字符串开头就是一个“无作用域的元素”，那么 IE 会在解析这个字符串前先删除该元素。
+焦点的功能，首先就是 document.activeElement 属性始终会引用 DOM 中当前获得了焦点的元素。  
+元素获得焦点的方式有页面加载、用户输入和在代码中调用 focus()方法。  
+默认情况下，文档刚刚加载完成时，document.activeElement 中保存的是 document.body 元素的引用。文档加载期间，值为 null。  
+新增了 document.**hasFocus()** 方法，这个方法用于确定文档是否获得了焦点，可以知道用户是不是正在与页面交互。  
+document 对象引入了 **readyState**属性，有两个值，loading，正在加载文档；complete，已经加载完文档。  
+document 添加了一个名为**compatMode**的属性，表示哪种渲染模式。  
+document.**head** 属性，引用文档的`<head>`元素。  
+document 的 charset 属性表示文档中实际使用的字符集。  
+document 的 defaultCharset 属性，表示根据默认浏览器及操作系统的设置，当前文档默认的字符集应该是什么。  
+HTML5 规定可以为元素添加非标准的属性，但要添加前缀 data-。通过元素的 **dataset** 属性来访问自定义属性的值。  
+在读模式下，**innerHTML** 属性返回与调用元素的所有子节点对应的 HTML 标记。在写模式下，根据指定的值创建新的 DOM 树，完全替换调用元素原先的所有子节点。  
+通过 innerHTML 插入`<script>`元素并不会执行其中的脚本。`<script>`元素被认为是“无作用域的元素”，也就是在页面中看不到的元素，与`<style>`元素或注释类似。插入的字符串开头就是一个“无作用域的元素”，那么 IE 会在解析这个字符串前先删除该元素。  
 ```javascript
 div.innerHTML = "<script defer>alert('hi');<\/script>"; //无效
 ```
-在读模式下，**outerHTML**返回调用它的元素及所有子节点的 HTML 标签。在写模式下，会根据指定的 HTML 字符串创建新的 DOM 子树，然后用这个 DOM 子树完全替换调用元素。
-**insertAdjacentHTML()** 方法，两个参数：插入位置和要插入的 HTML 文本，第一个参数包括："beforebegin"；"afterbegin"；"beforeend"；"afterend"。
-以上三种替换子节点可能会导致浏览器的内存占用问题，最好先手工删除要被替换的元素的所有事件处理程序和 JavaScript 对象属性。
-**scrollIntoView()** 可以在所有 HTML 元素上调用，通过滚动浏览器窗口或某个容器元素，调用元素就可以出现在视口中。
+在读模式下，**outerHTML**返回调用它的元素及所有子节点的 HTML 标签。在写模式下，会根据指定的 HTML 字符串创建新的 DOM 子树，然后用这个 DOM 子树完全替换调用元素。  
+**insertAdjacentHTML()** 方法，两个参数：插入位置和要插入的 HTML 文本，第一个参数包括："beforebegin"；"afterbegin"；"beforeend"；"afterend"。  
+以上三种替换子节点可能会导致浏览器的内存占用问题，最好先手工删除要被替换的元素的所有事件处理程序和 JavaScript 对象属性。  
+**scrollIntoView()** 可以在所有 HTML 元素上调用，通过滚动浏览器窗口或某个容器元素，调用元素就可以出现在视口中。  
 ```javascript
 //让元素可见
 document.forms[0].scrollIntoView(); 
 ```
 ## 11.4 专有扩展
-IE8 引入了一个新的概念叫“文档模式”，页面的文档模式决定了可以使用什么功能，到了 IE9，总共有以下 4 种文档模式，IE5，IE7，IE8，IE9。
+IE8 引入了一个新的概念叫“文档模式”，页面的文档模式决定了可以使用什么功能，到了 IE9，总共有以下 4 种文档模式，IE5，IE7，IE8，IE9。  
 要强制浏览器以某种模式渲染页面，可以使用 HTTP 头部信息 X-UA-Compatible，或通过等价的`<meta>`标签来设置：
 ```javascript
 <meta http-equiv="X-UA-Compatible" content="IE=IEVersion">
 ```
-通过 document.documentMode 属性可以知道给定页面使用的是什么文档模式。
-专有的 children 属性，是 HTMLCollection 的实例，只包含元素中同样还是元素的子节点。
-需要知道某个节点是不是另一个节点的后代 **contains()** 方法，方法接受一个参数，即要检测的后代节点，DOM Level 3 **compareDocumentPosition()** 也能够确定节点间的关系。
-**innerText**属性性可以操作元素中包含的所有文本内容，包括子文档树中的文本，设置 innerText 属性移除了先前存在的所有子节点，完全改变了 DOM 子树（Firefox 类似的 textContent 属性）。
-可以通过 innerText 属性过滤掉 HTML 标签，将 innerText 设置为等于 innerText。
-**outerText 属性**作用范围扩大到了包含调用它的节点，此属性并不常用。
+通过 document.documentMode 属性可以知道给定页面使用的是什么文档模式。  
+专有的 children 属性，是 HTMLCollection 的实例，只包含元素中同样还是元素的子节点。  
+需要知道某个节点是不是另一个节点的后代 **contains()** 方法，方法接受一个参数，即要检测的后代节点，DOM Level 3 **compareDocumentPosition()** 也能够确定节点间的关系。  
+**innerText**属性性可以操作元素中包含的所有文本内容，包括子文档树中的文本，设置 innerText 属性移除了先前存在的所有子节点，完全改变了 DOM 子树（Firefox 类似的 textContent 属性）。  
+可以通过 innerText 属性过滤掉 HTML 标签，将 innerText 设置为等于 innerText。  
+**outerText 属性**作用范围扩大到了包含调用它的节点，此属性并不常用。  
 # DOM2 和 DOM3
 ## 12.1 DOM 变化
-* 针对 XML 命名空间的变化
-HTML 不支持 XML 命名空间，但 XHTML 支持 XML 命名空间。
-DocumentType 类型新增了 3 个属性：publicId、systemId 和 internalSubset。
-importNode()方法两个参数要复制的节点和一个表示是否复制子节点的布尔值，返回原来节点的副本，在 HTML 文档中并不常用。
-defaultView 的属性，其中保存着一个指针，指向拥有给定文档的窗口（或框架）。
-Node 类型中添加了 **isSupported(**特性名，特性版本号**)** 方法，确定当前节点具有什么能力。
-DOM3 级两个辅助比较节点的方法：**isSameNode()** 和**isEqualNode()**。
-DOM3 级添加额外数据引入了新方法，setUserData()，getUserData()方法。
+* 针对 XML 命名空间的变化：  
+HTML 不支持 XML 命名空间，但 XHTML 支持 XML 命名空间。  
+DocumentType 类型新增了 3 个属性：publicId、systemId 和 internalSubset。  
+importNode()方法两个参数要复制的节点和一个表示是否复制子节点的布尔值，返回原来节点的副本，在 HTML 文档中并不常用。  
+defaultView 的属性，其中保存着一个指针，指向拥有给定文档的窗口（或框架）。  
+Node 类型中添加了 **isSupported(**特性名，特性版本号**)** 方法，确定当前节点具有什么能力。  
+DOM3 级两个辅助比较节点的方法：**isSameNode()** 和**isEqualNode()**。  
+DOM3 级添加额外数据引入了新方法，setUserData()，getUserData()方法。  
 ## 12.2 样式
-行内样式对象 style：对于使用短划线（分隔不同的词汇，例如 background-image）的 CSS 属性名，必须将其转换成驼峰大小写形式，才能通过 JavaScript 来访问。
-一个不能直接转换的 CSS 属性就是 **float**---cssFloat，ie----是 styleFloat。
-为 style 对象定义了一些属性和方法：
-cssText：能够访问到 style 特性中的 CSS 代码，
-parentRule：表示 CSS 信息的 CSSRule 对象。
-item(index)：返回给定位置的 CSS 属性的名称。
-getPropertyValue()方法可以属性名进一步取得属性的值。
+行内样式对象 style：对于使用短划线（分隔不同的词汇，例如 background-image）的 CSS 属性名，必须将其转换成驼峰大小写形式，才能通过 JavaScript 来访问。  
+一个不能直接转换的 CSS 属性就是 **float**---cssFloat，ie----是 styleFloat。  
+为 style 对象定义了一些属性和方法：  
+cssText：能够访问到 style 特性中的 CSS 代码，  
+parentRule：表示 CSS 信息的 CSSRule 对象。  
+item(index)：返回给定位置的 CSS 属性的名称。  
+getPropertyValue()方法可以属性名进一步取得属性的值。  
 ```javascript
  myDiv.style.getPropertyValue(prop); 
 ```
-removeProperty()方法，表示移除某个 CSS 属性。
-document.defaultView.getComputedStyle()方法，两个参数，取得计算样式的元素和一个伪元素字符串，返回包含当前元素的所有计算的样式。
-IE 的 style 属性还有一个 currentStyle 属性，包含计算后的样式。
-所有计算的样式都是只读的；不能修改计算后样式对象中的 CSS 属性。
-CSSStyleSheet 类型表示的是样式表，包括通过`<link>`元素和在`<style>`元素中定义的，通过 document.styleSheets 集合访问来表示的。
-insertRule(规则文本，表示在哪里插入规则的索引)方法，会向现有样式表中添加新规则。
-addRule(选择符文本，CSS 样式信息，可选参数：插入规则位置)，ie8 以前的方法。
-deleteRule(删除的规则的位置)，删除规则的方法。
-**元素大小**：偏移量包括元素在屏幕上占用的所有可见的空间。offsetHeight：元素在垂直方向上占用的空间大小，offsetWidth：元素在水平方向上占用的空间大小，offsetLeft：offsetTop。
- 想知道某个元素在页面上的偏移量，将这个元素的 offsetLeft 和 offsetTop 与其 offsetParent 的相同属性相加，如此循环直至根元素。
-每次访问一个元素的偏移量都需要重新计算，影响性能，建议保存到局部变量中。
-**客户区大小**：元素内容及其内边距所占据的空间大小，clientWidth 和 clientHeight。
-**滚动大小**：scrollWidth 和 scrollHeight 主要用于确定元素内容的实际大小，scrollLeft（元素左侧不可见内容的像素宽度。） 和 scrollTop（表示元素上方不可见内容的像素高度） 属性既可以确定元素当前滚动的状态，
+removeProperty()方法，表示移除某个 CSS 属性。  
+document.defaultView.getComputedStyle()方法，两个参数，取得计算样式的元素和一个伪元素字符串，返回包含当前元素的所有计算的样式。  
+IE 的 style 属性还有一个 currentStyle 属性，包含计算后的样式。  
+所有计算的样式都是只读的；不能修改计算后样式对象中的 CSS 属性。  
+CSSStyleSheet 类型表示的是样式表，包括通过`<link>`元素和在`<style>`元素中定义的，通过 document.styleSheets 集合访问来表示的。  
+insertRule(规则文本，表示在哪里插入规则的索引)方法，会向现有样式表中添加新规则。  
+addRule(选择符文本，CSS 样式信息，可选参数：插入规则位置)，ie8 以前的方法。  
+deleteRule(删除的规则的位置)，删除规则的方法。  
+**元素大小**：偏移量包括元素在屏幕上占用的所有可见的空间。offsetHeight：元素在垂直方向上占用的空间大小，offsetWidth：元素在水平方向上占用的空间大小，offsetLeft：offsetTop。  
+ 想知道某个元素在页面上的偏移量，将这个元素的 offsetLeft 和 offsetTop 与其 offsetParent 的相同属性相加，如此循环直至根元素。  
+每次访问一个元素的偏移量都需要重新计算，影响性能，建议保存到局部变量中。  
+**客户区大小**：元素内容及其内边距所占据的空间大小，clientWidth 和 clientHeight。  
+**滚动大小**：scrollWidth 和 scrollHeight 主要用于确定元素内容的实际大小，scrollLeft（元素左侧不可见内容的像素宽度。） 和 scrollTop（表示元素上方不可见内容的像素高度） 属性既可以确定元素当前滚动的状态。  
 ## 12.3 遍历
-“DOM2 级遍历和范围”模块定义了两个用于辅助完成顺序遍历 DOM 结构的类型：NodeIterator 和 TreeWalker，能够基于给定的起点对 DOM 结构执行深度优先的遍历操作。
-**document.createNodeIterator()** 方法创建它的新实例，四个参数：
+“DOM2 级遍历和范围”模块定义了两个用于辅助完成顺序遍历 DOM 结构的类型：NodeIterator 和 TreeWalker，能够基于给定的起点对 DOM 结构执行深度优先的遍历操作。  
+**document.createNodeIterator()** 方法创建它的新实例，四个参数：  
 ```javascript
 //能够访问所有类型节点的简单的 NodeIterator。
 var iterator = document.createNodeIterator(document, NodeFilter.SHOW_ALL, null, false); 
 //两个该类型的主要的方法
 iterator.nextNode(); iterator.previousNode();
 ```
-创建 TreeWalker 对象要使用 **document.createTreeWalker()** 方法，有一个属性，名叫 currentNode，表示任何遍历方法在上一次遍历中返回的节点。
+创建 TreeWalker 对象要使用 **document.createTreeWalker()** 方法，有一个属性，名叫 currentNode，表示任何遍历方法在上一次遍历中返回的节点。  
 ## 12.4 范围
-Document 类型中定义了 createRange()方法，属于 document 对象。
+Document 类型中定义了 createRange()方法，属于 document 对象。  
 ```javascript
 var range = document.createRange(); 
 ```
-该类型的 selectNode(一个参数，即一个 DOM 节点)选择整个节点，包括其子节点；或 selectNodeContents(一个参数，即一个 DOM 节点)只选择节点的子节点。
-创建复杂的范围就得使用 setStart()和 setEnd()方法。两个方法都接受两个参数：一个参
-照节点和一个偏移量值。
-collapse()方法来折叠范围，这个方法接受一个参数，一个布尔值，表示要折叠到范围的哪一端。参数 true 表示折叠到范围的起点，参数 false 表示折叠到范围的终点。
-compareBoundaryPoints()方法来确定这些范围是否有公共的边界（起点或终点）。
-cloneRange()方法复制范围。
+该类型的 selectNode(一个参数，即一个 DOM 节点)选择整个节点，包括其子节点；或 selectNodeContents(一个参数，即一个 DOM 节点)只选择节点的子节点。  
+创建复杂的范围就得使用 setStart()和 setEnd()方法。两个方法都接受两个参数：一个参照节点和一个偏移量值。  
+collapse()方法来折叠范围，这个方法接受一个参数，一个布尔值，表示要折叠到范围的哪一端。参数 true 表示折叠到范围的起点，参数 false 表示折叠到范围的终点。  
+compareBoundaryPoints()方法来确定这些范围是否有公共的边界（起点或终点）。  
+cloneRange()方法复制范围。  
 清理 DOM 范围：
 ```javascript
 range.detach(); //从文档中分离
 range = null; //解除引用
 ```
-IE8 以前的范围概念称为文本范围。
+IE8 以前的范围概念称为文本范围。  
 # 事 件
 ## 13.1 事件流
-**事件流**描述的是从页面中接收事件的顺序，IE 的事件流是事件冒泡流，另一种叫事件捕获。
-**事件冒泡**：事件开始时由最具体的元素接收，然后逐级向上传播到较为不具体的节点（文档），主流浏览器会冒泡到 window 对象。
-**事件捕获**：在事件到达预定目标之前捕获它。
-**Dom 事件流：** 包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段，实际的目标（`<div>`元素）在捕获阶段不会接收到事件。但 IE9、Safari、Chrome、Firefox 和 Opera 9.5 及更高版本都会在捕获阶段触发事件对象上的事件。
+**事件流**描述的是从页面中接收事件的顺序，IE 的事件流是事件冒泡流，另一种叫事件捕获。  
+**事件冒泡**：事件开始时由最具体的元素接收，然后逐级向上传播到较为不具体的节点（文档），主流浏览器会冒泡到 window 对象。  
+**事件捕获**：在事件到达预定目标之前捕获它。  
+**Dom 事件流：** 包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段，实际的目标（`<div>`元素）在捕获阶段不会接收到事件。但 IE9、Safari、Chrome、Firefox 和 Opera 9.5 及更高版本都会在捕获阶段触发事件对象上的事件。  
 ## 13.2 事件处理程序
-响应某个事件的函数就叫做**事件处理程序**（或事件侦听器）。
-* html 事件处理程序
-某个元素支持的每种事件，用一个与相应事件处理程序同名的 HTML 特性来指定。事件处理程序中的代码在执行时，有权访问全局作用域中的任何代码。
-创建一个封装着元素属性值的函数，函数中有一个局部变量 event，也就是事件对象，函数内部，this 值等于事件的目标元素。
-函数使用 with 可以扩展作用域。
-很多 HTML 事件处理程序都会被封装在一个 try-catch 块中，来捕获错误。
+响应某个事件的函数就叫做**事件处理程序**（或事件侦听器）。  
+
+* html 事件处理程序：  
+某个元素支持的每种事件，用一个与相应事件处理程序同名的 HTML 特性来指定。事件处理程序中的代码在执行时，有权访问全局作用域中的任何代码。  
+创建一个封装着元素属性值的函数，函数中有一个局部变量 event，也就是事件对象，函数内部，this 值等于事件的目标元素。  
+函数使用 with 可以扩展作用域。  
+很多 HTML 事件处理程序都会被封装在一个 try-catch 块中，来捕获错误。  
 ```javascript
 <......onclick="try{showMessage();}catch(ex){}">
 ```
-* DOM0 级事件处理程序
-每个元素（包括 window 和 document）都有自己的事件处理程序属性，
+* DOM0 级事件处理程序：  
+每个元素（包括 window 和 document）都有自己的事件处理程序属性。  
 ```javascript
 var btn = document.getElementById("myBtn"); 
 btn.onclick = function(){ 
@@ -1041,17 +1062,20 @@ btn.onclick = function(){ 
 }; 
 // 这些代码运行以前不会指定事件处理程序，因此如果这些代码在页面中位于按钮后面，就有可能在一段时间内怎么单击都没有反应。
 ```
-删除：将事件处理程序属性的值设置为 null 即可。
-* DOM2 级事件处理程序
-**addEventListener()，removeEventListener()。** 所有 DOM 节点中都包含这两个方法，3 个参数：要处理的事件名、作为事件处理程序的函数和一个布尔值，false 表示冒泡阶段调用事件处理程序，true 表示捕获阶段调用事件处理程序。
-处理函数建议提出来作为公共变量，不然无法移除 add 添加的匿名函数。
-将事件处理程序添加到事件流的冒泡阶段，这样可以最大限度地兼容各种浏览器。
-* IE 事件处理程序
-**attachEvent()和 detachEvent()** 两个参数：事件处理程序名称与事件处理程序函数，第一个参数是"on+事件名字"。
-事件处理程序会在全局作用域中运行，因此 this 等于 window。
-事件处理程序不是以添加它们的顺序执行，而是以相反的顺序被触发。
-* 跨浏览器的事件处理程序
-使用能力检测，要保证处理事件的代码能在大多数浏览器下一致地运行，只需关注冒泡阶段。
+删除：将事件处理程序属性的值设置为 null 即可。  
+
+* DOM2 级事件处理程序：  
+**addEventListener()，removeEventListener()。** 所有 DOM 节点中都包含这两个方法，3 个参数：要处理的事件名、作为事件处理程序的函数和一个布尔值，false 表示冒泡阶段调用事件处理程序，true 表示捕获阶段调用事件处理程序。  
+处理函数建议提出来作为公共变量，不然无法移除 add 添加的匿名函数。  
+将事件处理程序添加到事件流的冒泡阶段，这样可以最大限度地兼容各种浏览器。  
+
+* IE 事件处理程序：  
+**attachEvent()和 detachEvent()** 两个参数：事件处理程序名称与事件处理程序函数，第一个参数是"on+事件名字"。  
+事件处理程序会在全局作用域中运行，因此 this 等于 window。  
+事件处理程序不是以添加它们的顺序执行，而是以相反的顺序被触发。  
+
+* 跨浏览器的事件处理程序：  
+使用能力检测，要保证处理事件的代码能在大多数浏览器下一致地运行，只需关注冒泡阶段。  
 ```javascript
 var EventUtil =｛
   if (element.addEventListener){ 
@@ -1064,90 +1088,103 @@ var EventUtil =｛
 ｝
 ```
 ## 13.3 事件对象
-在触发 DOM 上的某个事件时，会产生一个事件对象 event。
-* DOM 中的事件对象
-event 对象传入到事件处理程序中。
-**currentTarget**，Element，只读 ，其事件处理程序当前正在处理事件的那个元素。
-**preventDefault()** ，Function， 只读 ，取消事件的默认行为。如果 cancelable 是 true，则可以使用这个方法。
-**stopPropagation()** ，Function， 只读， 取消事件的进一步捕获或冒泡。如果 bubbles 为 true，则可以使用这个方法。
-**target**，Element， 只读， 事件的目标。
-对象 this 始终等于 currentTarget 的值，直接将事件处理程序指定给了目标元素，则 this、currentTarget 和 target 包含相同的值。
+在触发 DOM 上的某个事件时，会产生一个事件对象 event。  
+* DOM 中的事件对象：  
+
+event 对象传入到事件处理程序中。  
+**currentTarget**，Element，只读 ，其事件处理程序当前正在处理事件的那个元素。  
+**preventDefault()** ，Function， 只读 ，取消事件的默认行为。如果 cancelable 是 true，则可以使用这个方法。  
+**stopPropagation()** ，Function， 只读， 取消事件的进一步捕获或冒泡。如果 bubbles 为 true，则可以使用这个方法。  
+**target**，Element， 只读， 事件的目标。  
+对象 this 始终等于 currentTarget 的值，直接将事件处理程序指定给了目标元素，则 this、currentTarget 和 target 包含相同的值。  
 ```javascript
 //在事件处理程序的函数中：
 event.preventDefault(); 
 event.stopPropagation(); 
 ```
-对象的 eventPhase 属性，可以用来确定事件当前正位于事件流的哪个阶段。1，捕获。2，处于。3，冒泡。
-尽管“处于目标”发生在冒泡阶段，但 eventPhase 仍然一直等于 2。
-只有在事件处理程序执行期间，event 对象才会存在；执行完后 event 对象会被销毁。
-* IE 的事件对象
-特别：DOM0 级方法添加事件处理程序时，event 对象作为 window 对象的一个属性存在。
-通过 attachedEvent（）则还是和 Dom2 级事件差不多。
-通过 HTML 特性指定的事件处理程序，那么还可以通过一个名叫 event 的变量来访问 event 对象。
+对象的 eventPhase 属性，可以用来确定事件当前正位于事件流的哪个阶段。1，捕获。2，处于。3，冒泡。  
+尽管“处于目标”发生在冒泡阶段，但 eventPhase 仍然一直等于 2。  
+只有在事件处理程序执行期间，event 对象才会存在；执行完后 event 对象会被销毁。 
+
+* IE 的事件对象：  
+特别：DOM0 级方法添加事件处理程序时，event 对象作为 window 对象的一个属性存在。  
+通过 attachedEvent（）则还是和 Dom2 级事件差不多。  
+通过 HTML 特性指定的事件处理程序，那么还可以通过一个名叫 event 的变量来访问 event 对象。  
 ```javascript
 var event = window.event;
 //html:
 <input type="button" value="Click Me" onclick="alert(event.type)"> 
 ```
-**cancelBubble** 默认值为 false，但将其设置为 true 就可以取消事件冒泡。
-**returnValue** 默认值为 true，但将其设置为 false 就可以取消事件的默认行为。
-不能认为 this 会始终等于事件目标，建议使用 event.srcElement 属性。
-* 跨浏览器的事件对象
-封装一个对象，对象里面实现 ie 和非 ie 的事件处理程序对象 event。
+**cancelBubble** 默认值为 false，但将其设置为 true 就可以取消事件冒泡。  
+**returnValue** 默认值为 true，但将其设置为 false 就可以取消事件的默认行为。  
+不能认为 this 会始终等于事件目标，建议使用 event.srcElement 属性。  
+
+* 跨浏览器的事件对象：  
+封装一个对象，对象里面实现 ie 和非 ie 的事件处理程序对象 event。  
+
 ## 13.4 事件类型
-* UI 事件
-概念：那些不一定与用户操作有关的事件，多数这些事件都与 **window 对象** 或**表单控件** 相关。
-load 事件：当页面完全加载后就会触发 window 上面的 load 事件。
+
+* UI 事件：  
+概念：那些不一定与用户操作有关的事件，多数这些事件都与 **window 对象** 或**表单控件** 相关。  
+load 事件：当页面完全加载后就会触发 window 上面的 load 事件。  
 ```javascript
 //dom0 级或者 dom2 级事件或者在 body 添加
 <body onload="alert('Loaded!')"> 
 </body> 
 ```
-img 图像的 onload 事件，重要的是要在指定 src 属性之前先指定事件。
-script 动态加载脚本：只有在设置了`<script>`元素的 src 属性并将该元素添加到文档后，才会开始下载 JavaScript 文件，所以先后顺序不那么重要了。
-unload 事件：在文档被完全卸载后触发。
-resize 事件：浏览器窗口被调整到一个新的高度或宽度时，就会触发 resize 事件。Firefox 则只会在用户停止调整窗口大小时才会触发 resize 事件。
-scroll 事件：文档被滚动期间重复被触发。
-* 焦点事件
-页面元素获得或失去焦点时触发，最主要的两个是 focus 和 blur，这些事件的最大问题是它们不冒泡，
+img 图像的 onload 事件，重要的是要在指定 src 属性之前先指定事件。  
+script 动态加载脚本：只有在设置了`<script>`元素的 src 属性并将该元素添加到文档后，才会开始下载 JavaScript 文件，所以先后顺序不那么重要了。  
+unload 事件：在文档被完全卸载后触发。  
+resize 事件：浏览器窗口被调整到一个新的高度或宽度时，就会触发 resize 事件。Firefox 则只会在用户停止调整窗口大小时才会触发 resize 事件。  
+scroll 事件：文档被滚动期间重复被触发。  
+
+* 焦点事件：  
+页面元素获得或失去焦点时触发，最主要的两个是 focus 和 blur，这些事件的最大问题是它们不冒泡，  
+```
 (1) focusout 在失去焦点的元素上触发；
 (2) focusin 在获得焦点的元素上触发；
 (3) blur 在失去焦点的元素上触发；
 (4) DOMFocusOut 在失去焦点的元素上触发；
 (5) focus 在获得焦点的元素上触发；
 (6) DOMFocusIn 在获得焦点的元素上触发。
-* 鼠标与滚轮事件
-click，dbclick，mousedown，mouseenter，mouseleave，mousemove，mouseout，mouseover，mouseup。除了 mouseenter 和 mouseleave，所有鼠标事件都会冒泡，也可以被取消。
-click 和 dblclick 事件都会依赖于其他先行事件的触发。
-**客户区坐标位置** clientX 和 clientY 属性中。
-**页面坐标位置** pageX 和 pageY 属性，表示鼠标光标在页面中的位置，因此坐标是从页面本身而非视口的左边和顶边计算的。在页面没有滚动的情况下，pageX 和 pageY 的值与 clientX 和 clientY 的值相等。
-**屏幕坐标位置** screenX 和 screenY 属性就可以确定鼠标事件发生时鼠标指针相对于整个屏幕的坐标信息。
-**修改键：** shiftKey、ctrlKey、altKey 和 metaKey，属性中包含的都是布尔值，相应的键被按下则为 true。
-**相关元素：** 发生 mouseover 和 mouserout 事件时，还会涉及更多的元素。mouseover 相关元素就是那个失去光标的元素，mouserout 相关元素则是获得光标的元素。
-event 对象的 relatedTarget 属性提供了相关元素的信息。
-IE 的 toElement 属性中保存着相关元素。
-**鼠标按钮:** DOM 的 button 属性可能有如下 3 个值：0 表示主鼠标按钮，1 表示中间的鼠标按钮（鼠标滚轮按钮），2 表示次鼠标按钮。
-支持 DOM 版鼠标事件的浏览器可以通过 hasFearture()方法来检测。
-使用 onmouseup 事件处理程序时，button 的值表示释放的是哪个按钮。
-**更多事件信息：** 在 event 对象中还提供了 detail 属性，用于给出有关事件的更多信息。鼠标事件则包含一个数值，表示在给定位置上发生了多少次单击。
-**鼠标滚轮事件：** mousewheel 事件，最终会冒泡到 document（IE8）或 window，event 对象除包含鼠标事件的所有标准信息外，还包含一个特殊的 wheelDelta 属性。wheelDelta 是 120 的倍数；Firefox 支持一个名为 DOMMouseScroll 的类似事件，信息则保存在 detail 属性中。
-**触摸设备：** 面向 iPhone 和 iPod 中的 Safari 开发时，记住不支持 dblclick 事件。轻击可单击元素会触发 mousemove 事件。mousemove 事件也会触发 mouseover 和 mouseout 事件。随手指移动而滚动时会触发 mousewheel 和 scroll 事件。
-* 键盘与文本事件
-keydown，keypress，keyup 只有在用户通过文本框输入文本时才最常用到。
-文本插入文本框之前会触发 textInput 事件。
-keydown 和 keypress 都是在文本框发生变化之前被触发的；keyup 在文本框已经发生变化之后被触发的，如果用户按下了一个字符键不放，就会重复触发前面两个事件。
-**键码** ：event 对象的 keyCode 属性。与 ASCII 码中对应小写字母或数字的编码相同。
-**字符编码：** event 对象都支持一个 charCode 属性，只有在发生 keypress 事件时才包含值，代表字符的 ASCII 编码。
-**DOM3 级变化：** 不再包含 charCode 属性，而是两个新属性：key 和 char，由于存在跨浏览器问题所以不推荐使用。event 对象添加了 getModifierState()方法，指定的修改键是活动的，处于被按下的状态，这个方法返回 true，否则返回 false。
-**textInput 事件:** 只有可编辑区域才能触发。用户按下能够输入实际字符的键时才会被触发。event 下的 data 属性，这个属性的值就是用户输入的字符。只有 IE 支持 inputMethod 属性。
-* 复合事件
+```
+
+* 鼠标与滚轮事件:  
+click，dbclick，mousedown，mouseenter，mouseleave，mousemove，mouseout，mouseover，mouseup。除了 mouseenter 和 mouseleave，所有鼠标事件都会冒泡，也可以被取消。  
+click 和 dblclick 事件都会依赖于其他先行事件的触发。  
+**客户区坐标位置** clientX 和 clientY 属性中。  
+**页面坐标位置** pageX 和 pageY 属性，表示鼠标光标在页面中的位置，因此坐标是从页面本身而非视口的左边和顶边计算的。在页面没有滚动的情况下，pageX 和 pageY 的值与 clientX 和 clientY 的值相等。  
+**屏幕坐标位置** screenX 和 screenY 属性就可以确定鼠标事件发生时鼠标指针相对于整个屏幕的坐标信息。  
+**修改键：** shiftKey、ctrlKey、altKey 和 metaKey，属性中包含的都是布尔值，相应的键被按下则为 true。  
+**相关元素：** 发生 mouseover 和 mouserout 事件时，还会涉及更多的元素。mouseover 相关元素就是那个失去光标的元素，mouserout 相关元素则是获得光标的元素。  
+event 对象的 relatedTarget 属性提供了相关元素的信息。  
+IE 的 toElement 属性中保存着相关元素。  
+**鼠标按钮:** DOM 的 button 属性可能有如下 3 个值：0 表示主鼠标按钮，1 表示中间的鼠标按钮（鼠标滚轮按钮），2 表示次鼠标按钮。  
+支持 DOM 版鼠标事件的浏览器可以通过 hasFearture()方法来检测。  
+使用 onmouseup 事件处理程序时，button 的值表示释放的是哪个按钮。  
+**更多事件信息：** 在 event 对象中还提供了 detail 属性，用于给出有关事件的更多信息。鼠标事件则包含一个数值，表示在给定位置上发生了多少次单击。  
+**鼠标滚轮事件：** mousewheel 事件，最终会冒泡到 document（IE8）或 window，event 对象除包含鼠标事件的所有标准信息外，还包含一个特殊的 wheelDelta 属性。wheelDelta 是 120 的倍数;Firefox 支持一个名为 DOMMouseScroll 的类似事件，信息则保存在 detail 属性中。  
+**触摸设备：** 面向 iPhone 和 iPod 中的 Safari 开发时，记住不支持 dblclick 事件。轻击可单击元素会触发 mousemove 事件。mousemove 事件也会触发 mouseover 和 mouseout 事件。随手指移动而滚动时会触发 mousewheel 和 scroll 事件。  
+
+* 键盘与文本事件:  
+keydown，keypress，keyup 只有在用户通过文本框输入文本时才最常用到。  
+文本插入文本框之前会触发 textInput 事件。  
+keydown 和 keypress 都是在文本框发生变化之前被触发的；keyup 在文本框已经发生变化之后被触发的，如果用户按下了一个字符键不放，就会重复触发前面两个事件。  
+**键码** ：event 对象的 keyCode 属性。与 ASCII 码中对应小写字母或数字的编码相同。  
+**字符编码：** event 对象都支持一个 charCode 属性，只有在发生 keypress 事件时才包含值，代表字符的 ASCII 编码。  
+**DOM3 级变化：** 不再包含 charCode 属性，而是两个新属性：key 和 char，由于存在跨浏览器问题所以不推荐使用。event 对象添加了 getModifierState()方法，指定的修改键是活动的，处于被按下的状态，这个方法返回 true，否则返回 false。  
+**textInput 事件:** 只有可编辑区域才能触发。用户按下能够输入实际字符的键时才会被触发。event 下的 data 属性，这个属性的值就是用户输入的字符。只有 IE 支持 inputMethod 属性。  
+
+* 复合事件:  
 compositionstart，compositionupdate，compositionend。值则是该三个事件的 data 属性。
-* 变动事件
-DOM 中的某一部分发生变化时给出提示。
-**删除节点** ：首先会触发 DOMNodeRemoved 事件，如果被移除的节点包含子节点，这个节点和子节点相继触发 DOMNodeRemovedFromDocument 事件(不会冒泡)。其后触发的是 DOMSubtreeModified 事件,事件的目标是被移除节点的父节点。
-**插入节点：** 首先会触发 DOMNodeInserted 事件，触发时，节点已经被插入到了新的父节点中。接下来会在新插入的节点上面触发 DOMNodeInsertedIntoDocument 事件（不冒泡）。最后一个触发的是 DOMSubtreeModified，触发于新插入节点的父节点。
-* HTML5 事件
-**contextmenu 事件：** 上下文菜单的概念，即通过单击鼠标右键可以调出上下文菜单。方法思路是，先取消默认行为 event.preventDefalut()；在 IE 中，将 event.returnValue 的值 false，然后再是使用 contextmenu 事件来显示自定义的上下文菜单。
+
+* 变动事件:  
+DOM 中的某一部分发生变化时给出提示。  
+**删除节点** ：首先会触发 DOMNodeRemoved 事件，如果被移除的节点包含子节点，这个节点和子节点相继触发 DOMNodeRemovedFromDocument 事件(不会冒泡)。其后触发的是 DOMSubtreeModified 事件,事件的目标是被移除节点的父节点。  
+**插入节点：** 首先会触发 DOMNodeInserted 事件，触发时，节点已经被插入到了新的父节点中。接下来会在新插入的节点上面触发 DOMNodeInsertedIntoDocument 事件（不冒泡）。最后一个触发的是 DOMSubtreeModified，触发于新插入节点的父节点。 
+
+* HTML5 事件:  
+**contextmenu 事件：** 上下文菜单的概念，即通过单击鼠标右键可以调出上下文菜单。方法思路是，先取消默认行为 event.preventDefalut()；在 IE 中，将 event.returnValue 的值 false，然后再是使用 contextmenu 事件来显示自定义的上下文菜单。  
 ```javascript
  myDiv.addEventListener('contextmenu', function (event) {
     var myMenu = document.getElementById('myMenu');
@@ -1157,28 +1194,33 @@ DOM 中的某一部分发生变化时给出提示。
     myMenu.style.top = event.clientY + 'px';
 });
 ```
-**beforeunload 事件：** 会在浏览器卸载页面之前触发，必须将 event.returnValue 的值设置为要显示给用户的字符串，同时作为函数的值返回。Opera 11 及之前的版本不支持 beforeunload 事件。
-**DOMContentLoaded 事件：** 在形成完整的 DOM 树之后就会触发，始终都会在 load 事件之前触发。
-**readystatechange 事件** ：IE 为 DOM 文档中的某些部分提供了 readystatechange 事件，提供与文档或元素的加载状态有关的信息，支持该事件的浏览器有 IE、Firfox 4+和 Opera。
-**pageshow 和 pagehide 事件：** Firefox 和 Opera 有一个特性，名叫“往返缓存”，在使用浏览器的“后退”和“前进”按钮时加快页面的转换速度。pageshow 会在 load 事件触发后触发；必须将其事件处理程序添加到 window。event 对象还包含一个名为 persisted 的布尔值属性，如果页面被保存在了 bfcache 中，则这个属性的值为 true。
-在浏览器卸载页面的时候触发 pagehide 事件，是在 unload 事件之前触发。必须要添加到 window 对象上。如果页面在卸载之后会被保存在 bfcache 中，persisted 的值会被设置为 true。
-指定了 onunload 事件处理程序的页面会被自动排除在 bfcache 之外，即使事件处理程序是空的。
-**hashchange 事件：** URL 参数列表只要变化就会调用该事件，必须要把事件处理程序添加给 window 对象，event 对象包含两个属性：oldURL 和 newURL，但是最好是使用 location 对象来确定当前的参数列表。
-* 设备事件
-**orientationchange 事件：** 苹果公司为移动 Safari 中添加了，用户何时将设备由横向查看模式切换为纵向查看模式。可以通过 window.orientation 访问到。
-**MozOrientation 事件** ：在 window 对象上触发的，event 对象包含三个属性：x、y 和 z。只有带加速计的设备才支持 MozOrientation 事件。
-**deviceorientation 事件：** 在 window 对象上触发，告诉设备在空间中朝向哪儿，五个属性。支持该事件的浏览器有 iOS 4.2+中的 Safari、Chrome 和 Android 版 WebKit。
-**devicemotion 事件：** 告诉开发人员设备什么时候移动，而不仅仅是设备方向如何改变。支持该事件的浏览器有 iOS 4.2+中的 Safari、Chrome 和 Android 版 WebKit。
-* 触摸与手势事件
-**触摸事件：** touchstart；touchmove；touchend；touchcancel；衍生的三个属性 touches；targetTouchs；changeTouches。触摸移动的默认行为是滚动页面。
-**手势事件：** gesturestart；gesturechange；gestureend。两个额外的属性：rotation 手指变化引起的旋转角度， 和 scale 两个手指间距离的变化情况。
+**beforeunload 事件：** 会在浏览器卸载页面之前触发，必须将 event.returnValue 的值设置为要显示给用户的字符串，同时作为函数的值返回。Opera 11 及之前的版本不支持 beforeunload 事件。  
+**DOMContentLoaded 事件：** 在形成完整的 DOM 树之后就会触发，始终都会在 load 事件之前触发。  
+**readystatechange 事件** ：IE 为 DOM 文档中的某些部分提供了 readystatechange 事件，提供与文档或元素的加载状态有关的信息，支持该事件的浏览器有 IE、Firfox 4+和 Opera。  
+**pageshow 和 pagehide 事件：** Firefox 和 Opera 有一个特性，名叫“往返缓存”，在使用浏览器的“后退”和“前进”按钮时加快页面的转换速度。pageshow 会在 load 事件触发后触发；必须将其事件处理程序添加到 window。event 对象还包含一个名为 persisted 的布尔值属性，如果页面被保存在了 bfcache 中，则这个属性的值为 true。  
+在浏览器卸载页面的时候触发 pagehide 事件，是在 unload 事件之前触发。必须要添加到 window 对象上。如果页面在卸载之后会被保存在 bfcache 中，persisted 的值会被设置为 true。  
+指定了 onunload 事件处理程序的页面会被自动排除在 bfcache 之外，即使事件处理程序是空的。  
+**hashchange 事件：** URL 参数列表只要变化就会调用该事件，必须要把事件处理程序添加给 window 对象，event 对象包含两个属性：oldURL 和 newURL，但是最好是使用 location 对象来确定当前的参数列表。  
+
+* 设备事件:  
+**orientationchange 事件：** 苹果公司为移动 Safari 中添加了，用户何时将设备由横向查看模式切换为纵向查看模式。可以通过 window.orientation 访问到。  
+**MozOrientation 事件** ：在 window 对象上触发的，event 对象包含三个属性：x、y 和 z。只有带加速计的设备才支持 MozOrientation 事件。  
+**deviceorientation 事件：** 在 window 对象上触发，告诉设备在空间中朝向哪儿，五个属性。支持该事件的浏览器有 iOS 4.2+中的 Safari、Chrome 和 Android 版 WebKit。  
+**devicemotion 事件：** 告诉开发人员设备什么时候移动，而不仅仅是设备方向如何改变。支持该事件的浏览器有 iOS 4.2+中的 Safari、Chrome 和 Android 版 WebKit。  
+
+* 触摸与手势事件:  
+**触摸事件：** touchstart；touchmove；touchend；touchcancel；衍生的三个属性 touches；targetTouchs；changeTouches。触摸移动的默认行为是滚动页面。  
+**手势事件：** gesturestart；gesturechange；gestureend。两个额外的属性：rotation 手指变化引起的旋转角度， 和 scale 两个手指间距离的变化情况。  
+
 ## 13.5 内存和性能
-事件处理函数都是对象，都会占用内存；内存中的对象越多，性能就越差。
-必须事先指定所有事件处理程序而导致的 DOM 访问次数，会延迟整个页面的交互就绪时间。
-* 事件委托
-主要是利用事件冒泡。
+事件处理函数都是对象，都会占用内存；内存中的对象越多，性能就越差。  
+必须事先指定所有事件处理程序而导致的 DOM 访问次数，会延迟整个页面的交互就绪时间。  
+
+* 事件委托：  
+主要是利用事件冒泡。  
 可行的话，也可以考虑为 document 对象添加一个事件处理程序，处理页面上发生的某种特定类型的事件。优点是很快就可以访问，所需的时间更少，占用的内存空间更少，提升整体性能。
-* 移除事件处理程序
+
+* 移除事件处理程序：  
 事件处理程序极有可能无法被当作垃圾回收，保存在内存中，最好手工移除事件处理程序。
 ```javascript
 btn.onclick = function(){ 
@@ -1187,28 +1229,30 @@ btn.onclick = function(){ 
  document.getElementById("myDiv").innerHTML = "Processing..."; 
  }; 
 ```
-一般来说，最好是在页面卸载之前，先通过 onunload 事件处理程序移除所有事件处理程序。
-采用事件委托也有助于解决这个问题。
+一般来说，最好是在页面卸载之前，先通过 onunload 事件处理程序移除所有事件处理程序。  
+采用事件委托也有助于解决这个问题。  
 ## 13.6 模拟事件
-使用 JavaScript 在任意时刻来触发特定的事件，DOM2 级规范为此规定了模拟特定事件的方式。
-* DOM 中的模拟事件
-在 document 对象上使用 **createEvent()** 方法创建 event 对象。参数一个：dom2 级负数，dom3 级单数，UIEvents，MouseEvents，MutationEvents，HTMLEvents。触发事件。这一步需要使用 **dispatchEvent()** 方法，一个参数，即表示要触发事件的 event 对象。
-**模拟鼠标事件** ："MouseEvents"，返回的对象 initMouseEvent()方法。
+使用 JavaScript 在任意时刻来触发特定的事件，DOM2 级规范为此规定了模拟特定事件的方式。  
+
+* DOM 中的模拟事件：  
+在 document 对象上使用 **createEvent()** 方法创建 event 对象。参数一个：dom2 级负数，dom3 级单数，UIEvents，MouseEvents，MutationEvents，HTMLEvents。触发事件。这一步需要使用 **dispatchEvent()** 方法，一个参数，即表示要触发事件的 event 对象。  
+**模拟鼠标事件** ："MouseEvents"，返回的对象 initMouseEvent()方法。  
 ```javascript
 var event = document.createEvent("MouseEvents"); 
 event.initMouseEvent("click", true, true, document.defaultView,...); 
 btn.dispatchEvent(event); 
 ```
-**模拟键盘事件:** createEvent()并传入"KeyboardEvent",initKeyEvent()方法初始化。
-在 Firefox 中，调用 createEvent()并传入"KeyEvents"创建一个键盘事件，initKeyEvent()方法初始化。
-其他浏览器中，则需要创建一个通用的事件，然后调用 initEvent()对其进行初始化，模拟事件虽然会触发键盘事件，但却不会向文本框中写入文本，这是由于无法精确模拟键盘事件所造成的。
+**模拟键盘事件:** createEvent()并传入"KeyboardEvent",initKeyEvent()方法初始化。  
+在 Firefox 中，调用 createEvent()并传入"KeyEvents"创建一个键盘事件，initKeyEvent()方法初始化。  
+其他浏览器中，则需要创建一个通用的事件，然后调用 initEvent()对其进行初始化，模拟事件虽然会触发键盘事件，但却不会向文本框中写入文本，这是由于无法精确模拟键盘事件所造成的。  
 ```javascript
 //创建通用事件对象
 var event = document.createEvent("Events"); 
 ```
-**模拟其他事件：** 模拟变动事件，可以使用 createEvent("MutationEvents")，要模拟 HTML 事件，可以使用通过 createEvent("HTMLEvents")，浏览器中很少使用变动事件和 HTML 事件，因为使用它们会受到一些限制。
-**自定义 DOM 事件：** 调用 createEvent("CustomEvent")。initCustomEvent()的方法进行初始化，type（字符串）：触发的事件类型，例如"keydown"。bubbles（布尔值）：表示事件是否应该冒泡。cancelable（布尔值）：表示事件是否可以取消。detail（对象）：任意值，保存在 event 对象的 detail 属性中。
-* IE 中的事件模拟
+**模拟其他事件：** 模拟变动事件，可以使用 createEvent("MutationEvents")，要模拟 HTML 事件，可以使用通过 createEvent("HTMLEvents")，浏览器中很少使用变动事件和 HTML 事件，因为使用它们会受到一些限制。  
+**自定义 DOM 事件：** 调用 createEvent("CustomEvent")。initCustomEvent()的方法进行初始化，type（字符串）：触发的事件类型，例如"keydown"。bubbles（布尔值）：表示事件是否应该冒泡。cancelable（布尔值）：表示事件是否可以取消。  detail（对象）：任意值，保存在 event 对象的 detail 属性中。  
+
+* IE 中的事件模拟：  
 调用 document.createEventObject()方法可以在 IE 中创建 event 对象，不接受参数。在目标上调用 fireEvent()方法，接受两个参数：事件处理程序的名称和 event 对象。
 ```javascript
 var event = document.createEventObject(); 
@@ -1216,76 +1260,81 @@ btn.fireEvent("onclick", event); 
 ```
 # 表单脚本
 ## 14.1 表单的基础知识
-表单是由`<form>`元素来表示的，取得`<form>`元素最常见的方式添加 id 特性，然后再像下面这样使用 getElementById()方法找到它。
-HTMLFormElement 特有的属性：action：method：等。。。
-其次，通过 document.forms 可以取得页面中所有的表单，name 值来取得特定的表单（不推荐）。
-* 提交表单
-用`<input>`或`<button>`将 type 特性的值设置为"submit"，图像按钮则是 type 设置为 image。
-表单里没有提交按钮，按回车键不会提交表单。
+表单是由`<form>`元素来表示的，取得`<form>`元素最常见的方式添加 id 特性，然后再像下面这样使用 getElementById()方法找到它。  
+HTMLFormElement 特有的属性：action：method：等。。。  
+其次，通过 document.forms 可以取得页面中所有的表单，name 值来取得特定的表单（不推荐）。  
+
+* 提交表单：  
+用`<input>`或`<button>`将 type 特性的值设置为"submit"，图像按钮则是 type 设置为 image。  
+表单里没有提交按钮，按回车键不会提交表单。  
 ```javascript
 preventDefault(event); 
 ```
-阻止这个事件的默认行为就可以取消表单提交。
-调用 submit()方法的形式提交表单时，不会触发 submit 事件。
+阻止这个事件的默认行为就可以取消表单提交。  
+调用 submit()方法的形式提交表单时，不会触发 submit 事件。  
 ```javascript
 var form = document.getElementById("myForm"); 
 form.submit(); 
 ```
-重复提交按钮问题：禁用提交按钮，或者利用 onsubmit 事件处理。
-* 重置表单
+重复提交按钮问题：禁用提交按钮，或者利用 onsubmit 事件处理。  
+
+* 重置表单：  
 ```javascript
 //调用 reset()方法会像单击重置按钮一样触发 reset 事件。
 form.reset(); 
 ```
-* 表单字段
-每个表单都有 elements 属性，是表单中所有表单元素（字段）的集合。
-多个表单控件都在使用一个 name，那么该属性会返回以该 name 命名的一个 NodeList。
-**共有的表单字段属性：** disabled，form：name：readOnly：tabIndex：type：value：
-所有表单字段都有 type 属性，`<select>`元素的 type 属性则是只读的。
-**共有的表单字段方法** ：focus()设置焦点和 blur()移除焦点。
-HTML5 为表单字段新增了一个 autofocus 属性。
+* 表单字段：  
+每个表单都有 elements 属性，是表单中所有表单元素（字段）的集合。  
+多个表单控件都在使用一个 name，那么该属性会返回以该 name 命名的一个 NodeList。  
+**共有的表单字段属性：** disabled，form：name：readOnly：tabIndex：type：value：  
+所有表单字段都有 type 属性，`<select>`元素的 type 属性则是只读的。  
+**共有的表单字段方法** ：focus()设置焦点和 blur()移除焦点。  
+HTML5 为表单字段新增了一个 autofocus 属性。  
 ```javascript
 <input type="text" autofocus> 
 ```
-其他元素而言，如果先将其 tabIndex 属性设置为-1，再调用 focus()方法，也可以获得焦点。
+其他元素而言，如果先将其 tabIndex 属性设置为-1，再调用 focus()方法，也可以获得焦点。  
 **共有的表单字段事件：** blur，change，focus。
 ## 14.2 文本框脚本
-两种方式来表现文本框：`<input>`和`<textarea>`的多行文本框。它们都会将用户输入的内容保存在 value 属性中。处理值的时候最好不要使用 DOM 方法。
-input 文本框的 size 特性能够显示的字符数，value 特性，可以设置文本框的初始值，maxlength 特性最大字符数。
-`<textarea>`rows 特性指定字符行数，cols 特性字符列数。
-* 选择文本
-select()方法，选择文本框中的所有文本。
-select 事件。在选择了文本框中的文本时，就会触发。
-**取得所选文本** ：substring()方法结合属性：selectionStart 和 selectionEnd 进行切割。IE8 及之前 document.selection 对象创建一个范围再将文本从其中提取出来。
+两种方式来表现文本框：`<input>`和`<textarea>`的多行文本框。它们都会将用户输入的内容保存在 value 属性中。处理值的时候最好不要使用 DOM 方法。  
+input 文本框的 size 特性能够显示的字符数，value 特性，可以设置文本框的初始值，maxlength 特性最大字符数。  
+`<textarea>`rows 特性指定字符行数，cols 特性字符列数。  
+
+* 选择文本：  
+select()方法，选择文本框中的所有文本。  
+select 事件。在选择了文本框中的文本时，就会触发。  
+**取得所选文本** ：substring()方法结合属性：selectionStart 和 selectionEnd 进行切割。IE8 及之前 document.selection 对象创建一个范围再将文本从其中提取出来。  
 ```javascript
 return document.selection.createRange().text; 
 ```
-**选择部分文本** ：setSelectionRange(要选择的第一个字符的索引，要选择的最后一个字符之后的字符的索引)。ie8 之前的版本 createTextRange()方法创建一个范围，再是以下步骤
+**选择部分文本** ：setSelectionRange(要选择的第一个字符的索引，要选择的最后一个字符之后的字符的索引)。ie8 之前的版本 createTextRange()方法创建一个范围，再是以下步骤  
 ```javascript
 range.collapse(true); 
 range.moveStart("character", 0); 
 range.moveEnd("character", textbox.value.length); //"Hello world!" 
 range.select(); 
 ```
-* 过滤输入
-屏蔽字符:用 String.fromCharCode()将字符编码转换成字符串，
+* 过滤输入：  
+屏蔽字符:用 String.fromCharCode()将字符编码转换成字符串，  
 ```javascript
 if (!/\d/.test(String.fromCharCode(charCode)) && charCode > 9 && !event.ctrlKey)
 { EventUtil.preventDefault(event); }
 ```
-**操作剪贴板:** 除 IE 之外 beforecopy、beforecut 和 beforepaste 事件只会在显示针对文本框的上下文菜单的情况下触发。取消 copy、cut 和 paste 事件，才能阻止相应操作发生。
-访问剪贴板中的数据，使用 clipboardData 对象：在 IE 中，是 window 对象的属性。其他则是属于 event 对象的属性。
-只有在处理剪贴板事件期间 clipboardData 对象才有效。
-clipboardData 对象有三个方法：getData()、setData()和 clearData()。
+**操作剪贴板:** 除 IE 之外 beforecopy、beforecut 和 beforepaste 事件只会在显示针对文本框的上下文菜单的情况下触发。取消 copy、cut 和 paste 事件，才能阻止相应操作发生。  
+访问剪贴板中的数据，使用 clipboardData 对象：在 IE 中，是 window 对象的属性。其他则是属于 event 对象的属性。  
+只有在处理剪贴板事件期间 clipboardData 对象才有效。  
+clipboardData 对象有三个方法：getData()、setData()和 clearData()。  
 ```javascript
 clipboardData.getData("text"); //两种数据格式，text 或者'URL'
 event.clipboardData.setData("text/plain", value); //其他浏览器设置格式
 window.clipboardData.setData("text", value); //IE 设置格式
 ```
-Firefox、Safari 和 Chrome 只允许在 onpaste 事件处理程序中访问 getData()方法。
-* 自动切换焦点
-* HTML5 约束验证 API
-有效 版本 Firefox 4+、Safari 5+、Chrome 和 Opera 10+。
+Firefox、Safari 和 Chrome 只允许在 onpaste 事件处理程序中访问 getData()方法。  
+
+* 自动切换焦点：  
+
+* HTML5 约束验证 API：  
+有效 版本 Firefox 4+、Safari 5+、Chrome 和 Opera 10+。  
 ```javascript
 // 必填字段 required 属性
 <input type="text" name="username" required>
@@ -1295,81 +1344,86 @@ var isRequiredSupported= "required" in document.createElement('input');
 <input type="email" name ="email"> 
 <input type="url" name="homepage"> 
 ```
-**数值范围** ：指定 min 属性、max 属性和 step 属性。
-**输入模式：** 文本字段新增 pattern 属性。这个属性的值是一个正则表达式。模式的开头和末尾不用加^和$符号。在 JavaScript 中可以通过 pattern 属性访问模式。
+**数值范围** ：指定 min 属性、max 属性和 step 属性。  
+**输入模式：** 文本字段新增 pattern 属性。这个属性的值是一个正则表达式。模式的开头和末尾不用加^和$符号。在 JavaScript 中可以通过 pattern 属性访问模式。  
 ```javascript
 // <input type="text" pattern="\d+" name="count"> 
 document.forms[0].elements["count"].pattern; 
 ```
-**检测有效性：** checkValidity()方法可以检测表单中的某个字段是否有效。
-检测整个表单是否有效，表单自身调用 checkValidity()方法。
-validity 属性则会告诉你为什么字段有效或无效。
+**检测有效性：** checkValidity()方法可以检测表单中的某个字段是否有效。  
+检测整个表单是否有效，表单自身调用 checkValidity()方法。  
+validity 属性则会告诉你为什么字段有效或无效。  
 ```javascript
 if (input.validity && !input.validity.valid){
  if (input.validity.valueMissing){ }
 } 
 ```
-表单不进行验证，设置 novalidate 属性。
-指定点击某个提交按钮不必验证表单，添加 formnovalidate 属性，或者直接用 js 属性赋值为 true。
+表单不进行验证，设置 novalidate 属性。  
+指定点击某个提交按钮不必验证表单，添加 formnovalidate 属性，或者直接用 js 属性赋值为 true。  
 ```javascript
 <input type="submit" formnovalidate name="btnNoValidate"> 
 document.forms[0].elements["btnNoValidate"].formNoValidate = true; 
 ```
 ## 14.3 选择框脚本
-选择框是通过`<select>`和`<option>`元素创建的。有属性和方法：add(newOption, relOption)：multiple：options：remove(index)：selectedIndex：size：。
-每个`<option>`元素都有一个 HTMLOptionElement 对象表示，存在下列属性：index，label，selected，text，value。
-不推荐使用标准 DOM 技术修改`<option>`元素的文本或者值。选择框的 change 事件只要选中了选项就会触发。
+选择框是通过`<select>`和`<option>`元素创建的。有属性和方法：add(newOption, relOption)：multiple：options：remove(index)：selectedIndex：size：。  
+每个`<option>`元素都有一个 HTMLOptionElement 对象表示，存在下列属性：index，label，selected，text，value。  
+不推荐使用标准 DOM 技术修改`<option>`元素的文本或者值。选择框的 change 事件只要选中了选项就会触发。  
 ```javascript
 var text = selectbox.options[0].text; //选项的文本
 var value = selectbox.options[0].value; //选项的值
 ```
-* 选择选项
-选择框的 selectedIndex 属性。
-selected 属性的作用主要是确定用户选择了选择框中的哪一项。
-* 添加选项
-第一种方法 dom 方法，createElement("option")，appendChild(）。
-第二种使用 Option 构造函数来创建新选项，两个参数（value，text），第二个参数可选。
-第三种方法，选择框的 add（），两个参数，要添加的新选项和将位于新选项之后的选项。如果想在列表最后添加一个 option，第二个参数为 null。
-* 移除选项
-DOM 的 removeChild()方法。
-选择框的 remove()方法。
-将相应选项设置为 null。
-* 移动和重排选项
-DOM 的 appendChild()方法，就可以将第一个选择框中的选项直接移动到第二个选择框中。传入一个文档中已有的元素，那么就会先从该元素的父节点中移除它，再把它添加到指定的位置。
-将选择框中的某一项移动到特定位置，最合适的 DOM 方法就是 insertBefore()。
+* 选择选项：  
+选择框的 selectedIndex 属性。  
+selected 属性的作用主要是确定用户选择了选择框中的哪一项。  
+
+* 添加选项：  
+第一种方法 dom 方法，createElement("option")，appendChild(）。  
+第二种使用 Option 构造函数来创建新选项，两个参数（value，text），第二个参数可选。  
+第三种方法，选择框的 add（），两个参数，要添加的新选项和将位于新选项之后的选项。如果想在列表最后添加一个 option，第二个参数为 null。  
+
+* 移除选项：  
+DOM 的 removeChild()方法。  
+选择框的 remove()方法。  
+将相应选项设置为 null。  
+
+* 移动和重排选项：  
+DOM 的 appendChild()方法，就可以将第一个选择框中的选项直接移动到第二个选择框中。传入一个文档中已有的元素，那么就会先从该元素的父节点中移除它，再把它添加到指定的位置。  
+将选择框中的某一项移动到特定位置，最合适的 DOM 方法就是 insertBefore()。  
 ## 14.4 表单序列化
-提交给服务器时，表单序列化过程中，一般不包含任何按钮字段。
-检查这个 value 特性，在 DOM 兼容的浏览器中需要使用 hasAttribute()方法，而在 IE 中需要使用特性的 specified 属性。
+提交给服务器时，表单序列化过程中，一般不包含任何按钮字段。  
+检查这个 value 特性，在 DOM 兼容的浏览器中需要使用 hasAttribute()方法，而在 IE 中需要使用特性的 specified 属性。  
 ## 14.5 富文本编辑
-又称为 WYSIWYG，所见即所得。
-iframe：通过设置 designMode 属性，这个空白的 HTML 页面可以被编辑。
+又称为 WYSIWYG，所见即所得。  
+iframe：通过设置 designMode 属性，这个空白的 HTML 页面可以被编辑。  
 ```javascript
 frames["richedit"].document.designMode = "on";
 ```
-* 使用 contenteditable 属性
-页面中的任何元素，设置 contenteditable 属性即可，三种值 true，false，inherit（继承父类）。
+* 使用 contenteditable 属性：  
+页面中的任何元素，设置 contenteditable 属性即可，三种值 true，false，inherit（继承父类）。  
 ```javascript
 <div class="editable" id="richedit" contenteditable></div> 
 ```
-* 操作富文本
-使用 document.execCommand()，对文档执行预定义的命令，三个参数，确保跨浏览器的兼容性，第二个参数应该始终设置为 false。
-queryCommandEnabled()测是否可以所在位置执行某个命令。
-queryCommandState()方法用于确定是否已将指定命令应用到了选择的文本。
-queryCommandValue()，用于取得执行命令时传入的值。
+* 操作富文本：  
+使用 document.execCommand()，对文档执行预定义的命令，三个参数，确保跨浏览器的兼容性，第二个参数应该始终设置为 false。  
+queryCommandEnabled()测是否可以所在位置执行某个命令。  
+queryCommandState()方法用于确定是否已将指定命令应用到了选择的文本。  
+queryCommandValue()，用于取得执行命令时传入的值。  
 ```javascript
 frames["richedit"].document.execCommand("bold", false, null); 
 document.execCommand("bold", false, null); 
 ```
-* 富文本选区
-使用框架（iframe）的 getSelection()方法，是 window 对象和 document 对象的属性，返回一个 Selection 对象。
-* 表单与富文本
-通过文档主体的**innerHTML 属性**（获取富文本对应的元素或者对应的 iframe 中的 HTML）。
+* 富文本选区：  
+使用框架（iframe）的 getSelection()方法，是 window 对象和 document 对象的属性，返回一个 Selection 对象。  
+
+* 表单与富文本：  
+通过文档主体的**innerHTML 属性**（获取富文本对应的元素或者对应的 iframe 中的 HTML）。  
+
 # 使用 Canvas 绘图
 ## 15.1 基本用法
-使用`<canvas>`元素，必须先设置其 width 和 height 属性。
-需要绘图必须取得绘图上下文，调用 getContext()方法并传入上下文的名字，“2d”等。
-使用`<canvas>`元素之前，首先要检测 getContext()方法是否存在。
-toDataURL()方法，接受一个参数 MIME 类型，例如"imge/png”，可以导出在`<canvas>`元素上绘制的图像。
+使用`<canvas>`元素，必须先设置其 width 和 height 属性。  
+需要绘图必须取得绘图上下文，调用 getContext()方法并传入上下文的名字，“2d”等。  
+使用`<canvas>`元素之前，首先要检测 getContext()方法是否存在。  
+toDataURL()方法，接受一个参数 MIME 类型，例如"imge/png”，可以导出在`<canvas>`元素上绘制的图像。  
 ```javascript
 <canvas id="drawing" width="500" height="500"></canvas>
 if (drawing.getContext){ ｝；
