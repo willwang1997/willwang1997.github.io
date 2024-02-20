@@ -132,25 +132,27 @@ alert(person.name); // Nicholas
     在严格模式下，初始化未经声明的变量会报错，非严格，将会在全局环境中。  
     查询标识符，查询过程中向上逐个查询，例如变量 color。  
 ## 4.3 垃圾收集
-    最常用的垃圾收集方式是**标记清除**，不太常见的垃圾收集策略叫做引用计数。  
-    引用计数：JavaScript 访问的 COM（Component Object Model，组件对象模型）对象依然是基于引用计数策略的，但 IE9 把 BOM 和 DOM 对象都转换成了真正的 JavaScript 对象。  
-    一旦数据不再有用，最好通过将其值设置为 null 来释放其引用——这个做法叫做**解除引用**适用于大多数全局变量和全局对象的属性，让值脱离执行环境，以便回收。
+最常用的垃圾收集方式是**标记清除**，不太常见的垃圾收集策略叫做引用计数。  
+引用计数：JavaScript 访问的 COM（Component Object Model，组件对象模型）对象依然是基于引用计数策略的，但 IE9 把 BOM 和 DOM 对象都转换成了真正的 JavaScript 对象。  
+一旦数据不再有用，最好通过将其值设置为 null 来释放其引用——这个做法叫做**解除引用**适用于大多数全局变量和全局对象的属性，让值脱离执行环境，以便回收。
 # 引用类型
 ## 5.1object 类型
-    对象是某个特定引用类型的**实例**，新对象是使用 new 操作符后跟一个构造函数来创建的。  
-    对象字面量：{ }花括号定义。左边的花括号（ { ）表示对象字面量的开始，因为它出现在了表达式上下文（expression context），表达式上下文指的是能够返回一个值（表达式）。  
-    点表示法访问属性，方括号表示法访问属性，避免了对象属性名字是关键字或者错误语法。person["first name"] = "Nicholas"。
+对象是某个特定引用类型的**实例**，新对象是使用 new 操作符后跟一个构造函数来创建的。  
+
+对象字面量：{ }花括号定义。左边的花括号（ { ）表示对象字面量的开始，因为它出现在了表达式上下文（expression context），表达式上下文指的是能够返回一个值（表达式）。  
+
+点表示法访问属性，方括号表示法访问属性，避免了对象属性名字是关键字或者错误语法。person["first name"] = "Nicholas"。
 ## 5.2 Array 类型
 new Array（）：数值，给定项数。如果传递的是其他类型的参数，则会创建包含那个值的只有一项的数组。  
-    数组字面量：var value =[1,2,];或者 [, , , , ]，在 IE8 之前会显示三项和 6 个项，最后一个为 undefined。  
-    设置 length 的属性长度，可以在数组末添加或者移除新项，新项会获得特殊值 undefined。  
-    es5 新增 Array.isArray（）方法检测。  
-    数组的 toString() 方法会返回由数组中每个值的字符串形式拼接而成的一个以逗号分隔的字符串。  
-    调用数组的 toLocaleString() 方法时，数组每一项都执行 toLocaleString() 方法，可重写数组每一个项的 toLocaleString() 方法。  
-     join() 方法只接收一个参数，即用作分隔符的字符串，然后返回包含所有数组项的字符串。  
-    数组可以表现得就像栈一样，后进先出的数据结构，只发生在栈的顶部。push（），pop（）。  
-    数组队列数据结构表现，shift（）移除数组中的第一个项并返回该项，数组长度-1。unshift（）返回添加的项数，功能是前端添加项。  
-    sort() 方法是按升序排列数组的每一项，每一项 toString() 转型方法，比较的也是字符串。可以接收比较函数。
+数组字面量：var value =[1,2,];或者 [, , , , ]，在 IE8 之前会显示三项和 6 个项，最后一个为 undefined。  
+设置 length 的属性长度，可以在数组末添加或者移除新项，新项会获得特殊值 undefined。  
+es5 新增 Array.isArray（）方法检测。  
+数组的 toString() 方法会返回由数组中每个值的字符串形式拼接而成的一个以逗号分隔的字符串。  
+调用数组的 toLocaleString() 方法时，数组每一项都执行 toLocaleString() 方法，可重写数组每一个项的 toLocaleString() 方法。  
+join() 方法只接收一个参数，即用作分隔符的字符串，然后返回包含所有数组项的字符串。  
+数组可以表现得就像栈一样，后进先出的数据结构，只发生在栈的顶部。push（），pop（）。  
+数组队列数据结构表现，shift（）移除数组中的第一个项并返回该项，数组长度-1。unshift（）返回添加的项数，功能是前端添加项。  
+sort() 方法是按升序排列数组的每一项，每一项 toString() 转型方法，比较的也是字符串。可以接收比较函数。
 ```javascript
 比较函数：
 function compare（value1，value2）{
@@ -207,34 +209,36 @@ var sum = arr.reduce( function (pre,cur,index,array) {
 sum;//15
 ```
 ## 5.3 Date 类型
-    var date = new Date（）；Date 构造函数没参数，对象自动获取当前日期和时间。  
-    Date.UTC()方法,前两个参数（年和月）是必需的。  
-    Data.now() 方法，调用这个方法时的日期和时间的毫秒数，在不支持它的浏览器中，使用+操作符把 Data 对象转换成字符串。var start = +new Date();  
-    Date 类型的 toLocaleString() 方法会按照与浏览器设置的地区相适应的格式返回日期和时间。toString() 方法则通常返回带有时区信息的日期和时间，valueOf() 方法返回日期的毫秒表示。  
+var date = new Date（）；Date 构造函数没参数，对象自动获取当前日期和时间。  
+Date.UTC()方法,前两个参数（年和月）是必需的。  
+Data.now() 方法，调用这个方法时的日期和时间的毫秒数，在不支持它的浏览器中，使用+操作符把 Data 对象转换成字符串。var start = +new Date();  
+Date 类型的 toLocaleString() 方法会按照与浏览器设置的地区相适应的格式返回日期和时间。toString() 方法则通常返回带有时区信息的日期和时间，valueOf() 方法返回日期的毫秒表示。  
 ## 5.4 RegExp 类型
-    var expression = / pattern / flags ;模式（pattern），可带有一或多个标志（flags）。  
-    g：全局模式，i：不区分大小写模式，m：多行模式。  
-    所有元字符都必须用 \ 转义：( [ { \ ^ $ | ) ? * + . ] } 。   
-    RegExp 构造函数的两个参数都是**字符串**，某些情况下要对字符进行双重转义，所有元字符都必须双重转义，字符\在字符串中转义为\\   
+var expression = / pattern / flags ;模式（pattern），可带有一或多个标志（flags）。  
+g：全局模式，i：不区分大小写模式，m：多行模式。  
+所有元字符都必须用 \ 转义：( [ { \ ^ $ | ) ? * + . ] } 。   
+RegExp 构造函数的两个参数都是**字符串**，某些情况下要对字符进行双重转义，所有元字符都必须双重转义，字符\在字符串中转义为\\   
 ```javascript
 语法：var pattern2 = new RegExp("[bc]at", "i");
 /\[bc\]at/ ===== "\\[bc\\]at"
 ```
-    正则表达式字面量共享同一个 RegExp 实例，构造函数创建的都是一个新实例。  
-    RegExp 实例有很 global，ignoreCas，source 等属性。  
-    实例方法:exec（），接收一个要应用模式的字符串，返回一个匹配项信息的数组。  
-    第二个是 test()，检测是否匹配。返回 true 或者 false。   
-    valueOf() 方法返回正则表达式本身。  
-    toLocaleString() 和 toString()返回以字面量形式创建的一样，显示其字符串表示。  
+正则表达式字面量共享同一个 RegExp 实例，构造函数创建的都是一个新实例。  
+RegExp 实例有很 global，ignoreCas，source 等属性。  
+实例方法:exec（），接收一个要应用模式的字符串，返回一个匹配项信息的数组。  
+第二个是 test()，检测是否匹配。返回 true 或者 false。   
+valueOf() 方法返回正则表达式本身。  
+toLocaleString() 和 toString()返回以字面量形式创建的一样，显示其字符串表示。  
+
 ```javascript
 var matches = pattern1.exec(textStr);
 var istrue = pattern2.test（textStr）;
 ```
-    构造函数属性:  
-    在 调用 exec()或 test()方法时，这些属性会被自动填充。  
-    RegExp.input:返回原始字符串。leftContext，lastMatch，lastParen，也可以用$` $_等短属性名代替。  
-    模式的局限性：  
-    不支持的特性有向后查找，交集并集，条件匹配，单行 s，无间隔 x 匹配模式，Unicode。
+构造函数属性:  
+在 调用 exec()或 test()方法时，这些属性会被自动填充。  
+RegExp.input:返回原始字符串。leftContext，lastMatch，lastParen，也可以用$` $_等短属性名代替。  
+
+模式的局限性：  
+不支持的特性有向后查找，交集并集，条件匹配，单行 s，无间隔 x 匹配模式，Unicode。
 ## 5.5 Function 类型
     函数实际上是对象，都是 Function 类型的实例，函数名是一个指向函数对象的指针。
     没有重载（同名函数覆盖），覆盖实际是同一个函数名（指针）指向了别的函数。
