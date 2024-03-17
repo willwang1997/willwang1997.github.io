@@ -82,7 +82,7 @@ module.exports = {
             },
             {
                 title: '摄影相册',   // 必要的
-                path: 'https://willwoung0328.lofter.com/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+                path: 'https://500px.com.cn/willwangPic',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
             },
             {
                 title: '友情链接',   // 必要的
