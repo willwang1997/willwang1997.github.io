@@ -24,10 +24,12 @@ export default {};
 </script>
 
 <style lang="stylus">
+@require '../styles/wrapper.styl';
 .footer-list {
-  width: $contentWidth;
-  margin: 0 auto;
-  max-width: calc(100% - 32px);
+  @extend $wrapper;
+  //width: $contentWidth;
+  //margin: 0 auto;
+  //max-width: calc(100% - 32px);
   padding-top: 3em;
   display: flex;
   justify-content: space-between;
